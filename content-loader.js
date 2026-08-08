@@ -227,6 +227,39 @@ if (content.transport_description) {
     const el = document.getElementById("transportDescription");
     if (el) el.textContent = content.transport_description;
 }
+    /* =========================
+   COMPANIES
+========================= */
+
+if (content.agro_company_name) {
+    const el = document.getElementById("agroCompanyName");
+    if (el) el.textContent = content.agro_company_name;
+}
+
+if (content.agro_company_description) {
+    const el = document.getElementById("agroCompanyDescription");
+    if (el) el.textContent = content.agro_company_description;
+}
+
+if (content.construction_company_name) {
+    const el = document.getElementById("constructionCompanyName");
+    if (el) el.textContent = content.construction_company_name;
+}
+
+if (content.construction_company_description) {
+    const el = document.getElementById("constructionCompanyDescription");
+    if (el) el.textContent = content.construction_company_description;
+}
+
+if (content.transport_company_name) {
+    const el = document.getElementById("transportCompanyName");
+    if (el) el.textContent = content.transport_company_name;
+}
+
+if (content.transport_company_description) {
+    const el = document.getElementById("transportCompanyDescription");
+    if (el) el.textContent = content.transport_company_description;
+}
   } catch (error) {
 
     console.log(
