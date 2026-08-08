@@ -14,17 +14,124 @@ async function loadWebsiteContent() {
 
     const content = data.content;
 
-    document.querySelectorAll("[data-content]").forEach(element => {
-      const field = element.getAttribute("data-content");
+    const phone = content.phone || "";
+    const email = content.email || "";
+    const address = content.address || "";
 
-      if (content[field] !== undefined) {
-        element.textContent = content[field];
+    /*
+     * Update elements that have:
+     *
+     * data-content="phone"
+     * data-content="email"
+     * data-content="address"
+     */
+    document.querySelectorAll("[data-content]").forEach(element => {
+
+      const field =
+        element.getAttribute("data-content");
+
+      if (field === "phone") {
+        element.textContent = phone;
       }
+
+      if (field === "email") {
+        element.textContent = email;
+      }
+
+      if (field === "address") {
+        element.textContent = address;
+      }
+
     });
 
+
+    /*
+     * Update every phone link.
+     *
+     * Example:
+     * href="tel:+91902677932"
+     *
+     * will become:
+     * href="tel:NEW_NUMBER"
+     */
+    if (phone) {
+
+      document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+
+        link.href = "tel:" + phone.replace(/[^\d+]/g, "");
+
+      });
+
+    }
+
+
+    /*
+     * Update every email link.
+     *
+     * Example:
+     * href="mailto:old@email.com"
+     *
+     * will become:
+     * href="mailto:NEW_EMAIL"
+     */
+    if (email) {
+
+      document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
+
+        link.href = "mailto:" + email.trim();
+
+      });
+
+    }
+
+
+    /*
+     * Also update elements specifically marked
+     * for the floating phone button.
+     *
+     * We will use:
+     *
+     * data-phone-button
+     */
+    if (phone) {
+
+      document
+        .querySelectorAll("[data-phone-button]")
+        .forEach(button => {
+
+          button.href =
+            "tel:" + phone.replace(/[^\d+]/g, "");
+
+        });
+
+    }
+
+
+    /*
+     * Update elements specifically marked
+     * for email buttons.
+     */
+    if (email) {
+
+      document
+        .querySelectorAll("[data-email-button]")
+        .forEach(button => {
+
+          button.href =
+            "mailto:" + email.trim();
+
+        });
+
+    }
+
   } catch (error) {
-    console.log("Website content could not be loaded.");
+
+    console.log(
+      "Website content could not be loaded."
+    );
+
   }
 }
+
 
 loadWebsiteContent();
