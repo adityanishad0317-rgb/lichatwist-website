@@ -1513,145 +1513,240 @@ footer {
     }
 }
     <style>
-/* =========================================
-   LICHATWIST - FORCE DARK ADMIN UI
-   VISUAL ONLY
+    /* =========================================
+   LICHATWIST PREMIUM ADAPTIVE THEME
+   Light + Dark | Visual only
 ========================================= */
 
-html {
-    background: #050d19 !important;
+:root {
+    --lt-navy: #071a33;
+    --lt-blue: #1769e0;
+    --lt-gold: #c9a227;
+    --lt-bg: #f4f7fb;
+    --lt-card: rgba(255,255,255,.88);
+    --lt-input: #ffffff;
+    --lt-text: #142033;
+    --lt-muted: #66758a;
+    --lt-border: rgba(7,26,51,.10);
 }
+
+/* ---------- MAIN PAGE ---------- */
 
 body {
-    background: #050d19 !important;
-    color: #edf4ff !important;
+    background:
+        radial-gradient(circle at 0% 0%, rgba(23,105,224,.10), transparent 28%),
+        radial-gradient(circle at 100% 15%, rgba(201,162,39,.09), transparent 25%),
+        linear-gradient(135deg, #f8fafc, #eef3f8) !important;
+    color: var(--lt-text) !important;
 }
 
-/* Main page wrappers */
-main,
-section,
-.container,
-.admin-container,
-.dashboard,
-.content,
-.content-container {
-    background: transparent !important;
-    color: #edf4ff !important;
+/* ---------- HEADER ---------- */
+
+header {
+    background:
+        linear-gradient(135deg, #071a33, #10365d) !important;
+    border-bottom: 3px solid var(--lt-gold) !important;
+    box-shadow: 0 10px 35px rgba(7,26,51,.18) !important;
 }
 
-/* Cards / panels / editor sections */
-.box,
-.card,
-.panel,
-.section,
-.form-section,
-.content-box,
-.editor-section,
-.dashboard-card,
-.admin-card,
-[class*="card"],
-[class*="panel"],
-[class*="section"] {
-    background: #0b1d33 !important;
-    color: #edf4ff !important;
-    border-color: #29435f !important;
-    box-shadow: 0 12px 35px rgba(0,0,0,.35) !important;
+/* ---------- CARDS ---------- */
+
+.box {
+    background: var(--lt-card) !important;
+    border: 1px solid var(--lt-border) !important;
+    border-radius: 22px !important;
+    box-shadow:
+        0 15px 40px rgba(7,26,51,.08),
+        inset 0 1px 0 rgba(255,255,255,.8) !important;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
 }
 
-/* Headings */
-h1, h2, h3, h4, h5, h6 {
-    color: #ffffff !important;
+/* Elegant gold accent */
+
+.box h2 {
+    color: var(--lt-navy) !important;
 }
 
-/* Normal text */
-p,
-label,
-span,
-small {
-    color: #c5d2e2 !important;
+.box h2::after {
+    content: "";
+    display: block;
+    width: 42px;
+    height: 3px;
+    margin-top: 9px;
+    border-radius: 10px;
+    background: linear-gradient(90deg, var(--lt-gold), #e7ca68);
 }
 
-/* Form fields */
+/* ---------- TEXT ---------- */
+
+label {
+    color: var(--lt-navy) !important;
+    font-weight: 700 !important;
+}
+
+.box p,
+.box small {
+    color: var(--lt-muted) !important;
+}
+
+/* ---------- INPUTS ---------- */
+
 input,
 textarea,
 select {
-    background: #071525 !important;
-    color: #ffffff !important;
-    border: 1px solid #35516f !important;
-    border-radius: 12px !important;
+    background: var(--lt-input) !important;
+    color: var(--lt-text) !important;
+    border: 1.5px solid #dce3ec !important;
+    border-radius: 13px !important;
+    box-shadow: 0 3px 12px rgba(7,26,51,.04) !important;
 }
 
 input:focus,
 textarea:focus,
 select:focus {
-    background: #0a1d33 !important;
-    color: #ffffff !important;
-    border-color: #3d8cff !important;
-    box-shadow: 0 0 0 3px rgba(61,140,255,.15) !important;
+    border-color: var(--lt-blue) !important;
+    box-shadow:
+        0 0 0 4px rgba(23,105,224,.10),
+        0 5px 18px rgba(23,105,224,.08) !important;
 }
 
-input::placeholder,
-textarea::placeholder {
-    color: #71859d !important;
-}
+/* ---------- BUTTONS ---------- */
 
-/* Text inside links */
-a {
-    color: #75adff !important;
-}
-
-/* Buttons */
 button {
-    color: #ffffff !important;
+    border-radius: 13px !important;
+    border: 0 !important;
+    background: linear-gradient(135deg, #1769e0, #0d4fae) !important;
+    color: white !important;
+    box-shadow: 0 8px 20px rgba(23,105,224,.20) !important;
+    font-weight: 700 !important;
 }
 
-/* Status / success */
-.status,
-.success,
-.message {
-    background: #0a2b27 !important;
-    color: #70e0bd !important;
-    border-color: #176b59 !important;
+button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 26px rgba(23,105,224,.28) !important;
 }
 
-/* Any white backgrounds inside editor */
-form,
-fieldset {
-    background: transparent !important;
-    color: #edf4ff !important;
-    border-color: #29435f !important;
+/* Save button */
+
+.save,
+button.save {
+    background: linear-gradient(135deg, #07966e, #087b5c) !important;
 }
 
-/* Footer */
-footer {
-    background: #030a13 !important;
-    color: #aebed1 !important;
+/* ---------- STATUS ---------- */
+
+.status {
+    background: rgba(10,155,114,.08) !important;
+    color: #087b5c !important;
+    border: 1px solid rgba(10,155,114,.20) !important;
+    border-radius: 12px !important;
 }
 
-/* Remove common white panel backgrounds */
-div[style*="background: white"],
-div[style*="background:white"],
-div[style*="background-color: white"],
-div[style*="background-color:white"] {
-    background: #0b1d33 !important;
-    color: #edf4ff !important;
+/* ---------- LINKS ---------- */
+
+a {
+    color: var(--lt-blue) !important;
 }
 
-/* Mobile */
-@media (max-width: 600px) {
+a:hover {
+    color: var(--lt-gold) !important;
+}
+
+/* =========================================
+   AUTOMATIC DARK MODE
+========================================= */
+
+@media (prefers-color-scheme: dark) {
+
+    :root {
+        --lt-bg: #091421;
+        --lt-card: rgba(17,34,55,.82);
+        --lt-input: #0c1d31;
+        --lt-text: #edf4ff;
+        --lt-muted: #a8b8ca;
+        --lt-border: rgba(255,255,255,.09);
+    }
+
     body {
-        background: #050d19 !important;
+        background:
+            radial-gradient(circle at 0% 0%, rgba(23,105,224,.18), transparent 30%),
+            radial-gradient(circle at 100% 15%, rgba(201,162,39,.10), transparent 25%),
+            linear-gradient(135deg, #07111f, #0b1d31) !important;
+        color: var(--lt-text) !important;
     }
 
-    .box,
-    .card,
-    .panel,
-    .section,
-    [class*="card"],
-    [class*="panel"],
-    [class*="section"] {
-        background: #0b1d33 !important;
+    .box {
+        background: var(--lt-card) !important;
+        border-color: var(--lt-border) !important;
+        box-shadow:
+            0 18px 45px rgba(0,0,0,.28),
+            inset 0 1px 0 rgba(255,255,255,.04) !important;
+    }
+
+    .box h2,
+    label {
+        color: #ffffff !important;
+    }
+
+    .box p,
+    .box small {
+        color: #aebed1 !important;
+    }
+
+    input,
+    textarea,
+    select {
+        background: var(--lt-input) !important;
+        color: #ffffff !important;
+        border-color: #29445f !important;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+        color: #71859d !important;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+        background: #10263e !important;
+        border-color: #4c94ff !important;
+    }
+
+    a {
+        color: #70aaff !important;
+    }
+
+    a:hover {
+        color: #e0c052 !important;
+    }
+
+    .status {
+        background: rgba(10,155,114,.13) !important;
+        color: #6ee0bc !important;
+        border-color: rgba(10,155,114,.30) !important;
     }
 }
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 600px) {
+
+    .box {
+        border-radius: 18px !important;
+        margin-bottom: 18px !important;
+    }
+
+    input,
+    textarea,
+    select {
+        font-size: 16px !important;
+    }
+
+    button {
+        min-height: 50px;
+    }
+
 </style>
 </html>
