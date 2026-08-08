@@ -102,6 +102,14 @@ async function isAuthenticated(request, secret) {
   }
 }
 
+function value(body, camelCase, snakeCase) {
+  return String(
+    body[camelCase] ??
+    body[snakeCase] ??
+    ""
+  );
+}
+
 export async function onRequestGet(context) {
 
   const secret =
@@ -183,20 +191,100 @@ export async function onRequestPost(context) {
     await context.env.DB.prepare(`
       UPDATE site_content
       SET
+
         business_name = ?,
         phone = ?,
         email = ?,
         address = ?,
         about = ?,
+
+        whatsapp = ?,
+
+        hero_title = ?,
+        hero_subtitle = ?,
+        hero_description = ?,
+        approach_title = ?,
+        approach_description = ?,
+
+        about_heading = ?,
+        about_description = ?,
+        mission = ?,
+        vision = ?,
+        values_text = ?,
+
+        agriculture_title = ?,
+        agriculture_description = ?,
+        agriculture_image = ?,
+
+        construction_title = ?,
+        construction_description = ?,
+        construction_image = ?,
+
+        transport_title = ?,
+        transport_description = ?,
+        transport_image = ?,
+
+        agro_company_name = ?,
+        agro_company_description = ?,
+
+        construction_company_name = ?,
+        construction_company_description = ?,
+
+        transport_company_name = ?,
+        transport_company_description = ?,
+
+        projects_heading = ?,
+        projects_description = ?,
+
         updated_at = CURRENT_TIMESTAMP
+
       WHERE id = 1
     `)
       .bind(
-        String(body.businessName || ""),
-        String(body.phone || ""),
-        String(body.email || ""),
-        String(body.address || ""),
-        String(body.about || "")
+
+        value(body, "businessName", "business_name"),
+        value(body, "phone"),
+        value(body, "email"),
+        value(body, "address"),
+        value(body, "about"),
+
+        value(body, "whatsapp"),
+
+        value(body, "heroTitle", "hero_title"),
+        value(body, "heroSubtitle", "hero_subtitle"),
+        value(body, "heroDescription", "hero_description"),
+        value(body, "approachTitle", "approach_title"),
+        value(body, "approachDescription", "approach_description"),
+
+        value(body, "aboutHeading", "about_heading"),
+        value(body, "aboutDescription", "about_description"),
+        value(body, "mission"),
+        value(body, "vision"),
+        value(body, "valuesText", "values_text"),
+
+        value(body, "agricultureTitle", "agriculture_title"),
+        value(body, "agricultureDescription", "agriculture_description"),
+        value(body, "agricultureImage", "agriculture_image"),
+
+        value(body, "constructionTitle", "construction_title"),
+        value(body, "constructionDescription", "construction_description"),
+        value(body, "constructionImage", "construction_image"),
+
+        value(body, "transportTitle", "transport_title"),
+        value(body, "transportDescription", "transport_description"),
+        value(body, "transportImage", "transport_image"),
+
+        value(body, "agroCompanyName", "agro_company_name"),
+        value(body, "agroCompanyDescription", "agro_company_description"),
+
+        value(body, "constructionCompanyName", "construction_company_name"),
+        value(body, "constructionCompanyDescription", "construction_company_description"),
+
+        value(body, "transportCompanyName", "transport_company_name"),
+        value(body, "transportCompanyDescription", "transport_company_description"),
+
+        value(body, "projectsHeading", "projects_heading"),
+        value(body, "projectsDescription", "projects_description")
       )
       .run();
 
