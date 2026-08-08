@@ -166,6 +166,19 @@ function loginPage() {
 export async function onRequest(context) {
   const url = new URL(context.request.url);
 
+  if (url.pathname === "/admin.html") {
+    return new Response("MIDDLEWARE IS WORKING", {
+      status: 200,
+      headers: {
+        "Content-Type": "text/plain"
+      }
+    });
+  }
+
+  return context.next();
+}
+  const url = new URL(context.request.url);
+
   // Only protect the admin page.
   if (url.pathname !== "/admin.html") {
     return context.next();
