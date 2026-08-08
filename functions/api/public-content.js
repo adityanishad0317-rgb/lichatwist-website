@@ -1,8 +1,55 @@
 export async function onRequestGet(context) {
   try {
-    const result = await context.env.DB.prepare(
-      "SELECT business_name, phone, email, address, about FROM site_content WHERE id = 1"
-    ).first();
+
+    const result = await context.env.DB.prepare(`
+      SELECT
+        business_name,
+        phone,
+        email,
+        address,
+        about,
+        whatsapp,
+
+        hero_title,
+        hero_subtitle,
+        hero_description,
+        approach_title,
+        approach_description,
+
+        about_heading,
+        about_description,
+        mission,
+        vision,
+        values_text,
+
+        agriculture_title,
+        agriculture_description,
+        agriculture_image,
+
+        construction_title,
+        construction_description,
+        construction_image,
+
+        transport_title,
+        transport_description,
+        transport_image,
+
+        agro_company_name,
+        agro_company_description,
+
+        construction_company_name,
+        construction_company_description,
+
+        transport_company_name,
+        transport_company_description,
+
+        projects_heading,
+        projects_description
+
+      FROM site_content
+      WHERE id = 1
+    `).first();
+
 
     return new Response(
       JSON.stringify({
@@ -18,7 +65,9 @@ export async function onRequestGet(context) {
       }
     );
 
+
   } catch (error) {
+
     return new Response(
       JSON.stringify({
         success: false,
@@ -31,5 +80,6 @@ export async function onRequestGet(context) {
         }
       }
     );
+
   }
 }
