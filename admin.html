@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>LichaTwist Admin Panel</title>
 
   <style>
@@ -35,12 +34,12 @@
     }
 
     .container {
-      max-width: 1100px;
+      max-width: 1000px;
       margin: auto;
       padding: 20px;
     }
 
-    .welcome {
+    .box {
       background: white;
       padding: 22px;
       border-radius: 14px;
@@ -48,65 +47,7 @@
       box-shadow: 0 2px 10px rgba(0,0,0,.08);
     }
 
-    .welcome h2 {
-      margin: 0 0 8px;
-    }
-
-    .welcome p {
-      margin: 0;
-      color: #64748b;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-    }
-
-    .card {
-      background: white;
-      padding: 20px;
-      border-radius: 14px;
-      box-shadow: 0 2px 10px rgba(0,0,0,.08);
-    }
-
-    .card h3 {
-      margin-top: 0;
-    }
-
-    .card p {
-      color: #64748b;
-      line-height: 1.5;
-    }
-
-    .status {
-      color: #059669;
-      font-weight: bold;
-    }
-
-    button {
-      border: 0;
-      border-radius: 8px;
-      padding: 11px 16px;
-      background: #2563eb;
-      color: white;
-      cursor: pointer;
-      font-size: 14px;
-    }
-
-    button:hover {
-      background: #1d4ed8;
-    }
-
-    .editor {
-      margin-top: 20px;
-      background: white;
-      padding: 22px;
-      border-radius: 14px;
-      box-shadow: 0 2px 10px rgba(0,0,0,.08);
-    }
-
-    .editor h2 {
+    h2 {
       margin-top: 0;
     }
 
@@ -132,31 +73,51 @@
       resize: vertical;
     }
 
-    .save-button {
-      margin-top: 20px;
+    button {
+      border: 0;
+      border-radius: 8px;
+      padding: 12px 18px;
+      background: #2563eb;
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+      margin-top: 18px;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .save {
       background: #059669;
     }
 
-    .save-button:hover {
+    .save:hover {
       background: #047857;
     }
 
     .message {
+      display: none;
       margin-top: 15px;
       padding: 12px;
       border-radius: 8px;
       background: #ecfdf5;
       color: #065f46;
-      display: none;
     }
 
-    .website-button {
-      margin-top: 10px;
+    .error {
+      background: #fef2f2;
+      color: #991b1b;
+    }
+
+    .status {
+      color: #059669;
+      font-weight: bold;
     }
 
     footer {
       text-align: center;
-      padding: 30px 10px;
+      padding: 30px;
       color: #64748b;
       font-size: 13px;
     }
@@ -172,53 +133,23 @@
 
 <main class="container">
 
-  <section class="welcome">
-    <h2>Welcome, Owner 👋</h2>
-    <p>
-      Manage your LichaTwist website from this private administration panel.
-    </p>
+  <section class="box">
+    <h2>Website Status</h2>
+    <p class="status">● Website Online</p>
+    <p class="status">● Admin Protected</p>
+
+    <button onclick="openWebsite()">
+      Open Public Website
+    </button>
   </section>
 
-  <section class="cards">
-
-    <div class="card">
-      <h3>🌐 Website</h3>
-      <p>
-        Your public website is currently online.
-      </p>
-      <div class="status">● Online</div>
-
-      <button
-        class="website-button"
-        onclick="openWebsite()">
-        Open Website
-      </button>
-    </div>
-
-    <div class="card">
-      <h3>🔐 Security</h3>
-      <p>
-        Owner authentication is active.
-      </p>
-      <div class="status">● Protected</div>
-    </div>
-
-    <div class="card">
-      <h3>☁️ Hosting</h3>
-      <p>
-        Your website is hosted and deployed through Cloudflare Pages.
-      </p>
-      <div class="status">● Active</div>
-    </div>
-
-  </section>
-
-  <section class="editor">
+  <section class="box">
 
     <h2>📝 Website Content</h2>
 
     <p>
-      Use this section to edit the information displayed on your website.
+      Edit your business information below and click
+      <strong>Save Changes</strong>.
     </p>
 
     <label for="businessName">
@@ -228,7 +159,7 @@
     <input
       id="businessName"
       type="text"
-      placeholder="Enter business name"
+      placeholder="Business name"
     >
 
     <label for="phone">
@@ -238,7 +169,7 @@
     <input
       id="phone"
       type="text"
-      placeholder="Enter phone number"
+      placeholder="Phone number"
     >
 
     <label for="email">
@@ -248,7 +179,7 @@
     <input
       id="email"
       type="email"
-      placeholder="Enter email address"
+      placeholder="Email address"
     >
 
     <label for="address">
@@ -257,7 +188,7 @@
 
     <textarea
       id="address"
-      placeholder="Enter business address">
+      placeholder="Business address">
     </textarea>
 
     <label for="about">
@@ -266,11 +197,11 @@
 
     <textarea
       id="about"
-      placeholder="Enter your company description">
+      placeholder="Company description">
     </textarea>
 
     <button
-      class="save-button"
+      class="save"
       onclick="saveContent()">
       Save Changes
     </button>
@@ -290,63 +221,165 @@
 
 <script>
 
-  function openWebsite() {
+async function loadContent() {
 
-    window.open(
-      "https://lichatwist-website.pages.dev",
-      "_blank"
-    );
+  const message =
+    document.getElementById("message");
 
-  }
+  try {
 
+    const response =
+      await fetch("/api/content");
 
-  function saveContent() {
+    const data =
+      await response.json();
 
-    const businessName =
-      document.getElementById("businessName").value;
+    if (!response.ok || !data.success) {
+      throw new Error("Unable to load content.");
+    }
 
-    const phone =
-      document.getElementById("phone").value;
+    const content =
+      data.content || {};
 
-    const email =
-      document.getElementById("email").value;
+    document.getElementById(
+      "businessName"
+    ).value =
+      content.business_name || "";
 
-    const address =
-      document.getElementById("address").value;
+    document.getElementById(
+      "phone"
+    ).value =
+      content.phone || "";
 
-    const about =
-      document.getElementById("about").value;
+    document.getElementById(
+      "email"
+    ).value =
+      content.email || "";
 
+    document.getElementById(
+      "address"
+    ).value =
+      content.address || "";
 
-    const message =
-      document.getElementById("message");
+    document.getElementById(
+      "about"
+    ).value =
+      content.about || "";
 
-
-    /*
-      The database connection will be added
-      in the next step.
-
-      For now we only confirm that the
-      information has been entered.
-    */
-
-    console.log({
-      businessName,
-      phone,
-      email,
-      address,
-      about
-    });
-
+  } catch (error) {
 
     message.style.display = "block";
-
+    message.className = "message error";
     message.textContent =
-      "Information is ready to be connected to the website.";
+      "Unable to load saved information.";
 
   }
+}
+
+
+async function saveContent() {
+
+  const message =
+    document.getElementById("message");
+
+  const data = {
+
+    businessName:
+      document.getElementById(
+        "businessName"
+      ).value,
+
+    phone:
+      document.getElementById(
+        "phone"
+      ).value,
+
+    email:
+      document.getElementById(
+        "email"
+      ).value,
+
+    address:
+      document.getElementById(
+        "address"
+      ).value,
+
+    about:
+      document.getElementById(
+        "about"
+      ).value
+  };
+
+
+  message.style.display = "block";
+  message.className = "message";
+  message.textContent =
+    "Saving...";
+
+
+  try {
+
+    const response =
+      await fetch(
+        "/api/content",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+
+          body:
+            JSON.stringify(data)
+        }
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if (!response.ok || !result.success) {
+      throw new Error(
+        result.message ||
+        "Unable to save."
+      );
+    }
+
+
+    message.className =
+      "message";
+
+    message.textContent =
+      "✓ Changes saved successfully.";
+
+  } catch (error) {
+
+    message.className =
+      "message error";
+
+    message.textContent =
+      "Unable to save changes.";
+
+  }
+
+}
+
+
+function openWebsite() {
+
+  window.open(
+    "https://lichatwist-website.pages.dev",
+    "_blank"
+  );
+
+}
+
+
+loadContent();
 
 </script>
 
 </body>
-</html>
+  </html>
