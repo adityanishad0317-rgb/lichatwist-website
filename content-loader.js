@@ -123,7 +123,47 @@ async function loadWebsiteContent() {
         });
 
     }
+/* =========================
+   HERO CONTENT
+========================= */
 
+if (content.hero_title) {
+
+    const heroTitle =
+        document.getElementById("heroTitle");
+
+    if (heroTitle) {
+        heroTitle.textContent =
+            content.hero_title;
+    }
+
+}
+
+
+if (content.hero_subtitle) {
+
+    const heroSubtitle =
+        document.getElementById("heroSubtitle");
+
+    if (heroSubtitle) {
+        heroSubtitle.textContent =
+            content.hero_subtitle;
+    }
+
+}
+
+
+if (content.hero_description) {
+
+    const heroDescription =
+        document.getElementById("heroDescription");
+
+    if (heroDescription) {
+        heroDescription.textContent =
+            content.hero_description;
+    }
+
+}
   } catch (error) {
 
     console.log(
