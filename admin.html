@@ -1513,4 +1513,139 @@ footer {
     }
 }
   </style>
+  /* =========================================
+   DARK PREMIUM ADMIN BACKGROUND
+========================================= */
+
+body {
+    background:
+        radial-gradient(circle at 15% 10%, rgba(23,105,224,.18), transparent 30%),
+        radial-gradient(circle at 85% 20%, rgba(201,162,39,.10), transparent 28%),
+        linear-gradient(135deg, #050f1f 0%, #071a33 50%, #0a203d 100%) !important;
+    color: #e8eef7 !important;
+}
+
+/* Main content areas */
+
+main,
+.container {
+    color: #e8eef7 !important;
+}
+
+/* White editor cards → dark navy cards */
+
+.box {
+    background: linear-gradient(
+        145deg,
+        rgba(15,39,70,.97),
+        rgba(8,27,50,.97)
+    ) !important;
+
+    border: 1px solid rgba(255,255,255,.08) !important;
+
+    box-shadow:
+        0 18px 45px rgba(0,0,0,.30),
+        inset 0 1px 0 rgba(255,255,255,.04) !important;
+}
+
+/* Card headings */
+
+.box h2 {
+    color: #ffffff !important;
+}
+
+/* Labels */
+
+label {
+    color: #dce7f5 !important;
+}
+
+/* Paragraph/help text */
+
+.box p,
+.box small,
+.box span {
+    color: #aebed1;
+}
+
+/* Inputs */
+
+input,
+textarea,
+select {
+    background: #0b223d !important;
+    color: #f4f7fb !important;
+    border: 1px solid #294563 !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #71859d !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    background: #0d2948 !important;
+    border-color: #3d8cff !important;
+    box-shadow: 0 0 0 4px rgba(61,140,255,.12) !important;
+}
+
+/* Dropdown options */
+
+select option {
+    background: #0b223d;
+    color: #ffffff;
+}
+
+/* Gold section accent */
+
+.box h2::after {
+    background: #c9a227 !important;
+}
+
+/* Success/status boxes */
+
+.status {
+    background: rgba(10,155,114,.12) !important;
+    border-color: rgba(10,155,114,.35) !important;
+    color: #65e0b8 !important;
+}
+
+/* Buttons stay bright */
+
+button {
+    color: #ffffff !important;
+}
+
+/* Login card if present */
+
+.login-box,
+.login-container {
+    background: linear-gradient(
+        145deg,
+        #0f2746,
+        #081b32
+    ) !important;
+
+    border: 1px solid rgba(255,255,255,.08) !important;
+    box-shadow: 0 20px 55px rgba(0,0,0,.35) !important;
+}
+
+/* Links */
+
+a {
+    color: #69a7ff;
+}
+
+a:hover {
+    color: #c9a227;
+}
+
+/* Footer */
+
+footer {
+    background: #040d1a !important;
+    border-top: 1px solid rgba(201,162,39,.45) !important;
+}
 </html>
