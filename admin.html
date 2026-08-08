@@ -1512,70 +1512,82 @@ footer {
         min-height: 50px;
     }
 }
-  </style>
-  /* =========================================
-   DARK PREMIUM ADMIN BACKGROUND
+    <style>
+/* =========================================
+   LICHATWIST - FORCE DARK ADMIN UI
+   VISUAL ONLY
 ========================================= */
 
+html {
+    background: #050d19 !important;
+}
+
 body {
-    background:
-        radial-gradient(circle at 15% 10%, rgba(23,105,224,.18), transparent 30%),
-        radial-gradient(circle at 85% 20%, rgba(201,162,39,.10), transparent 28%),
-        linear-gradient(135deg, #050f1f 0%, #071a33 50%, #0a203d 100%) !important;
-    color: #e8eef7 !important;
+    background: #050d19 !important;
+    color: #edf4ff !important;
 }
 
-/* Main content areas */
-
+/* Main page wrappers */
 main,
-.container {
-    color: #e8eef7 !important;
+section,
+.container,
+.admin-container,
+.dashboard,
+.content,
+.content-container {
+    background: transparent !important;
+    color: #edf4ff !important;
 }
 
-/* White editor cards → dark navy cards */
-
-.box {
-    background: linear-gradient(
-        145deg,
-        rgba(15,39,70,.97),
-        rgba(8,27,50,.97)
-    ) !important;
-
-    border: 1px solid rgba(255,255,255,.08) !important;
-
-    box-shadow:
-        0 18px 45px rgba(0,0,0,.30),
-        inset 0 1px 0 rgba(255,255,255,.04) !important;
+/* Cards / panels / editor sections */
+.box,
+.card,
+.panel,
+.section,
+.form-section,
+.content-box,
+.editor-section,
+.dashboard-card,
+.admin-card,
+[class*="card"],
+[class*="panel"],
+[class*="section"] {
+    background: #0b1d33 !important;
+    color: #edf4ff !important;
+    border-color: #29435f !important;
+    box-shadow: 0 12px 35px rgba(0,0,0,.35) !important;
 }
 
-/* Card headings */
-
-.box h2 {
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
     color: #ffffff !important;
 }
 
-/* Labels */
-
-label {
-    color: #dce7f5 !important;
+/* Normal text */
+p,
+label,
+span,
+small {
+    color: #c5d2e2 !important;
 }
 
-/* Paragraph/help text */
-
-.box p,
-.box small,
-.box span {
-    color: #aebed1;
-}
-
-/* Inputs */
-
+/* Form fields */
 input,
 textarea,
 select {
-    background: #0b223d !important;
-    color: #f4f7fb !important;
-    border: 1px solid #294563 !important;
+    background: #071525 !important;
+    color: #ffffff !important;
+    border: 1px solid #35516f !important;
+    border-radius: 12px !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    background: #0a1d33 !important;
+    color: #ffffff !important;
+    border-color: #3d8cff !important;
+    box-shadow: 0 0 0 3px rgba(61,140,255,.15) !important;
 }
 
 input::placeholder,
@@ -1583,69 +1595,63 @@ textarea::placeholder {
     color: #71859d !important;
 }
 
-input:focus,
-textarea:focus,
-select:focus {
-    background: #0d2948 !important;
-    border-color: #3d8cff !important;
-    box-shadow: 0 0 0 4px rgba(61,140,255,.12) !important;
+/* Text inside links */
+a {
+    color: #75adff !important;
 }
 
-/* Dropdown options */
-
-select option {
-    background: #0b223d;
-    color: #ffffff;
-}
-
-/* Gold section accent */
-
-.box h2::after {
-    background: #c9a227 !important;
-}
-
-/* Success/status boxes */
-
-.status {
-    background: rgba(10,155,114,.12) !important;
-    border-color: rgba(10,155,114,.35) !important;
-    color: #65e0b8 !important;
-}
-
-/* Buttons stay bright */
-
+/* Buttons */
 button {
     color: #ffffff !important;
 }
 
-/* Login card if present */
-
-.login-box,
-.login-container {
-    background: linear-gradient(
-        145deg,
-        #0f2746,
-        #081b32
-    ) !important;
-
-    border: 1px solid rgba(255,255,255,.08) !important;
-    box-shadow: 0 20px 55px rgba(0,0,0,.35) !important;
+/* Status / success */
+.status,
+.success,
+.message {
+    background: #0a2b27 !important;
+    color: #70e0bd !important;
+    border-color: #176b59 !important;
 }
 
-/* Links */
-
-a {
-    color: #69a7ff;
-}
-
-a:hover {
-    color: #c9a227;
+/* Any white backgrounds inside editor */
+form,
+fieldset {
+    background: transparent !important;
+    color: #edf4ff !important;
+    border-color: #29435f !important;
 }
 
 /* Footer */
-
 footer {
-    background: #040d1a !important;
-    border-top: 1px solid rgba(201,162,39,.45) !important;
+    background: #030a13 !important;
+    color: #aebed1 !important;
 }
+
+/* Remove common white panel backgrounds */
+div[style*="background: white"],
+div[style*="background:white"],
+div[style*="background-color: white"],
+div[style*="background-color:white"] {
+    background: #0b1d33 !important;
+    color: #edf4ff !important;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    body {
+        background: #050d19 !important;
+    }
+
+    .box,
+    .card,
+    .panel,
+    .section,
+    [class*="card"],
+    [class*="panel"],
+    [class*="section"] {
+        background: #0b1d33 !important;
+    }
+}
+</style>
 </html>
