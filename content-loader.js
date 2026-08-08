@@ -193,6 +193,40 @@ if (content.values_text) {
     const el = document.getElementById("valuesText");
     if (el) el.textContent = content.values_text;
 }
+
+/* =========================
+   SERVICES
+========================= */
+
+if (content.agriculture_title) {
+    const el = document.getElementById("agricultureTitle");
+    if (el) el.textContent = content.agriculture_title;
+}
+
+if (content.agriculture_description) {
+    const el = document.getElementById("agricultureDescription");
+    if (el) el.textContent = content.agriculture_description;
+}
+
+if (content.construction_title) {
+    const el = document.getElementById("constructionTitle");
+    if (el) el.textContent = content.construction_title;
+}
+
+if (content.construction_description) {
+    const el = document.getElementById("constructionDescription");
+    if (el) el.textContent = content.construction_description;
+}
+
+if (content.transport_title) {
+    const el = document.getElementById("transportTitle");
+    if (el) el.textContent = content.transport_title;
+}
+
+if (content.transport_description) {
+    const el = document.getElementById("transportDescription");
+    if (el) el.textContent = content.transport_description;
+}
   } catch (error) {
 
     console.log(
