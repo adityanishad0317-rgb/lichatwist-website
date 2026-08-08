@@ -260,6 +260,19 @@ if (content.transport_company_description) {
     const el = document.getElementById("transportCompanyDescription");
     if (el) el.textContent = content.transport_company_description;
 }
+    /* =========================
+   PROJECTS
+========================= */
+
+if (content.projects_heading) {
+    const el = document.getElementById("projectsHeading");
+    if (el) el.textContent = content.projects_heading;
+}
+
+if (content.projects_description) {
+    const el = document.getElementById("projectsDescription");
+    if (el) el.textContent = content.projects_description;
+}
   } catch (error) {
 
     console.log(
