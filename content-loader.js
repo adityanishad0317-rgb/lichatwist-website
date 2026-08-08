@@ -164,6 +164,35 @@ if (content.hero_description) {
     }
 
 }
+
+/* =========================
+   ABOUT + PRINCIPLES
+========================= */
+
+if (content.about_heading) {
+    const el = document.getElementById("aboutHeading");
+    if (el) el.textContent = content.about_heading;
+}
+
+if (content.about_description) {
+    const el = document.getElementById("aboutDescription");
+    if (el) el.textContent = content.about_description;
+}
+
+if (content.mission) {
+    const el = document.getElementById("missionText");
+    if (el) el.textContent = content.mission;
+}
+
+if (content.vision) {
+    const el = document.getElementById("visionText");
+    if (el) el.textContent = content.vision;
+}
+
+if (content.values_text) {
+    const el = document.getElementById("valuesText");
+    if (el) el.textContent = content.values_text;
+}
   } catch (error) {
 
     console.log(
