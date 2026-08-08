@@ -1512,5 +1512,355 @@ footer {
         min-height: 50px;
     }
 }
+    /* =========================================
+   LICHATWIST PREMIUM ADMIN THEME
+   PERMANENT LIGHT MODE
+========================================= */
+
+:root {
+    --lt-navy: #10243e;
+    --lt-navy-dark: #071a33;
+    --lt-blue: #1769e0;
+    --lt-gold: #c9a227;
+
+    --lt-page: #e9eef3;
+    --lt-card: #f8fafc;
+    --lt-input: #eef3f7;
+
+    --lt-text: #16263a;
+    --lt-muted: #667589;
+
+    --lt-border: #d7e0e8;
+}
+
+/* =========================================
+   PAGE
+========================================= */
+
+html,
+body {
+    background: #e9eef3 !important;
+    color: var(--lt-text) !important;
+}
+
+/* Soft premium background */
+
+body {
+    background:
+        radial-gradient(
+            circle at 0% 0%,
+            rgba(201,162,39,.10),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 100% 10%,
+            rgba(23,105,224,.08),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #edf2f6 0%,
+            #e4eaf0 100%
+        ) !important;
+}
+
+/* =========================================
+   HEADER
+========================================= */
+
+header {
+    background:
+        linear-gradient(
+            135deg,
+            #071a33,
+            #12365b
+        ) !important;
+
+    color: #ffffff !important;
+
+    border-bottom:
+        3px solid var(--lt-gold) !important;
+
+    box-shadow:
+        0 10px 30px rgba(7,26,51,.18) !important;
+}
+
+/* Header text */
+
+header h1,
+header h2,
+header h3,
+header p,
+header span {
+    color: #ffffff !important;
+}
+
+/* =========================================
+   MAIN CARDS
+========================================= */
+
+.box,
+.card,
+.panel,
+.section,
+[class*="card"],
+[class*="panel"],
+[class*="section"] {
+    background: var(--lt-card) !important;
+
+    color: var(--lt-text) !important;
+
+    border:
+        1px solid var(--lt-border) !important;
+
+    border-radius:
+        22px !important;
+
+    box-shadow:
+        0 12px 32px rgba(16,36,62,.08),
+        0 2px 8px rgba(16,36,62,.04) !important;
+}
+
+/* =========================================
+   CARD HEADINGS
+========================================= */
+
+.box h2,
+.card h2,
+.panel h2,
+.section h2,
+.box h3,
+.card h3,
+.panel h3,
+.section h3 {
+    color: var(--lt-navy-dark) !important;
+}
+
+/* Elegant gold line */
+
+.box h2::after,
+.card h2::after,
+.panel h2::after {
+    content: "";
+
+    display: block;
+
+    width: 44px;
+
+    height: 3px;
+
+    margin-top: 10px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #c9a227,
+            #e4c95e
+        );
+}
+
+/* =========================================
+   NORMAL TEXT
+========================================= */
+
+.box p,
+.card p,
+.panel p,
+.section p,
+small {
+    color: var(--lt-muted) !important;
+}
+
+/* =========================================
+   LABELS
+========================================= */
+
+label {
+    color: var(--lt-navy-dark) !important;
+
+    font-weight: 700 !important;
+}
+
+/* =========================================
+   INPUTS
+========================================= */
+
+input,
+textarea,
+select {
+    background:
+        var(--lt-input) !important;
+
+    color:
+        var(--lt-text) !important;
+
+    border:
+        1.5px solid #cfd9e3 !important;
+
+    border-radius:
+        14px !important;
+
+    box-shadow:
+        inset 0 1px 2px rgba(16,36,62,.03) !important;
+}
+
+/* Placeholder */
+
+input::placeholder,
+textarea::placeholder {
+    color: #8a98a8 !important;
+}
+
+/* Focus */
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none !important;
+
+    background: #ffffff !important;
+
+    border-color:
+        var(--lt-blue) !important;
+
+    box-shadow:
+        0 0 0 4px rgba(23,105,224,.10),
+        0 6px 18px rgba(23,105,224,.07) !important;
+}
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+button {
+    background:
+        linear-gradient(
+            135deg,
+            #1769e0,
+            #0d4fae
+        ) !important;
+
+    color: #ffffff !important;
+
+    border: none !important;
+
+    border-radius:
+        13px !important;
+
+    min-height:
+        50px !important;
+
+    font-weight:
+        700 !important;
+
+    box-shadow:
+        0 8px 20px rgba(23,105,224,.20) !important;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease !important;
+}
+
+button:hover {
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+        0 12px 26px rgba(23,105,224,.25) !important;
+}
+
+/* Save button */
+
+button[type="submit"],
+.save,
+.save-button {
+    background:
+        linear-gradient(
+            135deg,
+            #07966e,
+            #087b5c
+        ) !important;
+}
+
+/* =========================================
+   LINKS
+========================================= */
+
+a {
+    color:
+        var(--lt-blue) !important;
+}
+
+a:hover {
+    color:
+        var(--lt-gold) !important;
+}
+
+/* =========================================
+   SUCCESS / STATUS MESSAGE
+========================================= */
+
+.status,
+.success,
+.success-message {
+    background:
+        #e5f6ef !important;
+
+    color:
+        #087b5c !important;
+
+    border:
+        1px solid #a9dfcc !important;
+
+    border-radius:
+        14px !important;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    body {
+        background:
+            linear-gradient(
+                145deg,
+                #edf2f6,
+                #e4eaf0
+            ) !important;
+    }
+
+    .box,
+    .card,
+    .panel,
+    .section,
+    [class*="card"],
+    [class*="panel"],
+    [class*="section"] {
+        border-radius:
+            18px !important;
+
+        margin-bottom:
+            18px !important;
+    }
+
+    input,
+    textarea,
+    select {
+        font-size:
+            16px !important;
+    }
+
+    button {
+        width:
+            100%;
+
+        min-height:
+            52px !important;
+    }
+  }
     </style>
   </html>
