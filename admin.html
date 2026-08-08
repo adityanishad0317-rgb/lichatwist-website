@@ -3,34 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>LichaTwist Admin Panel</title>
 
   <style>
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
       background: #f4f6f8;
-      color: #1f2937;
+      color: #222;
     }
 
     header {
       background: #111827;
       color: white;
-      padding: 20px;
+      padding: 18px 20px;
     }
 
     header h1 {
-      margin: 0;
-      font-size: 23px;
+      font-size: 22px;
     }
 
     header p {
-      margin: 6px 0 0;
+      margin-top: 5px;
       color: #cbd5e1;
+      font-size: 14px;
     }
 
     .container {
@@ -39,33 +41,102 @@
       padding: 20px;
     }
 
-    .intro,
-    .section {
+    .welcome {
       background: white;
-      padding: 22px;
-      border-radius: 14px;
+      border-radius: 12px;
+      padding: 20px;
       margin-bottom: 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,.08);
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
     }
 
-    .section h2 {
-      margin-top: 0;
-      color: #111827;
+    .welcome h2 {
+      margin-bottom: 8px;
     }
 
-    .section-description {
+    .welcome p {
+      color: #64748b;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: #64748b;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    button {
+      border: none;
+      border-radius: 8px;
+      padding: 11px 16px;
+      background: #2563eb;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .danger {
+      background: #dc2626;
+    }
+
+    .danger:hover {
+      background: #b91c1c;
+    }
+
+    .status {
+      margin-top: 20px;
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      color: #065f46;
+      padding: 15px;
+      border-radius: 10px;
+    }
+
+    .editor-section {
+      background: white;
+      border-radius: 12px;
+      padding: 22px;
+      margin-top: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    }
+
+    .editor-section h2 {
+      margin-bottom: 6px;
+    }
+
+    .editor-description {
       color: #64748b;
       margin-bottom: 20px;
+      font-size: 14px;
     }
 
     .field {
-      margin-bottom: 16px;
+      margin-bottom: 17px;
     }
 
-    label {
+    .field label {
       display: block;
-      margin-bottom: 6px;
       font-weight: bold;
+      margin-bottom: 7px;
     }
 
     input,
@@ -83,77 +154,85 @@
       resize: vertical;
     }
 
-    button {
-      border: 0;
-      border-radius: 8px;
-      padding: 13px 20px;
-      background: #2563eb;
-      color: white;
-      font-size: 15px;
-      cursor: pointer;
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
     }
 
-    button:hover {
-      background: #1d4ed8;
+    .service-box {
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 15px;
     }
 
-    .save-area {
+    .service-box h3 {
+      margin-bottom: 15px;
+    }
+
+    .save-panel {
       background: #111827;
       color: white;
+      border-radius: 12px;
       padding: 22px;
-      border-radius: 14px;
-      margin-bottom: 20px;
+      margin-top: 20px;
       text-align: center;
+    }
+
+    .save-panel p {
+      color: #cbd5e1;
+      margin: 8px 0 18px;
     }
 
     .save-button {
       background: #059669;
-      min-width: 200px;
+      font-size: 16px;
+      padding: 13px 24px;
     }
 
     .save-button:hover {
       background: #047857;
     }
 
-    .message {
-      display: none;
+    #editorMessage {
       margin-top: 15px;
       padding: 12px;
       border-radius: 8px;
+      display: none;
     }
 
-    .success {
-      display: block;
+    .success-message {
+      display: block !important;
       background: #ecfdf5;
       color: #065f46;
     }
 
-    .error {
-      display: block;
+    .error-message {
+      display: block !important;
       background: #fef2f2;
       color: #991b1b;
     }
 
-    .status {
-      color: #059669;
-      font-weight: bold;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
+    .info-box {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1e40af;
+      padding: 13px;
+      border-radius: 8px;
+      margin-bottom: 18px;
+      font-size: 14px;
     }
 
     footer {
       text-align: center;
-      padding: 30px;
       color: #64748b;
       font-size: 13px;
+      padding: 30px 10px;
     }
 
     @media (max-width: 700px) {
-      .grid {
+      .two-column {
         grid-template-columns: 1fr;
       }
     }
@@ -164,202 +243,1046 @@
 
 <header>
   <h1>LichaTwist Admin Panel</h1>
-  <p>Secure Owner Website Editor</p>
+  <p>Owner dashboard</p>
 </header>
+
 
 <main class="container">
 
-  <section class="intro">
-    <h2>Welcome, Owner 👋</h2>
+
+  <!-- OLD DASHBOARD -->
+
+  <section class="welcome">
+
+    <h2>Welcome, Owner</h2>
+
     <p>
-      Edit your LichaTwist website from one secure dashboard.
-      Changes are saved to the website database.
+      Manage your LichaTwist website from this administration panel.
     </p>
 
-    <p class="status">● Admin Protected</p>
-    <p class="status">● Database Connected</p>
   </section>
 
 
-  <!-- HOME -->
+  <section class="grid">
 
-  <section class="section">
-    <h2>🏠 Home / Hero</h2>
 
-    <p class="section-description">
-      Control the main text visitors see when they open the website.
-    </p>
+    <div class="card">
 
-    <div class="field">
-      <label>Hero Title</label>
-      <input id="heroTitle" type="text">
+      <h3>🌐 Website</h3>
+
+      <p>
+        Open and check the public website.
+      </p>
+
+      <button onclick="openWebsite()">
+        Open Website
+      </button>
+
     </div>
 
-    <div class="field">
-      <label>Hero Subtitle</label>
-      <input id="heroSubtitle" type="text">
+
+    <div class="card">
+
+      <h3>📊 Dashboard</h3>
+
+      <p>
+        Website administration and information.
+      </p>
+
+      <button onclick="showMessage('Dashboard is ready.')">
+        View Dashboard
+      </button>
+
     </div>
 
-    <div class="field">
-      <label>Hero Description</label>
-      <textarea id="heroDescription"></textarea>
+
+    <div class="card">
+
+      <h3>📝 Content</h3>
+
+      <p>
+        Manage the complete website content below.
+      </p>
+
+      <button onclick="scrollToEditor()">
+        Manage Content
+      </button>
+
     </div>
 
-    <div class="field">
-      <label>Approach Card Title</label>
-      <input id="approachTitle" type="text">
+
+    <div class="card">
+
+      <h3>🖼️ Images</h3>
+
+      <p>
+        Image management will be connected next.
+      </p>
+
+      <button onclick="showMessage('Image management will be connected next.')">
+        Manage Images
+      </button>
+
     </div>
 
-    <div class="field">
-      <label>Approach Card Description</label>
-      <textarea id="approachDescription"></textarea>
+
+    <div class="card">
+
+      <h3>⚙️ Settings</h3>
+
+      <p>
+        Website and administration settings.
+      </p>
+
+      <button onclick="showMessage('Settings will be connected next.')">
+        Settings
+      </button>
+
     </div>
+
+
+    <div class="card">
+
+      <h3>🔐 Security</h3>
+
+      <p>
+        Owner authentication and access protection.
+      </p>
+
+      <button onclick="showMessage('Admin authentication is active.')">
+        Security
+      </button>
+
+    </div>
+
+
   </section>
 
 
-  <!-- ABOUT -->
-
-  <section class="section">
-    <h2>ℹ️ About</h2>
-
-    <div class="field">
-      <label>About Heading</label>
-      <input id="aboutHeading" type="text">
-    </div>
-
-    <div class="field">
-      <label>About Description</label>
-      <textarea id="aboutDescription"></textarea>
-    </div>
-
-    <div class="field">
-      <label>About / Company Description</label>
-      <textarea id="about"></textarea>
-    </div>
-  </section>
+  <div id="status" class="status">
+    Admin panel loaded successfully.
+  </div>
 
 
-  <!-- MISSION VISION VALUES -->
+  <!-- WEBSITE EDITOR -->
 
-  <section class="section">
-    <h2>🎯 Mission, Vision & Values</h2>
-
-    <div class="field">
-      <label>Mission</label>
-      <textarea id="mission"></textarea>
-    </div>
-
-    <div class="field">
-      <label>Vision</label>
-      <textarea id="vision"></textarea>
-    </div>
-
-    <div class="field">
-      <label>Values</label>
-      <textarea id="valuesText"></textarea>
-    </div>
-  </section>
+  <div id="websiteEditor">
 
 
-  <!-- SERVICES -->
+    <!-- HOME -->
 
-  <section class="section">
-    <h2>🛠️ Services</h2>
+    <section class="editor-section">
 
-    <div class="grid">
+      <h2>🏠 Home / Hero</h2>
 
-      <div>
+      <p class="editor-description">
+        Edit the main content visitors see on the homepage.
+      </p>
+
+      <div class="field">
+
+        <label>Hero Title</label>
+
+        <input id="heroTitle" type="text">
+
+      </div>
+
+
+      <div class="field">
+
+        <label>Hero Subtitle</label>
+
+        <input id="heroSubtitle" type="text">
+
+      </div>
+
+
+      <div class="field">
+
+        <label>Hero Description</label>
+
+        <textarea id="heroDescription"></textarea>
+
+      </div>
+
+
+      <div class="two-column">
+
+        <div class="field">
+
+          <label>Approach Card Title</label>
+
+          <input id="approachTitle" type="text">
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Approach Card Description</label>
+
+          <textarea id="approachDescription"></textarea>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+
+    <section class="editor-section">
+
+      <h2>ℹ️ About LichaTwist</h2>
+
+      <p class="editor-description">
+        Edit the About section and company information.
+      </p>
+
+
+      <div class="field">
+
+        <label>About Heading</label>
+
+        <input id="aboutHeading" type="text">
+
+      </div>
+
+
+      <div class="field">
+
+        <label>About Description</label>
+
+        <textarea id="aboutDescription"></textarea>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>Company Description</label>
+
+        <textarea id="about"></textarea>
+
+      </div>
+
+    </section>
+
+
+    <!-- MISSION -->
+
+    <section class="editor-section">
+
+      <h2>🎯 Mission, Vision & Values</h2>
+
+      <p class="editor-description">
+        Edit the principles displayed on the website.
+      </p>
+
+
+      <div class="field">
+
+        <label>Mission</label>
+
+        <textarea id="mission"></textarea>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>Vision</label>
+
+        <textarea id="vision"></textarea>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>Values</label>
+
+        <textarea id="valuesText"></textarea>
+
+      </div>
+
+    </section>
+
+
+    <!-- SERVICES -->
+
+    <section class="editor-section">
+
+      <h2>🛠️ Services</h2>
+
+      <p class="editor-description">
+        Edit Agriculture, Construction and Transport.
+      </p>
+
+
+      <div class="service-box">
+
         <h3>🌱 Agriculture</h3>
 
         <div class="field">
+
           <label>Title</label>
+
           <input id="agricultureTitle" type="text">
+
         </div>
 
         <div class="field">
+
           <label>Description</label>
+
           <textarea id="agricultureDescription"></textarea>
+
         </div>
 
         <div class="field">
+
           <label>Image Path</label>
+
           <input id="agricultureImage" type="text">
+
         </div>
+
       </div>
 
 
-      <div>
+      <div class="service-box">
+
         <h3>🏗️ Construction</h3>
 
         <div class="field">
+
           <label>Title</label>
+
           <input id="constructionTitle" type="text">
+
         </div>
 
         <div class="field">
+
           <label>Description</label>
+
           <textarea id="constructionDescription"></textarea>
+
         </div>
 
         <div class="field">
+
           <label>Image Path</label>
+
           <input id="constructionImage" type="text">
+
         </div>
+
       </div>
 
 
-      <div>
+      <div class="service-box">
+
         <h3>🚚 Transport</h3>
 
         <div class="field">
+
           <label>Title</label>
+
           <input id="transportTitle" type="text">
+
         </div>
 
         <div class="field">
+
           <label>Description</label>
+
           <textarea id="transportDescription"></textarea>
+
         </div>
 
         <div class="field">
+
           <label>Image Path</label>
+
           <input id="transportImage" type="text">
+
         </div>
+
       </div>
 
-    </div>
-  </section>
+    </section>
 
 
-  <!-- COMPANIES -->
+    <!-- COMPANIES -->
 
-  <section class="section">
-    <h2>🏢 Companies</h2>
+    <section class="editor-section">
 
-    <div class="field">
-      <label>Agro Company Name</label>
-      <input id="agroCompanyName" type="text">
-    </div>
+      <h2>🏢 Companies</h2>
 
-    <div class="field">
-      <label>Agro Company Description</label>
-      <textarea id="agroCompanyDescription"></textarea>
-    </div>
+      <p class="editor-description">
+        Edit your three business divisions.
+      </p>
 
-    <div class="field">
-      <label>Construction Company Name</label>
-      <input id="constructionCompanyName" type="text">
-    </div>
 
-    <div class="field">
-      <label>Construction Company Description</label>
-      <textarea id="constructionCompanyDescription"></textarea>
-    </div>
+      <div class="service-box">
 
-    <div class="field">
-      <label>Transport Company Name</label>
-      <input id="transportCompanyName" type="text">
-    </div>
+        <h3>LichaTwist Agro</h3>
 
-    <div class="field">
-      <label>
+        <div class="field">
+
+          <label>Company Name</label>
+
+          <input id="agroCompanyName" type="text">
+
+        </div>
+
+        <div class="field">
+
+          <label>Description</label>
+
+          <textarea id="agroCompanyDescription"></textarea>
+
+        </div>
+
+      </div>
+
+
+      <div class="service-box">
+
+        <h3>LichaTwist Construction</h3>
+
+        <div class="field">
+
+          <label>Company Name</label>
+
+          <input id="constructionCompanyName" type="text">
+
+        </div>
+
+        <div class="field">
+
+          <label>Description</label>
+
+          <textarea id="constructionCompanyDescription"></textarea>
+
+        </div>
+
+      </div>
+
+
+      <div class="service-box">
+
+        <h3>LichaTwist Transport</h3>
+
+        <div class="field">
+
+          <label>Company Name</label>
+
+          <input id="transportCompanyName" type="text">
+
+        </div>
+
+        <div class="field">
+
+          <label>Description</label>
+
+          <textarea id="transportCompanyDescription"></textarea>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- PROJECTS -->
+
+    <section class="editor-section">
+
+      <h2>📁 Projects</h2>
+
+      <p class="editor-description">
+        Edit the projects section heading and description.
+      </p>
+
+
+      <div class="field">
+
+        <label>Projects Heading</label>
+
+        <input id="projectsHeading" type="text">
+
+      </div>
+
+
+      <div class="field">
+
+        <label>Projects Description</label>
+
+        <textarea id="projectsDescription"></textarea>
+
+      </div>
+
+    </section>
+
+
+    <!-- CONTACT -->
+
+    <section class="editor-section">
+
+      <h2>📞 Contact Information</h2>
+
+      <p class="editor-description">
+        These are already connected to your public website.
+      </p>
+
+
+      <div class="info-box">
+        Your phone, email and address system is already working.
+        We are keeping it connected to the same database.
+      </div>
+
+
+      <div class="field">
+
+        <label>Business Name</label>
+
+        <input id="businessName" type="text">
+
+      </div>
+
+
+      <div class="field">
+
+        <label>Phone Number</label>
+
+        <input id="phone" type="text">
+
+      </div>
+
+
+      <div class="field">
+
+        <label>Email Address</label>
+
+        <input id="email" type="email">
+
+      </div>
+
+
+      <div class="field">
+
+        <label>WhatsApp Number</label>
+
+        <input id="whatsapp" type="text">
+
+      </div>
+
+
+      <div class="field">
+
+        <label>Address / Location</label>
+
+        <textarea id="address"></textarea>
+
+      </div>
+
+    </section>
+
+
+    <!-- SAVE -->
+
+    <section class="save-panel">
+
+      <h2>💾 Save All Website Changes</h2>
+
+      <p>
+        Save everything you've changed above to your secure database.
+      </p>
+
+      <button
+        class="save-button"
+        onclick="saveAllContent()">
+
+        Save All Changes
+
+      </button>
+
+
+      <div id="editorMessage"></div>
+
+    </section>
+
+
+  </div>
+
+</main>
+
+
+<footer>
+  LichaTwist Website • Owner Administration Panel
+</footer>
+
+
+<script>
+
+function showMessage(message) {
+
+  document.getElementById("status").textContent =
+    message;
+
+}
+
+
+function openWebsite() {
+
+  window.open(
+    "https://lichatwist-website.pages.dev",
+    "_blank"
+  );
+
+}
+
+
+function scrollToEditor() {
+
+  document
+    .getElementById("websiteEditor")
+    .scrollIntoView({
+      behavior: "smooth"
+    });
+
+}
+
+
+function setValue(id, value) {
+
+  const element =
+    document.getElementById(id);
+
+  if (element) {
+
+    element.value =
+      value || "";
+
+  }
+
+}
+
+
+function getValue(id) {
+
+  const element =
+    document.getElementById(id);
+
+  return element
+    ? element.value
+    : "";
+
+}
+
+
+async function loadContent() {
+
+  const message =
+    document.getElementById("editorMessage");
+
+  try {
+
+    const response =
+      await fetch("/api/content");
+
+    const data =
+      await response.json();
+
+    if (!response.ok || !data.success) {
+
+      throw new Error(
+        "Unable to load content."
+      );
+
+    }
+
+
+    const c =
+      data.content || {};
+
+
+    setValue(
+      "businessName",
+      c.business_name
+    );
+
+    setValue(
+      "phone",
+      c.phone
+    );
+
+    setValue(
+      "email",
+      c.email
+    );
+
+    setValue(
+      "whatsapp",
+      c.whatsapp
+    );
+
+    setValue(
+      "address",
+      c.address
+    );
+
+    setValue(
+      "about",
+      c.about
+    );
+
+
+    setValue(
+      "heroTitle",
+      c.hero_title
+    );
+
+    setValue(
+      "heroSubtitle",
+      c.hero_subtitle
+    );
+
+    setValue(
+      "heroDescription",
+      c.hero_description
+    );
+
+    setValue(
+      "approachTitle",
+      c.approach_title
+    );
+
+    setValue(
+      "approachDescription",
+      c.approach_description
+    );
+
+
+    setValue(
+      "aboutHeading",
+      c.about_heading
+    );
+
+    setValue(
+      "aboutDescription",
+      c.about_description
+    );
+
+
+    setValue(
+      "mission",
+      c.mission
+    );
+
+    setValue(
+      "vision",
+      c.vision
+    );
+
+    setValue(
+      "valuesText",
+      c.values_text
+    );
+
+
+    setValue(
+      "agricultureTitle",
+      c.agriculture_title
+    );
+
+    setValue(
+      "agricultureDescription",
+      c.agriculture_description
+    );
+
+    setValue(
+      "agricultureImage",
+      c.agriculture_image
+    );
+
+
+    setValue(
+      "constructionTitle",
+      c.construction_title
+    );
+
+    setValue(
+      "constructionDescription",
+      c.construction_description
+    );
+
+    setValue(
+      "constructionImage",
+      c.construction_image
+    );
+
+
+    setValue(
+      "transportTitle",
+      c.transport_title
+    );
+
+    setValue(
+      "transportDescription",
+      c.transport_description
+    );
+
+    setValue(
+      "transportImage",
+      c.transport_image
+    );
+
+
+    setValue(
+      "agroCompanyName",
+      c.agro_company_name
+    );
+
+    setValue(
+      "agroCompanyDescription",
+      c.agro_company_description
+    );
+
+
+    setValue(
+      "constructionCompanyName",
+      c.construction_company_name
+    );
+
+    setValue(
+      "constructionCompanyDescription",
+      c.construction_company_description
+    );
+
+
+    setValue(
+      "transportCompanyName",
+      c.transport_company_name
+    );
+
+    setValue(
+      "transportCompanyDescription",
+      c.transport_company_description
+    );
+
+
+    setValue(
+      "projectsHeading",
+      c.projects_heading
+    );
+
+    setValue(
+      "projectsDescription",
+      c.projects_description
+    );
+
+
+  } catch (error) {
+
+    message.className =
+      "error-message";
+
+    message.textContent =
+      "Unable to load saved website information.";
+
+  }
+
+}
+
+
+async function saveAllContent() {
+
+  const message =
+    document.getElementById("editorMessage");
+
+  message.className = "";
+  message.style.display = "block";
+  message.textContent = "Saving...";
+
+
+  const data = {
+
+    businessName:
+      getValue("businessName"),
+
+    phone:
+      getValue("phone"),
+
+    email:
+      getValue("email"),
+
+    whatsapp:
+      getValue("whatsapp"),
+
+    address:
+      getValue("address"),
+
+    about:
+      getValue("about"),
+
+
+    heroTitle:
+      getValue("heroTitle"),
+
+    heroSubtitle:
+      getValue("heroSubtitle"),
+
+    heroDescription:
+      getValue("heroDescription"),
+
+    approachTitle:
+      getValue("approachTitle"),
+
+    approachDescription:
+      getValue("approachDescription"),
+
+
+    aboutHeading:
+      getValue("aboutHeading"),
+
+    aboutDescription:
+      getValue("aboutDescription"),
+
+
+    mission:
+      getValue("mission"),
+
+    vision:
+      getValue("vision"),
+
+    valuesText:
+      getValue("valuesText"),
+
+
+    agricultureTitle:
+      getValue("agricultureTitle"),
+
+    agricultureDescription:
+      getValue("agricultureDescription"),
+
+    agricultureImage:
+      getValue("agricultureImage"),
+
+
+    constructionTitle:
+      getValue("constructionTitle"),
+
+    constructionDescription:
+      getValue("constructionDescription"),
+
+    constructionImage:
+      getValue("constructionImage"),
+
+
+    transportTitle:
+      getValue("transportTitle"),
+
+    transportDescription:
+      getValue("transportDescription"),
+
+    transportImage:
+      getValue("transportImage"),
+
+
+    agroCompanyName:
+      getValue("agroCompanyName"),
+
+    agroCompanyDescription:
+      getValue("agroCompanyDescription"),
+
+
+    constructionCompanyName:
+      getValue("constructionCompanyName"),
+
+    constructionCompanyDescription:
+      getValue("constructionCompanyDescription"),
+
+
+    transportCompanyName:
+      getValue("transportCompanyName"),
+
+    transportCompanyDescription:
+      getValue("transportCompanyDescription"),
+
+
+    projectsHeading:
+      getValue("projectsHeading"),
+
+    projectsDescription:
+      getValue("projectsDescription")
+
+  };
+
+
+  try {
+
+    const response =
+      await fetch(
+        "/api/content",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+
+          body:
+            JSON.stringify(data)
+        }
+      );
+
+
+    const result =
+      await response.json();
+
+
+    if (
+      !response.ok ||
+      !result.success
+    ) {
+
+      throw new Error(
+        result.message ||
+        "Unable to save."
+      );
+
+    }
+
+
+    message.className =
+      "success-message";
+
+    message.textContent =
+      "✓ All website changes saved successfully.";
+
+
+  } catch (error) {
+
+    message.className =
+      "error-message";
+
+    message.textContent =
+      "Unable to save changes. Please try again.";
+
+  }
+
+}
+
+
+loadContent();
+
+</script>
+
+</body>
+</html>
