@@ -34,12 +34,13 @@
     }
 
     .container {
-      max-width: 1000px;
+      max-width: 1100px;
       margin: auto;
       padding: 20px;
     }
 
-    .box {
+    .intro,
+    .section {
       background: white;
       padding: 22px;
       border-radius: 14px;
@@ -47,13 +48,22 @@
       box-shadow: 0 2px 10px rgba(0,0,0,.08);
     }
 
-    h2 {
+    .section h2 {
       margin-top: 0;
+      color: #111827;
+    }
+
+    .section-description {
+      color: #64748b;
+      margin-bottom: 20px;
+    }
+
+    .field {
+      margin-bottom: 16px;
     }
 
     label {
       display: block;
-      margin-top: 16px;
       margin-bottom: 6px;
       font-weight: bold;
     }
@@ -69,30 +79,39 @@
     }
 
     textarea {
-      min-height: 130px;
+      min-height: 110px;
       resize: vertical;
     }
 
     button {
       border: 0;
       border-radius: 8px;
-      padding: 12px 18px;
+      padding: 13px 20px;
       background: #2563eb;
       color: white;
       font-size: 15px;
       cursor: pointer;
-      margin-top: 18px;
     }
 
     button:hover {
       background: #1d4ed8;
     }
 
-    .save {
-      background: #059669;
+    .save-area {
+      background: #111827;
+      color: white;
+      padding: 22px;
+      border-radius: 14px;
+      margin-bottom: 20px;
+      text-align: center;
     }
 
-    .save:hover {
+    .save-button {
+      background: #059669;
+      min-width: 200px;
+    }
+
+    .save-button:hover {
       background: #047857;
     }
 
@@ -101,11 +120,16 @@
       margin-top: 15px;
       padding: 12px;
       border-radius: 8px;
+    }
+
+    .success {
+      display: block;
       background: #ecfdf5;
       color: #065f46;
     }
 
     .error {
+      display: block;
       background: #fef2f2;
       color: #991b1b;
     }
@@ -115,11 +139,23 @@
       font-weight: bold;
     }
 
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
     footer {
       text-align: center;
       padding: 30px;
       color: #64748b;
       font-size: 13px;
+    }
+
+    @media (max-width: 700px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -128,258 +164,202 @@
 
 <header>
   <h1>LichaTwist Admin Panel</h1>
-  <p>Secure Owner Dashboard</p>
+  <p>Secure Owner Website Editor</p>
 </header>
 
 <main class="container">
 
-  <section class="box">
-    <h2>Website Status</h2>
-    <p class="status">● Website Online</p>
-    <p class="status">● Admin Protected</p>
-
-    <button onclick="openWebsite()">
-      Open Public Website
-    </button>
-  </section>
-
-  <section class="box">
-
-    <h2>📝 Website Content</h2>
-
+  <section class="intro">
+    <h2>Welcome, Owner 👋</h2>
     <p>
-      Edit your business information below and click
-      <strong>Save Changes</strong>.
+      Edit your LichaTwist website from one secure dashboard.
+      Changes are saved to the website database.
     </p>
 
-    <label for="businessName">
-      Business Name
-    </label>
-
-    <input
-      id="businessName"
-      type="text"
-      placeholder="Business name"
-    >
-
-    <label for="phone">
-      Phone Number
-    </label>
-
-    <input
-      id="phone"
-      type="text"
-      placeholder="Phone number"
-    >
-
-    <label for="email">
-      Email Address
-    </label>
-
-    <input
-      id="email"
-      type="email"
-      placeholder="Email address"
-    >
-
-    <label for="address">
-      Address
-    </label>
-
-    <textarea
-      id="address"
-      placeholder="Business address">
-    </textarea>
-
-    <label for="about">
-      About / Company Description
-    </label>
-
-    <textarea
-      id="about"
-      placeholder="Company description">
-    </textarea>
-
-    <button
-      class="save"
-      onclick="saveContent()">
-      Save Changes
-    </button>
-
-    <div
-      id="message"
-      class="message">
-    </div>
-
+    <p class="status">● Admin Protected</p>
+    <p class="status">● Database Connected</p>
   </section>
 
-</main>
 
-<footer>
-  LichaTwist Website • Owner Administration Panel
-</footer>
+  <!-- HOME -->
 
-<script>
+  <section class="section">
+    <h2>🏠 Home / Hero</h2>
 
-async function loadContent() {
+    <p class="section-description">
+      Control the main text visitors see when they open the website.
+    </p>
 
-  const message =
-    document.getElementById("message");
+    <div class="field">
+      <label>Hero Title</label>
+      <input id="heroTitle" type="text">
+    </div>
 
-  try {
+    <div class="field">
+      <label>Hero Subtitle</label>
+      <input id="heroSubtitle" type="text">
+    </div>
 
-    const response =
-      await fetch("/api/content");
+    <div class="field">
+      <label>Hero Description</label>
+      <textarea id="heroDescription"></textarea>
+    </div>
 
-    const data =
-      await response.json();
+    <div class="field">
+      <label>Approach Card Title</label>
+      <input id="approachTitle" type="text">
+    </div>
 
-    if (!response.ok || !data.success) {
-      throw new Error("Unable to load content.");
-    }
-
-    const content =
-      data.content || {};
-
-    document.getElementById(
-      "businessName"
-    ).value =
-      content.business_name || "";
-
-    document.getElementById(
-      "phone"
-    ).value =
-      content.phone || "";
-
-    document.getElementById(
-      "email"
-    ).value =
-      content.email || "";
-
-    document.getElementById(
-      "address"
-    ).value =
-      content.address || "";
-
-    document.getElementById(
-      "about"
-    ).value =
-      content.about || "";
-
-  } catch (error) {
-
-    message.style.display = "block";
-    message.className = "message error";
-    message.textContent =
-      "Unable to load saved information.";
-
-  }
-}
+    <div class="field">
+      <label>Approach Card Description</label>
+      <textarea id="approachDescription"></textarea>
+    </div>
+  </section>
 
 
-async function saveContent() {
+  <!-- ABOUT -->
 
-  const message =
-    document.getElementById("message");
+  <section class="section">
+    <h2>ℹ️ About</h2>
 
-  const data = {
+    <div class="field">
+      <label>About Heading</label>
+      <input id="aboutHeading" type="text">
+    </div>
 
-    businessName:
-      document.getElementById(
-        "businessName"
-      ).value,
+    <div class="field">
+      <label>About Description</label>
+      <textarea id="aboutDescription"></textarea>
+    </div>
 
-    phone:
-      document.getElementById(
-        "phone"
-      ).value,
-
-    email:
-      document.getElementById(
-        "email"
-      ).value,
-
-    address:
-      document.getElementById(
-        "address"
-      ).value,
-
-    about:
-      document.getElementById(
-        "about"
-      ).value
-  };
+    <div class="field">
+      <label>About / Company Description</label>
+      <textarea id="about"></textarea>
+    </div>
+  </section>
 
 
-  message.style.display = "block";
-  message.className = "message";
-  message.textContent =
-    "Saving...";
+  <!-- MISSION VISION VALUES -->
+
+  <section class="section">
+    <h2>🎯 Mission, Vision & Values</h2>
+
+    <div class="field">
+      <label>Mission</label>
+      <textarea id="mission"></textarea>
+    </div>
+
+    <div class="field">
+      <label>Vision</label>
+      <textarea id="vision"></textarea>
+    </div>
+
+    <div class="field">
+      <label>Values</label>
+      <textarea id="valuesText"></textarea>
+    </div>
+  </section>
 
 
-  try {
+  <!-- SERVICES -->
 
-    const response =
-      await fetch(
-        "/api/content",
-        {
-          method: "POST",
+  <section class="section">
+    <h2>🛠️ Services</h2>
 
-          headers: {
-            "Content-Type":
-              "application/json"
-          },
+    <div class="grid">
 
-          body:
-            JSON.stringify(data)
-        }
-      );
+      <div>
+        <h3>🌱 Agriculture</h3>
 
+        <div class="field">
+          <label>Title</label>
+          <input id="agricultureTitle" type="text">
+        </div>
 
-    const result =
-      await response.json();
+        <div class="field">
+          <label>Description</label>
+          <textarea id="agricultureDescription"></textarea>
+        </div>
 
-
-    if (!response.ok || !result.success) {
-      throw new Error(
-        result.message ||
-        "Unable to save."
-      );
-    }
+        <div class="field">
+          <label>Image Path</label>
+          <input id="agricultureImage" type="text">
+        </div>
+      </div>
 
 
-    message.className =
-      "message";
+      <div>
+        <h3>🏗️ Construction</h3>
 
-    message.textContent =
-      "✓ Changes saved successfully.";
+        <div class="field">
+          <label>Title</label>
+          <input id="constructionTitle" type="text">
+        </div>
 
-  } catch (error) {
+        <div class="field">
+          <label>Description</label>
+          <textarea id="constructionDescription"></textarea>
+        </div>
 
-    message.className =
-      "message error";
-
-    message.textContent =
-      "Unable to save changes.";
-
-  }
-
-}
-
-
-function openWebsite() {
-
-  window.open(
-    "https://lichatwist-website.pages.dev",
-    "_blank"
-  );
-
-}
+        <div class="field">
+          <label>Image Path</label>
+          <input id="constructionImage" type="text">
+        </div>
+      </div>
 
 
-loadContent();
+      <div>
+        <h3>🚚 Transport</h3>
 
-</script>
+        <div class="field">
+          <label>Title</label>
+          <input id="transportTitle" type="text">
+        </div>
 
-</body>
-  </html>
+        <div class="field">
+          <label>Description</label>
+          <textarea id="transportDescription"></textarea>
+        </div>
+
+        <div class="field">
+          <label>Image Path</label>
+          <input id="transportImage" type="text">
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- COMPANIES -->
+
+  <section class="section">
+    <h2>🏢 Companies</h2>
+
+    <div class="field">
+      <label>Agro Company Name</label>
+      <input id="agroCompanyName" type="text">
+    </div>
+
+    <div class="field">
+      <label>Agro Company Description</label>
+      <textarea id="agroCompanyDescription"></textarea>
+    </div>
+
+    <div class="field">
+      <label>Construction Company Name</label>
+      <input id="constructionCompanyName" type="text">
+    </div>
+
+    <div class="field">
+      <label>Construction Company Description</label>
+      <textarea id="constructionCompanyDescription"></textarea>
+    </div>
+
+    <div class="field">
+      <label>Transport Company Name</label>
+      <input id="transportCompanyName" type="text">
+    </div>
+
+    <div class="field">
+      <label>
