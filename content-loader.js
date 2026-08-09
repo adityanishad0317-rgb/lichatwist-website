@@ -12,12 +12,11 @@ async function loadWebsiteContent() {
       return;
     }
 
-    const content = data.content;
-
-    const phone = content.phone || "";
-    const email = content.email || "";
-    const address = content.address || "";
-
+    const content = 
+const phone = content.phone || "";
+const email = content.email || "";
+const address = content.address || "";
+const whatsapp = content.whatsapp || "";
     /*
      * Update elements that have:
      *
@@ -84,7 +83,34 @@ async function loadWebsiteContent() {
 
     }
 
+/*
+ * Update every WhatsApp link.
+ *
+ * Example:
+ * href="https://wa.me/919026777932"
+ *
+ * will become:
+ * href="https://wa.me/NEW_NUMBER"
+ */
+if (whatsapp) {
 
+  const whatsappNumber =
+    whatsapp.replace(/[^\d]/g, "");
+
+  if (whatsappNumber) {
+
+    document
+      .querySelectorAll('a[href*="wa.me/"]')
+      .forEach(link => {
+
+        link.href =
+          "https://wa.me/" + whatsappNumber;
+
+      });
+
+  }
+
+}
     /*
      * Also update elements specifically marked
      * for the floating phone button.
