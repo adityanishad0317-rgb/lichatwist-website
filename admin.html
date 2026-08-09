@@ -529,6 +529,173 @@
   <!-- WEBSITE EDITOR -->
 
   <div id="websiteEditor">
+    <!-- IMAGE MANAGEMENT -->
+
+<section class="editor-section">
+
+  <h2>🖼️ Image Management</h2>
+
+  <p class="editor-description">
+    Upload and replace the images used on the public website.
+    Maximum file size: 5 MB.
+  </p>
+
+
+  <div class="service-box">
+
+    <h3>🏠 Hero Image</h3>
+
+    <div class="field">
+
+      <label>Select Hero Image</label>
+
+      <input
+        type="file"
+        id="heroImageFile"
+        accept="image/jpeg,image/png,image/webp">
+
+    </div>
+
+    <button
+      type="button"
+      onclick="uploadWebsiteImage('hero', 'heroImageFile', 'heroImageMessage')">
+
+      Upload Hero Image
+
+    </button>
+
+    <div
+      id="heroImageMessage"
+      style="margin-top:10px;">
+    </div>
+
+  </div>
+
+
+  <div class="service-box">
+
+    <h3>🏢 About Image</h3>
+
+    <div class="field">
+
+      <label>Select About Image</label>
+
+      <input
+        type="file"
+        id="aboutImageFile"
+        accept="image/jpeg,image/png,image/webp">
+
+    </div>
+
+    <button
+      type="button"
+      onclick="uploadWebsiteImage('about', 'aboutImageFile', 'aboutImageMessage')">
+
+      Upload About Image
+
+    </button>
+
+    <div
+      id="aboutImageMessage"
+      style="margin-top:10px;">
+    </div>
+
+  </div>
+
+
+  <div class="service-box">
+
+    <h3>🌱 Agriculture Image</h3>
+
+    <div class="field">
+
+      <label>Select Agriculture Image</label>
+
+      <input
+        type="file"
+        id="agricultureImageFile"
+        accept="image/jpeg,image/png,image/webp">
+
+    </div>
+
+    <button
+      type="button"
+      onclick="uploadWebsiteImage('agriculture', 'agricultureImageFile', 'agricultureImageMessage')">
+
+      Upload Agriculture Image
+
+    </button>
+
+    <div
+      id="agricultureImageMessage"
+      style="margin-top:10px;">
+    </div>
+
+  </div>
+
+
+  <div class="service-box">
+
+    <h3>🏗️ Construction Image</h3>
+
+    <div class="field">
+
+      <label>Select Construction Image</label>
+
+      <input
+        type="file"
+        id="constructionImageFile"
+        accept="image/jpeg,image/png,image/webp">
+
+    </div>
+
+    <button
+      type="button"
+      onclick="uploadWebsiteImage('construction', 'constructionImageFile', 'constructionImageMessage')">
+
+      Upload Construction Image
+
+    </button>
+
+    <div
+      id="constructionImageMessage"
+      style="margin-top:10px;">
+    </div>
+
+  </div>
+
+
+  <div class="service-box">
+
+    <h3>🚚 Transport Image</h3>
+
+    <div class="field">
+
+      <label>Select Transport Image</label>
+
+      <input
+        type="file"
+        id="transportImageFile"
+        accept="image/jpeg,image/png,image/webp">
+
+    </div>
+
+    <button
+      type="button"
+      onclick="uploadWebsiteImage('transport', 'transportImageFile', 'transportImageMessage')">
+
+      Upload Transport Image
+
+    </button>
+
+    <div
+      id="transportImageMessage"
+      style="margin-top:10px;">
+    </div>
+
+  </div>
+
+</section>
 
 
     <!-- HOME -->
@@ -1641,6 +1808,133 @@ async function changeAdminPassword() {
   }
 
   }
+  async function uploadWebsiteImage(
+  imageType,
+  fileInputId,
+  messageId
+) {
+
+  const fileInput =
+    document.getElementById(fileInputId);
+
+  const message =
+    document.getElementById(messageId);
+
+  if (!fileInput || !fileInput.files.length) {
+
+    message.textContent =
+      "Please select an image first.";
+
+    message.style.color =
+      "#dc2626";
+
+    return;
+  }
+
+  const file =
+    fileInput.files[0];
+
+
+  if (file.size > 5 * 1024 * 1024) {
+
+    message.textContent =
+      "Image must be smaller than 5 MB.";
+
+    message.style.color =
+      "#dc2626";
+
+    return;
+  }
+
+
+  const allowedTypes = [
+    "image/jpeg",
+    "image/png",
+    "image/webp"
+  ];
+
+  if (!allowedTypes.includes(file.type)) {
+
+    message.textContent =
+      "Only JPG, PNG and WebP images are allowed.";
+
+    message.style.color =
+      "#dc2626";
+
+    return;
+  }
+
+
+  const formData =
+    new FormData();
+
+  formData.append(
+    "image",
+    file
+  );
+
+  formData.append(
+    "imageType",
+    imageType
+  );
+
+
+  message.textContent =
+    "Uploading...";
+
+  message.style.color =
+    "#2563eb";
+
+
+  try {
+
+    const response =
+      await fetch(
+        "/api/upload-image",
+        {
+          method: "POST",
+          credentials: "include",
+          body: formData
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if (!response.ok || !data.success) {
+
+      throw new Error(
+        data.message ||
+        "Image upload failed."
+      );
+
+    }
+
+
+    message.textContent =
+      "✓ Image uploaded successfully.";
+
+    message.style.color =
+      "#059669";
+
+
+    fileInput.value = "";
+
+
+  } catch (error) {
+
+    message.textContent =
+      error.message ||
+      "Unable to upload image.";
+
+    message.style.color =
+      "#dc2626";
+
+  }
+
+}
 </script>
 
 </body>
