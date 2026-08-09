@@ -444,6 +444,86 @@
   <div id="status" class="status">
     Admin panel loaded successfully.
   </div>
+  <!-- CHANGE ADMIN PASSWORD -->
+
+<section class="editor-section">
+
+  <h2>🔐 Change Admin Password</h2>
+
+  <p class="editor-description">
+    Change the password used to access the LichaTwist Admin Panel.
+  </p>
+
+  <div class="info-box">
+    Your new password will replace the current admin password.
+    Keep it secure and do not share it with anyone.
+  </div>
+
+  <div class="field">
+
+    <label for="currentAdminPassword">
+      Current Password
+    </label>
+
+    <input
+      id="currentAdminPassword"
+      type="password"
+      autocomplete="current-password"
+      placeholder="Enter current password">
+
+  </div>
+
+
+  <div class="field">
+
+    <label for="newAdminPassword">
+      New Password
+    </label>
+
+    <input
+      id="newAdminPassword"
+      type="password"
+      autocomplete="new-password"
+      placeholder="Enter new password">
+
+  </div>
+
+
+  <div class="field">
+
+    <label for="confirmAdminPassword">
+      Confirm New Password
+    </label>
+
+    <input
+      id="confirmAdminPassword"
+      type="password"
+      autocomplete="new-password"
+      placeholder="Confirm new password">
+
+  </div>
+
+
+  <button
+    type="button"
+    onclick="changeAdminPassword()">
+
+    🔑 Change Password
+
+  </button>
+
+
+  <div
+    id="passwordMessage"
+    style="
+      margin-top:15px;
+      padding:12px;
+      border-radius:8px;
+      display:none;
+    ">
+  </div>
+
+</section>
 
 
   <!-- WEBSITE EDITOR -->
@@ -1389,7 +1469,178 @@ async function saveAllContent() {
 
 
 loadContent();
+async function changeAdminPassword() {
 
+  const currentPassword =
+    document.getElementById(
+      "currentAdminPassword"
+    ).value;
+
+  const newPassword =
+    document.getElementById(
+      "newAdminPassword"
+    ).value;
+
+  const confirmPassword =
+    document.getElementById(
+      "confirmAdminPassword"
+    ).value;
+
+  const message =
+    document.getElementById(
+      "passwordMessage"
+    );
+
+
+  message.style.display = "block";
+
+  message.style.background = "#eff6ff";
+  message.style.color = "#1e40af";
+
+  message.textContent =
+    "Changing password...";
+
+
+  if (!currentPassword) {
+
+    message.style.background = "#fef2f2";
+    message.style.color = "#991b1b";
+
+    message.textContent =
+      "Please enter your current password.";
+
+    return;
+  }
+
+
+  if (!newPassword) {
+
+    message.style.background = "#fef2f2";
+    message.style.color = "#991b1b";
+
+    message.textContent =
+      "Please enter a new password.";
+
+    return;
+  }
+
+
+  if (newPassword.length < 8) {
+
+    message.style.background = "#fef2f2";
+    message.style.color = "#991b1b";
+
+    message.textContent =
+      "New password must be at least 8 characters.";
+
+    return;
+  }
+
+
+  if (newPassword !== confirmPassword) {
+
+    message.style.background = "#fef2f2";
+    message.style.color = "#991b1b";
+
+    message.textContent =
+      "New passwords do not match.";
+
+    return;
+  }
+
+
+  try {
+
+    const response =
+      await fetch(
+        "/api/change-password",
+        {
+          method: "POST",
+
+          credentials: "include",
+
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+
+          body: JSON.stringify({
+            currentPassword:
+              currentPassword,
+
+            newPassword:
+              newPassword
+          })
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if (!response.ok || !data.success) {
+
+      message.style.background =
+        "#fef2f2";
+
+      message.style.color =
+        "#991b1b";
+
+      message.textContent =
+        data.message ||
+        "Unable to change password.";
+
+      return;
+    }
+
+
+    message.style.background =
+      "#ecfdf5";
+
+    message.style.color =
+      "#065f46";
+
+    message.textContent =
+      "Password changed successfully. " +
+      "Please log in again.";
+
+
+    document.getElementById(
+      "currentAdminPassword"
+    ).value = "";
+
+    document.getElementById(
+      "newAdminPassword"
+    ).value = "";
+
+    document.getElementById(
+      "confirmAdminPassword"
+    ).value = "";
+
+
+    setTimeout(function() {
+
+      window.location.href =
+        "/admin-login.html";
+
+    }, 1500);
+
+
+  } catch (error) {
+
+    message.style.background =
+      "#fef2f2";
+
+    message.style.color =
+      "#991b1b";
+
+    message.textContent =
+      "Unable to connect to password service.";
+
+  }
+
+  }
 </script>
 
 </body>
