@@ -1,4 +1,4 @@
-const COOKIE_NAME = "ADMIN_SESSION";
+const COOKIE_NAME = "ADMIN_SESSION_V2";
 
 function json(data, status = 200) {
   return new Response(
