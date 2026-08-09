@@ -34,6 +34,9 @@ async function loadWebsiteContent() {
     const email = content.email || "";
     const address = content.address || "";
     const whatsapp = content.whatsapp || "";
+    
+    const businessName =
+     content.business_name || "";
 
 
     /*
