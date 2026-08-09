@@ -63,6 +63,10 @@ async function loadWebsiteContent() {
         if (field === "address") {
           element.textContent = address;
         }
+        if (field === "business_name") {
+  element.innerHTML =
+    businessName + "<sup>®</sup>";
+        }
 
       });
 
