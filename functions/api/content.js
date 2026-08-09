@@ -235,8 +235,19 @@ export async function onRequestPost(context) {
 projects_heading = ?,
 projects_description = ?,
 
-updated_at = CURRENT_TIMESTAMP
-      WHERE id = 1
+project1_category = ?,
+project1_title = ?,
+project1_description = ?,
+
+project2_category = ?,
+project2_title = ?,
+project2_description = ?,
+
+project3_category = ?,
+project3_title = ?,
+project3_description = ?,
+
+updated_at = CURRENT_TIMESTAMP      WHERE id = 1
     `)
       .bind(
 
@@ -281,8 +292,20 @@ updated_at = CURRENT_TIMESTAMP
         value(body, "transportCompanyName", "transport_company_name"),
         value(body, "transportCompanyDescription", "transport_company_description"),
 
-        value(body, "projectsHeading", "projects_heading"),
-        value(body, "projectsDescription", "projects_description")
+       value(body, "projectsHeading", "projects_heading"),
+value(body, "projectsDescription", "projects_description"),
+
+value(body, "project1Category", "project1_category"),
+value(body, "project1Title", "project1_title"),
+value(body, "project1Description", "project1_description"),
+
+value(body, "project2Category", "project2_category"),
+value(body, "project2Title", "project2_title"),
+value(body, "project2Description", "project2_description"),
+
+value(body, "project3Category", "project3_category"),
+value(body, "project3Title", "project3_title"),
+value(body, "project3Description", "project3_description")
       )
       .run();
 
