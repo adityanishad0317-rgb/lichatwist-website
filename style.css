@@ -3250,3 +3250,74 @@ footer h4 {
     }
 
 }
+/* =========================================
+   ADMIN QUICK NAVIGATION
+========================================= */
+
+.admin-quick-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  background: rgba(248, 250, 252, 0.96);
+  backdrop-filter: blur(10px);
+
+  border: 1px solid #d7e0e8;
+  border-radius: 16px;
+
+  padding: 12px;
+  margin-bottom: 20px;
+
+  box-shadow: 0 8px 24px rgba(16, 36, 62, 0.10);
+}
+
+.admin-quick-nav-title {
+  font-weight: 700;
+  color: #10243e;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.admin-quick-nav-links {
+  display: flex;
+  gap: 8px;
+
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+
+  scrollbar-width: none;
+}
+
+.admin-quick-nav-links::-webkit-scrollbar {
+  display: none;
+}
+
+.admin-quick-nav-links button {
+  flex: 0 0 auto;
+
+  min-height: 42px !important;
+  width: auto !important;
+
+  padding: 9px 13px !important;
+
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+
+  .admin-quick-nav {
+    position: sticky;
+    top: 0;
+
+    margin-left: -2px;
+    margin-right: -2px;
+
+    border-radius: 14px;
+  }
+
+  .admin-quick-nav-links button {
+    min-height: 44px !important;
+  }
+
+}
