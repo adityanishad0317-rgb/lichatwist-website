@@ -65,7 +65,7 @@ async function createSignature(data, secret) {
 async function isAuthenticated(request, secret) {
   const cookie = getCookie(
     request,
-    "ADMIN_SESSION"
+    "ADMIN_SESSION_V2"
   );
 
   if (!cookie) return false;
