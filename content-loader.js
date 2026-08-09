@@ -502,37 +502,159 @@ async function loadWebsiteContent() {
     }
 
 
-    /*
-     * =========================
-     * PROJECTS
-     * =========================
-     */
+   /*
+ * =========================
+ * PROJECTS
+ * =========================
+ */
 
-    if (content.projects_heading) {
+if (content.projects_heading) {
 
-      const el =
-        document.getElementById("projectsHeading");
+  const el =
+    document.getElementById("projectsHeading");
 
-      if (el) {
-        el.textContent =
-          content.projects_heading;
-      }
+  if (el) {
+    el.textContent =
+      content.projects_heading;
+  }
 
-    }
+}
 
 
-    if (content.projects_description) {
+if (content.projects_description) {
 
-      const el =
-        document.getElementById("projectsDescription");
+  const el =
+    document.getElementById("projectsDescription");
 
-      if (el) {
-        el.textContent =
-          content.projects_description;
-      }
+  if (el) {
+    el.textContent =
+      content.projects_description;
+  }
 
-    }
+}
 
+
+/* PROJECT 1 */
+
+if (content.project1_category) {
+
+  const el =
+    document.getElementById("project1Category");
+
+  if (el) {
+    el.textContent =
+      content.project1_category;
+  }
+
+}
+
+
+if (content.project1_title) {
+
+  const el =
+    document.getElementById("project1Title");
+
+  if (el) {
+    el.textContent =
+      content.project1_title;
+  }
+
+}
+
+
+if (content.project1_description) {
+
+  const el =
+    document.getElementById("project1Description");
+
+  if (el) {
+    el.textContent =
+      content.project1_description;
+  }
+
+}
+
+
+/* PROJECT 2 */
+
+if (content.project2_category) {
+
+  const el =
+    document.getElementById("project2Category");
+
+  if (el) {
+    el.textContent =
+      content.project2_category;
+  }
+
+}
+
+
+if (content.project2_title) {
+
+  const el =
+    document.getElementById("project2Title");
+
+  if (el) {
+    el.textContent =
+      content.project2_title;
+  }
+
+}
+
+
+if (content.project2_description) {
+
+  const el =
+    document.getElementById("project2Description");
+
+  if (el) {
+    el.textContent =
+      content.project2_description;
+  }
+
+}
+
+
+/* PROJECT 3 */
+
+if (content.project3_category) {
+
+  const el =
+    document.getElementById("project3Category");
+
+  if (el) {
+    el.textContent =
+      content.project3_category;
+  }
+
+}
+
+
+if (content.project3_title) {
+
+  const el =
+    document.getElementById("project3Title");
+
+  if (el) {
+    el.textContent =
+      content.project3_title;
+  }
+
+}
+
+
+if (content.project3_description) {
+
+  const el =
+    document.getElementById("project3Description");
+
+  if (el) {
+    el.textContent =
+      content.project3_description;
+  }
+
+}
 
     console.log(
       "LichaTwist website content loaded successfully."
