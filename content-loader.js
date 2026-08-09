@@ -85,6 +85,21 @@ async function loadWebsiteContent() {
         });
 
     }
+    if (phone) {
+
+  const cleanPhone =
+    phone.replace(/[^\d+]/g, "");
+
+  document
+    .querySelectorAll("[data-phone-footer]")
+    .forEach(link => {
+
+      link.href =
+        "tel:" + cleanPhone;
+
+    });
+
+}
 
 
     /*
