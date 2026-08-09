@@ -235,6 +235,10 @@ export async function onRequestPost(context) {
 projects_heading = ?,
 projects_description = ?,
 
+project1_image = ?,
+project2_image = ?,
+project3_image = ?,
+
 project1_category = ?,
 project1_title = ?,
 project1_description = ?,
@@ -294,6 +298,10 @@ updated_at = CURRENT_TIMESTAMP      WHERE id = 1
 
        value(body, "projectsHeading", "projects_heading"),
 value(body, "projectsDescription", "projects_description"),
+
+value(body, "project1Image", "project1_image"),
+value(body, "project2Image", "project2_image"),
+value(body, "project3Image", "project3_image"),
 
 value(body, "project1Category", "project1_category"),
 value(body, "project1Title", "project1_title"),
