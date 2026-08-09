@@ -234,10 +234,21 @@ export async function onRequestPost(context) {
         transport_company_description = ?,
 
         projects_heading = ?,
-        projects_description = ?,
+projects_description = ?,
 
-        updated_at = CURRENT_TIMESTAMP
+project1_category = ?,
+project1_title = ?,
+project1_description = ?,
 
+project2_category = ?,
+project2_title = ?,
+project2_description = ?,
+
+project3_category = ?,
+project3_title = ?,
+project3_description = ?,
+
+updated_at = CURRENT_TIMESTAMP
       WHERE id = 1
     `)
       .bind(
