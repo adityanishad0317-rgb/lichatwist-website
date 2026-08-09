@@ -910,7 +910,33 @@
 
 
 <script>
+async function logoutAdmin() {
 
+  try {
+
+    const response = await fetch(
+      "/api/logout",
+      {
+        method: "GET",
+        credentials: "include"
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Logout failed.");
+    }
+
+    window.location.href = "/admin-login.html";
+
+  } catch (error) {
+
+    alert(
+      "Unable to log out. Please try again."
+    );
+
+  }
+
+}
 function showMessage(message) {
 
   document.getElementById("status").textContent =
