@@ -3314,10 +3314,25 @@ footer h4 {
     margin-right: -2px;
 
     border-radius: 14px;
+
+    padding: 14px;
+  }
+
+  .admin-quick-nav-links {
+    gap: 12px;
+    padding-bottom: 4px;
   }
 
   .admin-quick-nav-links button {
-    min-height: 44px !important;
+    min-height: 46px !important;
+
+    padding: 10px 16px !important;
+
+    margin-right: 2px;
+
+    border-radius: 12px !important;
+
+    font-size: 13px;
   }
 
 }
