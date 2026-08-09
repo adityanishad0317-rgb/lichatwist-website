@@ -533,7 +533,37 @@ if (content.projects_description) {
 
 }
 
+/* PROJECT IMAGES */
 
+if (content.project1_image) {
+  const el = document.querySelector(
+    '.project-card:nth-child(1) .project-image img'
+  );
+
+  if (el) {
+    el.src = content.project1_image;
+  }
+}
+
+if (content.project2_image) {
+  const el = document.querySelector(
+    '.project-card:nth-child(2) .project-image img'
+  );
+
+  if (el) {
+    el.src = content.project2_image;
+  }
+}
+
+if (content.project3_image) {
+  const el = document.querySelector(
+    '.project-card:nth-child(3) .project-image img'
+  );
+
+  if (el) {
+    el.src = content.project3_image;
+  }
+}
 /* PROJECT 1 */
 
 if (content.project1_category) {
