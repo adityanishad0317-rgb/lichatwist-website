@@ -224,11 +224,10 @@ export async function onRequest(context) {
 
   const url = new URL(context.request.url);
 
-  // Protect only the admin page.
-  if (url.pathname !== "/admin.html") {
-    return context.next();
-  }
-
+ // Protect the admin page.
+if (url.pathname !== "/admin" && url.pathname !== "/admin.html") {
+  return context.next();
+}
   const secret = context.env.ADMIN_PASSWORD;
 
   if (!secret) {
