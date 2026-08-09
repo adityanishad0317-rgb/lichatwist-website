@@ -58,7 +58,7 @@ export async function onRequestPost(context) {
     }
 
     const session = {
-      exp: Date.now() + 8 * 60 * 60 * 1000
+      exp: Date.now() + 6 * 60 * 60 * 1000
     };
 
     const payload = base64urlEncode(
@@ -70,7 +70,7 @@ export async function onRequestPost(context) {
       secret
     );
 
-    const cookie = `${COOKIE_NAME}=${payload}.${signature}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=28800`;
+    const cookie = `${COOKIE_NAME}=${payload}.${signature}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=21600`;
 
     return Response.json(
       {
