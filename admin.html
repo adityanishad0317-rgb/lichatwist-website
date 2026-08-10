@@ -1036,15 +1036,36 @@
 
     <div class="field">
 
-      <label>Company Image</label>
+  <label>Company Image</label>
 
-      <input
-        id="agroCompanyImage"
-        type="text"
-        placeholder="images/agro-company.jpg">
+  <input
+    id="agroCompanyImage"
+    type="text"
+    placeholder="images/agro-company.jpg">
+
+  <input
+    type="file"
+    id="agroCompanyImageFile"
+    accept="image/jpeg,image/png,image/webp">
+
+  <button
+    type="button"
+    onclick="uploadWebsiteImage(
+      'agroCompany',
+      'agroCompanyImageFile',
+      'agroCompanyImageMessage'
+    )">
+
+    Upload Agro Company Image
+
+  </button>
+
+  <div
+    id="agroCompanyImageMessage"
+    style="margin-top:10px;">
+  </div>
 
     </div>
-
   </div>
 
 
