@@ -562,38 +562,67 @@ export async function onRequestPost(
     }
 
 
-    /*
-     * =====================================
-     * SUCCESS
-     * =====================================
-     */
+ /*
+ * =====================================
+ * SAVE SEPARATE IMAGE PATH TO D1
+ * =====================================
+ */
 
-    return Response.json(
-      {
-        success: true,
-        message:
-          "Image uploaded successfully.",
-        path
-      },
-      {
-        status: 200
-      }
-    );
+const databaseFields = {
+  agroCompany:
+    "agro_company_image",
+
+  constructionCompany:
+    "construction_company_image",
+
+  transportCompany:
+    "transport_company_image",
+
+  project1:
+    "project1_image",
+
+  project2:
+    "project2_image",
+
+  project3:
+    "project3_image"
+};
 
 
-  } catch (error) {
+const databaseField =
+  databaseFields[imageType];
 
-    return Response.json(
-      {
-        success: false,
-        message:
-          "Image upload failed."
-      },
-      {
-        status: 500
-      }
-    );
 
-  }
+if (databaseField) {
+
+  await context.env.DB.prepare(
+    `
+      UPDATE site_content
+      SET ${databaseField} = ?,
+          updated_at = CURRENT_TIMESTAMP
+      WHERE id = 1
+    `
+  )
+    .bind(path)
+    .run();
 
 }
+
+
+/*
+ * =====================================
+ * SUCCESS
+ * =====================================
+ */
+
+return Response.json(
+  {
+    success: true,
+    message:
+      "Image uploaded successfully.",
+    path
+  },
+  {
+    status: 200
+  }
+);
