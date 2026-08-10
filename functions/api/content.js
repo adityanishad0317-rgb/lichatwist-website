@@ -290,14 +290,17 @@ updated_at = CURRENT_TIMESTAMP      WHERE id = 1
         value(body, "transportDescription", "transport_description"),
         value(body, "transportImage", "transport_image"),
 
-        value(body, "agroCompanyName", "agro_company_name"),
-        value(body, "agroCompanyDescription", "agro_company_description"),
+       value(body, "agroCompanyName", "agro_company_name"),
+value(body, "agroCompanyDescription", "agro_company_description"),
+value(body, "agroCompanyImage", "agro_company_image"),
 
-        value(body, "constructionCompanyName", "construction_company_name"),
-        value(body, "constructionCompanyDescription", "construction_company_description"),
+value(body, "constructionCompanyName", "construction_company_name"),
+value(body, "constructionCompanyDescription", "construction_company_description"),
+value(body, "constructionCompanyImage", "construction_company_image"),
 
-        value(body, "transportCompanyName", "transport_company_name"),
-        value(body, "transportCompanyDescription", "transport_company_description"),
+value(body, "transportCompanyName", "transport_company_name"),
+value(body, "transportCompanyDescription", "transport_company_description"),
+value(body, "transportCompanyImage", "transport_company_image"),
 
        value(body, "projectsHeading", "projects_heading"),
 value(body, "projectsDescription", "projects_description"),
