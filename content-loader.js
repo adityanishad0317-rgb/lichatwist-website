@@ -23,7 +23,31 @@ async function loadWebsiteContent() {
     }
 
     const content = data.content;
+        /*
+     * =========================
+     * IMAGE CACHE VERSION
+     * =========================
+     */
 
+    const imageVersion =
+      encodeURIComponent(
+        content.updated_at || Date.now()
+      );
+
+    function imageUrl(path) {
+
+      if (!path) {
+        return "";
+      }
+
+      return (
+        path +
+        (path.includes("?") ? "&" : "?") +
+        "v=" +
+        imageVersion
+      );
+
+    }
     /*
      * =========================
      * CONTACT INFORMATION
@@ -425,7 +449,7 @@ if (content.agriculture_image) {
 
   if (el) {
     el.src =
-      content.agriculture_image;
+     imageUrl(content.agriculture_image)
   }
 
 }
@@ -438,7 +462,7 @@ if (content.construction_image) {
 
   if (el) {
     el.src =
-      content.construction_image;
+  imageUrl(content.construction_image);
   }
 
 }
@@ -451,7 +475,7 @@ if (content.transport_image) {
 
   if (el) {
     el.src =
-      content.transport_image;
+  imageUrl(content.transport_image);
   }
 
 }
@@ -555,7 +579,7 @@ if (content.agro_company_image) {
 
   if (el) {
     el.src =
-      content.agro_company_image;
+  imageUrl(content.agro_company_image);
   }
 
 }
@@ -568,7 +592,7 @@ if (content.construction_company_image) {
 
   if (el) {
     el.src =
-      content.construction_company_image;
+  imageUrl(content.construction_company_image);
   }
 
 }
@@ -581,7 +605,7 @@ if (content.transport_company_image) {
 
   if (el) {
     el.src =
-      content.transport_company_image;
+  imageUrl(content.transport_company_image);
   }
 
 }
@@ -625,7 +649,7 @@ if (content.project1_image) {
 
   if (el) {
     el.src =
-      content.project1_image;
+  imageUrl(content.project1_image);
   }
 
 }
@@ -638,7 +662,7 @@ if (content.project2_image) {
 
   if (el) {
     el.src =
-      content.project2_image;
+  imageUrl(content.project2_image);
   }
 
 }
@@ -651,7 +675,7 @@ if (content.project3_image) {
 
   if (el) {
     el.src =
-      content.project3_image;
+  imageUrl(content.project3_image);
   }
 
 }
