@@ -626,3 +626,19 @@ return Response.json(
     status: 200
   }
 );
+  } catch (error) {
+
+    return Response.json(
+      {
+        success: false,
+        message:
+          "Image upload failed."
+      },
+      {
+        status: 500
+      }
+    );
+
+  }
+
+  }
