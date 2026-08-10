@@ -412,7 +412,49 @@ async function loadWebsiteContent() {
       }
 
     }
+/*
+ * =========================
+ * SERVICE IMAGES
+ * =========================
+ */
 
+if (content.agriculture_image) {
+
+  const el =
+    document.getElementById("agricultureServiceImage");
+
+  if (el) {
+    el.src =
+      content.agriculture_image;
+  }
+
+}
+
+
+if (content.construction_image) {
+
+  const el =
+    document.getElementById("constructionServiceImage");
+
+  if (el) {
+    el.src =
+      content.construction_image;
+  }
+
+}
+
+
+if (content.transport_image) {
+
+  const el =
+    document.getElementById("transportServiceImage");
+
+  if (el) {
+    el.src =
+      content.transport_image;
+  }
+
+}
 
     /*
      * =========================
@@ -500,7 +542,49 @@ async function loadWebsiteContent() {
       }
 
     }
+/*
+ * =========================
+ * COMPANY IMAGES
+ * =========================
+ */
 
+if (content.agro_company_image) {
+
+  const el =
+    document.getElementById("agroCompanyImage");
+
+  if (el) {
+    el.src =
+      content.agro_company_image;
+  }
+
+}
+
+
+if (content.construction_company_image) {
+
+  const el =
+    document.getElementById("constructionCompanyImage");
+
+  if (el) {
+    el.src =
+      content.construction_company_image;
+  }
+
+}
+
+
+if (content.transport_company_image) {
+
+  const el =
+    document.getElementById("transportCompanyImage");
+
+  if (el) {
+    el.src =
+      content.transport_company_image;
+  }
+
+}
 
    /*
  * =========================
@@ -532,37 +616,44 @@ if (content.projects_description) {
   }
 
 }
-
 /* PROJECT IMAGES */
 
 if (content.project1_image) {
-  const el = document.querySelector(
-    '.project-card:nth-child(1) .project-image img'
-  );
+
+  const el =
+    document.getElementById("project1Image");
 
   if (el) {
-    el.src = content.project1_image;
+    el.src =
+      content.project1_image;
   }
+
 }
+
 
 if (content.project2_image) {
-  const el = document.querySelector(
-    '.project-card:nth-child(2) .project-image img'
-  );
+
+  const el =
+    document.getElementById("project2Image");
 
   if (el) {
-    el.src = content.project2_image;
+    el.src =
+      content.project2_image;
   }
+
 }
 
+
 if (content.project3_image) {
-  const el = document.querySelector(
-    '.project-card:nth-child(3) .project-image img'
-  );
+
+  const el =
+    document.getElementById("project3Image");
 
   if (el) {
-    el.src = content.project3_image;
+    el.src =
+      content.project3_image;
   }
+
 }
 /* PROJECT 1 */
 
