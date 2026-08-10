@@ -2356,15 +2356,67 @@ async function changeAdminPassword() {
     }
 
 
-    message.textContent =
-      "✓ Image uploaded successfully.";
+message.textContent =
+  "✓ Image uploaded successfully.";
 
-    message.style.color =
-      "#059669";
+message.style.color =
+  "#059669";
 
 
-    fileInput.value = "";
+/*
+ * Save the returned image path
+ * into the matching Admin field.
+ */
 
+if (data.path) {
+
+  const imageFieldMap = {
+
+    agroCompanyImageFile:
+      "agroCompanyImage",
+
+    constructionCompanyImageFile:
+      "constructionCompanyImage",
+
+    transportCompanyImageFile:
+      "transportCompanyImage",
+
+    project1ImageFile:
+      "project1Image",
+
+    project2ImageFile:
+      "project2Image",
+
+    project3ImageFile:
+      "project3Image"
+
+  };
+
+
+  const targetFieldId =
+    imageFieldMap[fileInputId];
+
+
+  if (targetFieldId) {
+
+    const targetField =
+      document.getElementById(
+        targetFieldId
+      );
+
+    if (targetField) {
+
+      targetField.value =
+        data.path;
+
+    }
+
+  }
+
+}
+
+
+fileInput.value = "";
 
   } catch (error) {
 
