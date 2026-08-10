@@ -2379,12 +2379,22 @@ async function changeAdminPassword() {
   }
 
   }
-  async function uploadWebsiteImage(
+async function uploadWebsiteImage(
   imageType,
   fileInputId,
-  messageId
+  thirdArgument,
+  fourthArgument
 ) {
 
+  const targetFieldId =
+    fourthArgument
+      ? thirdArgument
+      : null;
+
+  const messageId =
+    fourthArgument
+      ? fourthArgument
+      : thirdArgument;
   const fileInput =
     document.getElementById(fileInputId);
 
@@ -2521,17 +2531,19 @@ if (data.path) {
   };
 
 
-  const targetFieldId =
-    imageFieldMap[fileInputId];
+ const mappedTargetFieldId =
+  imageFieldMap[fileInputId];
 
+const finalTargetFieldId =
+  targetFieldId ||
+  mappedTargetFieldId;
 
-  if (targetFieldId) {
+  if (finalTargetFieldId) {
 
     const targetField =
-      document.getElementById(
-        targetFieldId
-      );
-
+    document.getElementById(
+  finalTargetFieldId
+);
     if (targetField) {
 
       targetField.value =
