@@ -1,11 +1,22 @@
 const COOKIE_NAME = "ADMIN_SESSION_V2";
 
 const ALLOWED_FILES = {
+  // Global images
   hero: "hero.jpg",
   about: "office.jpg",
   agriculture: "agriculture.jpg",
   construction: "construction.jpg",
-  transport: "transport.jpg"
+  transport: "transport.jpg",
+
+  // Company images
+  agroCompany: "agro-company.jpg",
+  constructionCompany: "construction-company.jpg",
+  transportCompany: "transport-company.jpg",
+
+  // Project images
+  project1: "project1.jpg",
+  project2: "project2.jpg",
+  project3: "project3.jpg"
 };
 
 const ALLOWED_TYPES = {
