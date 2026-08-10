@@ -1362,6 +1362,35 @@
     placeholder="images/construction.jpg">
 
 </div>
+    <div class="field">
+
+  <label>Upload Project 2 Image</label>
+
+  <input
+    id="project2ImageFile"
+    type="file"
+    accept="image/jpeg,image/png,image/webp">
+
+  <button
+    type="button"
+    class="upload-image-button"
+    onclick="uploadWebsiteImage(
+      'project2',
+      'project2ImageFile',
+      'project2Image',
+      'project2UploadStatus'
+    )">
+
+    Upload Project 2 Image
+
+  </button>
+
+  <span
+    id="project2UploadStatus"
+    class="upload-status">
+  </span>
+
+    </div>
   </div>
 
 
