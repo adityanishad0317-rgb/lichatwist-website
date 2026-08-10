@@ -1156,15 +1156,36 @@
 
     <div class="field">
 
-      <label>Company Image</label>
+  <label>Company Image</label>
 
-      <input
-        id="transportCompanyImage"
-        type="text"
-        placeholder="images/transport-company.jpg">
+  <input
+    id="transportCompanyImage"
+    type="text"
+    placeholder="images/transport-company.jpg">
+
+  <input
+    type="file"
+    id="transportCompanyImageFile"
+    accept="image/jpeg,image/png,image/webp">
+
+  <button
+    type="button"
+    onclick="uploadWebsiteImage(
+      'transportCompany',
+      'transportCompanyImageFile',
+      'transportCompanyImageMessage'
+    )">
+
+    Upload Transport Company Image
+
+  </button>
+
+  <div
+    id="transportCompanyImageMessage"
+    style="margin-top:10px;">
+  </div>
 
     </div>
-
   </div>
 
 </section>
