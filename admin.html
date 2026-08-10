@@ -1361,6 +1361,15 @@
     id="project1ImageFile"
     type="file"
     accept="image/jpeg,image/png,image/webp">
+  <div style="margin-top:12px;">
+  <small>Current Project 1 Image</small>
+  <br>
+  <img
+    id="project1ImagePreview"
+    src="/images/project1.jpg"
+    alt="Current Project 1 Image"
+    style="width:180px;height:100px;object-fit:cover;border-radius:8px;margin-top:6px;">
+</div>
 
   <button
     type="button"
@@ -1442,6 +1451,15 @@
     id="project2ImageFile"
     type="file"
     accept="image/jpeg,image/png,image/webp">
+      <div style="margin-top:12px;">
+  <small>Current Project 2 Image</small>
+  <br>
+  <img
+    id="project2ImagePreview"
+    src="/images/project2.jpg"
+    alt="Current Project 2 Image"
+    style="width:180px;height:100px;object-fit:cover;border-radius:8px;margin-top:6px;">
+</div>
 
   <button
     type="button"
@@ -1523,6 +1541,15 @@
     id="project3ImageFile"
     type="file"
     accept="image/jpeg,image/png,image/webp">
+      <div style="margin-top:12px;">
+  <small>Current Project 3 Image</small>
+  <br>
+  <img
+    id="project3ImagePreview"
+    src="/images/project3.jpg"
+    alt="Current Project 3 Image"
+    style="width:180px;height:100px;object-fit:cover;border-radius:8px;margin-top:6px;">
+</div>
 
   <button
     type="button"
@@ -2663,10 +2690,27 @@ const imagePreviewMap = {
     "constructionImagePreview",
 
   transportImageFile:
-    "transportImagePreview"
+    "transportImagePreview",
+
+  agroCompanyImageFile:
+    "agroCompanyImagePreview",
+
+  constructionCompanyImageFile:
+    "constructionCompanyImagePreview",
+
+  transportCompanyImageFile:
+    "transportCompanyImagePreview",
+
+  project1ImageFile:
+    "project1ImagePreview",
+
+  project2ImageFile:
+    "project2ImagePreview",
+
+  project3ImageFile:
+    "project3ImagePreview"
 
 };
-
 
 Object.entries(imagePreviewMap)
   .forEach(
