@@ -35,15 +35,18 @@ export async function onRequestGet(context) {
         transport_image,
 
         agro_company_name,
-        agro_company_description,
+agro_company_description,
+agro_company_image,
 
-        construction_company_name,
-        construction_company_description,
+construction_company_name,
+construction_company_description,
+construction_company_image,
 
-        transport_company_name,
-        transport_company_description,
+transport_company_name,
+transport_company_description,
+transport_company_image,
 
-        projects_heading,
+projects_heading,
 projects_description,
 
 project1_category,
