@@ -2615,6 +2615,93 @@ fileInput.value = "";
   }
 
 }
+  /*
+ * =====================================
+ * SELECTED IMAGE PREVIEW
+ * =====================================
+ */
+
+const imagePreviewMap = {
+
+  heroImageFile:
+    "heroImagePreview",
+
+  aboutImageFile:
+    "aboutImagePreview",
+
+  agricultureImageFile:
+    "agricultureImagePreview",
+
+  constructionImageFile:
+    "constructionImagePreview",
+
+  transportImageFile:
+    "transportImagePreview"
+
+};
+
+
+Object.entries(imagePreviewMap)
+  .forEach(
+    ([fileInputId, previewId]) => {
+
+      const fileInput =
+        document.getElementById(
+          fileInputId
+        );
+
+      const preview =
+        document.getElementById(
+          previewId
+        );
+
+      if (
+        !fileInput ||
+        !preview
+      ) {
+        return;
+      }
+
+      fileInput.addEventListener(
+        "change",
+        function () {
+
+          const file =
+            this.files &&
+            this.files[0];
+
+          if (!file) {
+            return;
+          }
+
+          if (
+            !file.type.startsWith(
+              "image/"
+            )
+          ) {
+            return;
+          }
+
+          const reader =
+            new FileReader();
+
+          reader.onload =
+            function (event) {
+
+              preview.src =
+                event.target.result;
+
+            };
+
+          reader.readAsDataURL(
+            file
+          );
+
+        }
+      );
+
+    }
+  );
 </script>
 
 </body>
