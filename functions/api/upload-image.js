@@ -569,6 +569,19 @@ export async function onRequestPost(
  */
 
 const databaseFields = {
+
+  // Global images
+  agriculture:
+    "agriculture_image",
+
+  construction:
+    "construction_image",
+
+  transport:
+    "transport_image",
+
+
+  // Company images
   agroCompany:
     "agro_company_image",
 
@@ -578,6 +591,8 @@ const databaseFields = {
   transportCompany:
     "transport_company_image",
 
+
+  // Project images
   project1:
     "project1_image",
 
@@ -586,8 +601,8 @@ const databaseFields = {
 
   project3:
     "project3_image"
-};
 
+};
 
 const databaseField =
   databaseFields[imageType];
