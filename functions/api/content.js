@@ -224,24 +224,32 @@ export async function onRequestPost(context) {
         transport_description = ?,
         transport_image = ?,
 
-        agro_company_name = ?,
+      agro_company_name = ?,
 agro_company_description = ?,
-agro_company_image = ?,
+agro_company_image =
+  COALESCE(NULLIF(?, ''), agro_company_image),
 
 construction_company_name = ?,
 construction_company_description = ?,
-construction_company_image = ?,
+construction_company_image =
+  COALESCE(NULLIF(?, ''), construction_company_image),
 
 transport_company_name = ?,
 transport_company_description = ?,
-transport_company_image = ?,
+transport_company_image =
+  COALESCE(NULLIF(?, ''), transport_company_image),
+
 projects_heading = ?,
 projects_description = ?,
 
-project1_image = ?,
-project2_image = ?,
-project3_image = ?,
+project1_image =
+  COALESCE(NULLIF(?, ''), project1_image),
 
+project2_image =
+  COALESCE(NULLIF(?, ''), project2_image),
+
+project3_image =
+  COALESCE(NULLIF(?, ''), project3_image),
 project1_category = ?,
 project1_title = ?,
 project1_description = ?,
