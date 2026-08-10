@@ -3,7 +3,8 @@ export async function onRequestGet(context) {
 
     const result = await context.env.DB.prepare(`
       SELECT
-        business_name,
+  business_name,
+  updated_at,
         phone,
         email,
         address,
