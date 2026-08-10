@@ -1443,6 +1443,35 @@
     placeholder="images/transport.jpg">
 
 </div>
+    <div class="field">
+
+  <label>Upload Project 3 Image</label>
+
+  <input
+    id="project3ImageFile"
+    type="file"
+    accept="image/jpeg,image/png,image/webp">
+
+  <button
+    type="button"
+    class="upload-image-button"
+    onclick="uploadWebsiteImage(
+      'project3',
+      'project3ImageFile',
+      'project3Image',
+      'project3UploadStatus'
+    )">
+
+    Upload Project 3 Image
+
+  </button>
+
+  <span
+    id="project3UploadStatus"
+    class="upload-status">
+  </span>
+
+    </div>
   </div>
 
 </section>
