@@ -1096,15 +1096,36 @@
 
     <div class="field">
 
-      <label>Company Image</label>
+  <label>Company Image</label>
 
-      <input
-        id="constructionCompanyImage"
-        type="text"
-        placeholder="images/construction-company.jpg">
+  <input
+    id="constructionCompanyImage"
+    type="text"
+    placeholder="images/construction-company.jpg">
+
+  <input
+    type="file"
+    id="constructionCompanyImageFile"
+    accept="image/jpeg,image/png,image/webp">
+
+  <button
+    type="button"
+    onclick="uploadWebsiteImage(
+      'constructionCompany',
+      'constructionCompanyImageFile',
+      'constructionCompanyImageMessage'
+    )">
+
+    Upload Construction Company Image
+
+  </button>
+
+  <div
+    id="constructionCompanyImageMessage"
+    style="margin-top:10px;">
+  </div>
 
     </div>
-
   </div>
 
 
