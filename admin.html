@@ -579,10 +579,109 @@
 </section>
 
 
-  <!-- WEBSITE EDITOR -->
+<!-- CLIENT MANAGEMENT -->
 
-  <div id="websiteEditor">
-    <!-- IMAGE MANAGEMENT -->
+<section class="editor-section" id="clientManagement">
+
+  <h2>👤 Client Management</h2>
+
+  <p class="editor-description">
+    Create and manage the client account used to access website administration.
+  </p>
+
+  <div class="info-box">
+    The client will receive a temporary password and must create a new
+    private password after the first login.
+  </div>
+
+  <div class="field">
+
+    <label for="clientName">
+      Client Name
+    </label>
+
+    <input
+      id="clientName"
+      type="text"
+      autocomplete="name"
+      placeholder="Enter client name"
+      maxlength="100">
+
+  </div>
+
+
+  <div class="field">
+
+    <label for="clientEmail">
+      Client Email
+    </label>
+
+    <input
+      id="clientEmail"
+      type="email"
+      autocomplete="email"
+      placeholder="Enter client email">
+
+  </div>
+
+
+  <button
+    type="button"
+    onclick="createClientAccount()">
+
+    👤 Create Client Account
+
+  </button>
+
+
+  <div
+    id="clientMessage"
+    style="
+      margin-top:15px;
+      padding:12px;
+      border-radius:8px;
+      display:none;
+      word-break:break-word;
+    ">
+  </div>
+
+
+  <div
+    id="temporaryPasswordBox"
+    style="
+      display:none;
+      margin-top:15px;
+      padding:15px;
+      border-radius:10px;
+      background:#fff7ed;
+      border:1px solid #fed7aa;
+    ">
+
+    <strong>
+      ⚠️ Temporary Client Password
+    </strong>
+
+    <p>
+      This password is shown only once. Give it securely to the client.
+    </p>
+
+    <input
+      id="temporaryClientPassword"
+      type="text"
+      readonly
+      style="
+        font-family:monospace;
+        font-weight:700;
+      ">
+
+  </div>
+
+</section>
+
+
+<!-- WEBSITE EDITOR -->
+
+<div id="websiteEditor">    <!-- IMAGE MANAGEMENT -->
 
 <section class="editor-section" id="imageManagement">
 
@@ -1685,6 +1784,170 @@
 
 
 <script>
+  async function createClientAccount() {
+
+  const nameInput =
+    document.getElementById("clientName");
+
+  const emailInput =
+    document.getElementById("clientEmail");
+
+  const message =
+    document.getElementById("clientMessage");
+
+  const passwordBox =
+    document.getElementById(
+      "temporaryPasswordBox"
+    );
+
+  const passwordInput =
+    document.getElementById(
+      "temporaryClientPassword"
+    );
+
+
+  const name =
+    nameInput.value.trim();
+
+  const email =
+    emailInput.value.trim();
+
+
+  passwordBox.style.display = "none";
+
+  message.style.display = "block";
+
+  message.style.background = "#eff6ff";
+
+  message.style.color = "#1e40af";
+
+  message.textContent =
+    "Creating client account...";
+
+
+  if (!name) {
+
+    message.style.background =
+      "#fef2f2";
+
+    message.style.color =
+      "#991b1b";
+
+    message.textContent =
+      "Please enter the client name.";
+
+    return;
+
+  }
+
+
+  if (!email) {
+
+    message.style.background =
+      "#fef2f2";
+
+    message.style.color =
+      "#991b1b";
+
+    message.textContent =
+      "Please enter the client email.";
+
+    return;
+
+  }
+
+
+  try {
+
+    const response =
+      await fetch(
+        "/api/create-client",
+        {
+          method: "POST",
+
+          credentials: "include",
+
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+
+          body:
+            JSON.stringify({
+              name: name,
+              email: email
+            })
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if (
+      !response.ok ||
+      !data.success
+    ) {
+
+      throw new Error(
+        data.message ||
+        "Unable to create client account."
+      );
+
+    }
+
+
+    message.style.background =
+      "#ecfdf5";
+
+    message.style.color =
+      "#065f46";
+
+    message.textContent =
+      "✓ Client account created successfully.";
+
+
+    /*
+     * Show the temporary password.
+     *
+     * This password is returned only once
+     * by the server and is not stored in
+     * plain text in D1.
+     */
+
+    passwordInput.value =
+      data.temporaryPassword || "";
+
+
+    passwordBox.style.display =
+      "block";
+
+
+    /*
+     * Clear the form fields.
+     */
+
+    nameInput.value = "";
+
+    emailInput.value = "";
+
+
+  } catch (error) {
+
+    message.style.background =
+      "#fef2f2";
+
+    message.style.color =
+      "#991b1b";
+
+    message.textContent =
+      error.message ||
+      "Unable to create client account.";
+
+  }
+
+}
 async function logoutAdmin() {
 
   try {
