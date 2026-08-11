@@ -461,6 +461,35 @@
       LichaTwist Client Administration
 
     </div>
+    <button
+  id="testContentButton"
+  type="button"
+  style="
+    margin-top:20px;
+    width:100%;
+    min-height:50px;
+    border:0;
+    border-radius:12px;
+    background:#dc2626;
+    color:white;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+  "
+>
+  TEST CLIENT CONTENT SAVE
+</button>
+
+<div
+  id="testContentMessage"
+  style="
+    margin-top:15px;
+    padding:12px;
+    border-radius:10px;
+    display:none;
+    line-height:1.5;
+  "
+></div>
 
 
   </main>
@@ -489,7 +518,125 @@ document
 
     }
   );
+const testContentButton =
+  document.getElementById(
+    "testContentButton"
+  );
 
+
+const testContentMessage =
+  document.getElementById(
+    "testContentMessage"
+  );
+
+
+testContentButton.addEventListener(
+  "click",
+  async function() {
+
+    testContentButton.disabled =
+      true;
+
+    testContentButton.textContent =
+      "Testing...";
+
+
+    testContentMessage.style.display =
+      "block";
+
+    testContentMessage.style.background =
+      "#eff6ff";
+
+    testContentMessage.style.color =
+      "#1e40af";
+
+    testContentMessage.textContent =
+      "Sending test content...";
+
+
+    try {
+
+      const response =
+        await fetch(
+          "/api/client-content",
+          {
+            method: "POST",
+
+            credentials:
+              "include",
+
+            headers: {
+              "Content-Type":
+                "application/json"
+            },
+
+            body:
+              JSON.stringify({
+                content: {
+                  business_name:
+                    "LichaTwist TEST"
+                }
+              })
+          }
+        );
+
+
+      const data =
+        await response.json();
+
+
+      if (
+        !response.ok ||
+        !data.success
+      ) {
+
+        testContentMessage.style.background =
+          "#fef2f2";
+
+        testContentMessage.style.color =
+          "#991b1b";
+
+        testContentMessage.textContent =
+          data.message ||
+          "Test failed.";
+
+        return;
+
+      }
+
+
+      testContentMessage.style.background =
+        "#ecfdf5";
+
+      testContentMessage.style.color =
+        "#065f46";
+
+      testContentMessage.textContent =
+        "✓ Test successful. The client API saved the test content.";
+
+    } catch {
+
+      testContentMessage.style.background =
+        "#fef2f2";
+
+      testContentMessage.style.color =
+        "#991b1b";
+
+      testContentMessage.textContent =
+        "Unable to connect to the client content API.";
+
+    } finally {
+
+      testContentButton.disabled =
+        false;
+
+      testContentButton.textContent =
+        "TEST CLIENT CONTENT SAVE";
+
+    }
+
+  }
+);
 </script>
 
 
