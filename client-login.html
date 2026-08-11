@@ -352,6 +352,77 @@
 
 
       <div id="message"></div>
+      <div
+  id="changePasswordBox"
+  style="display:none; margin-top:20px;"
+>
+
+  <h2>
+    Create Your Password
+  </h2>
+
+  <p class="description">
+    Your temporary password can only be used for
+    initial access. Please create your own private
+    password to continue.
+  </p>
+
+  <div class="field">
+
+    <label for="currentClientPassword">
+      Temporary Password
+    </label>
+
+    <input
+      id="currentClientPassword"
+      type="password"
+      autocomplete="current-password"
+      placeholder="Enter your temporary password"
+    >
+
+  </div>
+
+
+  <div class="field">
+
+    <label for="newClientPassword">
+      New Password
+    </label>
+
+    <input
+      id="newClientPassword"
+      type="password"
+      autocomplete="new-password"
+      placeholder="Minimum 8 characters"
+    >
+
+  </div>
+
+
+  <div class="field">
+
+    <label for="confirmClientPassword">
+      Confirm New Password
+    </label>
+
+    <input
+      id="confirmClientPassword"
+      type="password"
+      autocomplete="new-password"
+      placeholder="Enter the new password again"
+    >
+
+  </div>
+
+
+  <button
+    id="changePasswordButton"
+    type="button"
+  >
+    Set New Password
+  </button>
+
+</div>
 
 
     </form>
@@ -397,6 +468,30 @@ const message =
   document.getElementById(
     "message"
   );
+  const changePasswordBox =
+  document.getElementById(
+    "changePasswordBox"
+  );
+
+const currentClientPassword =
+  document.getElementById(
+    "currentClientPassword"
+  );
+
+const newClientPassword =
+  document.getElementById(
+    "newClientPassword"
+  );
+
+const confirmClientPassword =
+  document.getElementById(
+    "confirmClientPassword"
+  );
+
+const changePasswordButton =
+  document.getElementById(
+    "changePasswordButton"
+  );
 
 
 function showMessage(
@@ -415,7 +510,178 @@ function showMessage(
 
 }
 
+async function changeClientPassword() {
 
+  const currentPassword =
+    currentClientPassword.value;
+
+  const newPassword =
+    newClientPassword.value;
+
+  const confirmPassword =
+    confirmClientPassword.value;
+
+
+  if (!currentPassword) {
+
+    showMessage(
+      "Please enter your temporary password.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if (!newPassword) {
+
+    showMessage(
+      "Please enter your new password.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if (newPassword.length < 8) {
+
+    showMessage(
+      "New password must be at least 8 characters.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if (
+    newPassword !==
+    confirmPassword
+  ) {
+
+    showMessage(
+      "The new passwords do not match.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  changePasswordButton.disabled =
+    true;
+
+  changePasswordButton.textContent =
+    "Saving...";
+
+
+  showMessage(
+    "Changing your password...",
+    "info"
+  );
+
+
+  try {
+
+    const response =
+      await fetch(
+        "/api/client-change-password",
+        {
+          method: "POST",
+
+          credentials:
+            "include",
+
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+
+          body:
+            JSON.stringify({
+              currentPassword:
+                currentPassword,
+
+              newPassword:
+                newPassword
+            })
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if (
+      !response.ok ||
+      !data.success
+    ) {
+
+      showMessage(
+        data.message ||
+        "Unable to change password.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    showMessage(
+      "✓ Password changed successfully. Your temporary password is no longer required.",
+      "success"
+    );
+
+
+    changePasswordBox.style.display =
+      "none";
+
+
+    /*
+     * Clear password fields.
+     */
+
+    currentClientPassword.value =
+      "";
+
+    newClientPassword.value =
+      "";
+
+    confirmClientPassword.value =
+      "";
+
+
+  } catch {
+
+    showMessage(
+      "Unable to connect to the password service.",
+      "error"
+    );
+
+  } finally {
+
+    changePasswordButton.disabled =
+      false;
+
+    changePasswordButton.textContent =
+      "Set New Password";
+
+  }
+
+}
+
+
+changePasswordButton.addEventListener(
+  "click",
+  changeClientPassword
+);
 form.addEventListener(
   "submit",
   async function(event) {
@@ -530,24 +796,46 @@ form.addEventListener(
        */
 
       if (
-        data.mustChangePassword
-      ) {
+  data.mustChangePassword
+) {
 
-        showMessage(
-          "✓ Client login successful. " +
-          "Temporary-password login is working. " +
-          "Password-change screen will be added next.",
-          "success"
-        );
+  showMessage(
+    "✓ Client login successful. Please create your private password.",
+    "success"
+  );
 
-      } else {
 
-        showMessage(
-          "✓ Client login successful.",
-          "success"
-        );
+  changePasswordBox.style.display =
+    "block";
 
-      }
+
+  /*
+   * Keep the temporary password
+   * available for the password-change
+   * request.
+   */
+
+  currentClientPassword.value =
+    password;
+
+
+  /*
+   * Hide the login form after
+   * successful temporary-password login.
+   */
+
+  form.style.display =
+    "none";
+
+
+} else {
+
+  showMessage(
+    "✓ Client login successful.",
+    "success"
+  );
+
+}
 
 
     } catch (error) {
