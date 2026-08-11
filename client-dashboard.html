@@ -904,6 +904,99 @@
     }
 
 
+    .security-grid {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        repeat(
+          2,
+          minmax(0, 1fr)
+        );
+
+      gap:
+        18px;
+    }
+
+
+    .security-actions {
+
+      margin-top:
+        18px;
+    }
+
+
+    #changePasswordButton {
+
+      width:
+        100%;
+
+      min-height:
+        50px;
+
+      border:
+        0;
+
+      border-radius:
+        12px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #10243e,
+          #071a33
+        );
+
+      color:
+        white;
+
+      font-size:
+        15px;
+
+      font-weight:
+        700;
+
+      cursor:
+        pointer;
+    }
+
+
+    #changePasswordButton:disabled {
+
+      opacity:
+        .65;
+
+      cursor:
+        wait;
+    }
+
+
+    .security-note {
+
+      margin-top:
+        14px;
+
+      padding:
+        12px 14px;
+
+      border-radius:
+        10px;
+
+      background:
+        #eef3f7;
+
+      color:
+        #536477;
+
+      font-size:
+        12px;
+
+      line-height:
+        1.5;
+    }
+
+
     .footer {
 
       text-align:
@@ -924,27 +1017,22 @@
       max-width: 700px
     ) {
 
+      .field-grid,
+      .image-grid,
+      .security-grid {
+
+        grid-template-columns:
+          1fr;
+      }
+
+
       .container {
 
         width:
-          94%;
+          min(94%, 1100px);
 
         margin:
-          20px auto 35px;
-      }
-
-
-      .welcome {
-
-        padding:
-          20px;
-      }
-
-
-      .welcome h1 {
-
-        font-size:
-          23px;
+          20px auto 40px;
       }
 
 
@@ -955,33 +1043,17 @@
       }
 
 
-      .field-grid,
-      .image-grid {
+      .welcome {
 
-        grid-template-columns:
-          1fr;
+        padding:
+          20px;
       }
 
 
-      .field.full {
+      .topbar {
 
-        grid-column:
-          auto;
-      }
-
-
-      input,
-      textarea {
-
-        font-size:
-          16px;
-      }
-
-
-      .image-preview {
-
-        height:
-          210px;
+        padding:
+          15px;
       }
 
     }
@@ -1003,7 +1075,7 @@
     </div>
 
     <div class="subtitle">
-      Client Website Management
+      Client Dashboard
     </div>
 
   </div>
@@ -1026,12 +1098,12 @@
 <section class="welcome">
 
   <h1>
-    Website Management
+    Client Dashboard
   </h1>
 
   <p>
-    Manage your website content and
-    permitted website images.
+    Welcome to your LichaTwist website
+    management area.
   </p>
 
   <span class="status">
@@ -1044,10 +1116,12 @@
 <div
   id="message"
   class="message"
+  role="status"
+  aria-live="polite"
 ></div>
 
 
-<!-- COMPANY INFORMATION -->
+<!-- CONTACT -->
 
 <section class="section">
 
@@ -1058,8 +1132,8 @@
     </h2>
 
     <p>
-      Basic company information displayed
-      throughout the website.
+      Manage the basic company information
+      available to your website.
     </p>
 
   </div>
@@ -1130,7 +1204,9 @@
         Address
       </label>
 
-      <textarea id="address"></textarea>
+      <textarea
+        id="address"
+      ></textarea>
 
     </div>
 
@@ -1141,7 +1217,9 @@
         About
       </label>
 
-      <textarea id="about"></textarea>
+      <textarea
+        id="about"
+      ></textarea>
 
     </div>
 
@@ -1151,19 +1229,19 @@
 </section>
 
 
-<!-- HOME / HERO -->
+<!-- HERO -->
 
 <section class="section">
 
   <div class="section-header">
 
     <h2>
-      Home / Hero
+      Homepage / Hero
     </h2>
 
     <p>
-      Main message displayed on the
-      website home section.
+      Manage the main homepage title,
+      subtitle and introduction.
     </p>
 
   </div>
@@ -1757,6 +1835,109 @@
 </section>
 
 
+<!-- ACCOUNT SECURITY -->
+
+<section class="section">
+
+  <div class="section-header">
+
+    <h2>
+      Account Security
+    </h2>
+
+    <p>
+      Change the password for your own client account.
+      This section cannot change the owner's password.
+    </p>
+
+  </div>
+
+
+  <div class="security-grid">
+
+    <div class="field">
+
+      <label for="currentClientPassword">
+        Current Password
+      </label>
+
+      <input
+        id="currentClientPassword"
+        type="password"
+        autocomplete="current-password"
+        placeholder="Enter your current password"
+      >
+
+    </div>
+
+
+    <div class="field">
+
+      <label for="newClientPassword">
+        New Password
+      </label>
+
+      <input
+        id="newClientPassword"
+        type="password"
+        autocomplete="new-password"
+        placeholder="Enter a new password"
+      >
+
+    </div>
+
+
+    <div class="field">
+
+      <label for="confirmClientPassword">
+        Confirm New Password
+      </label>
+
+      <input
+        id="confirmClientPassword"
+        type="password"
+        autocomplete="new-password"
+        placeholder="Confirm your new password"
+      >
+
+    </div>
+
+  </div>
+
+
+  <div class="security-actions">
+
+    <button
+      id="changePasswordButton"
+      type="button"
+    >
+      Change My Password
+    </button>
+
+  </div>
+
+
+  <div
+    id="passwordChangeStatus"
+    class="save-status"
+    role="status"
+    aria-live="polite"
+  ></div>
+
+
+  <div class="security-note">
+
+    <strong>Security note:</strong>
+    Your password belongs only to your client account.
+    Changing it does not change the owner's password.
+    After a successful change, your existing client sessions
+    are invalidated and you will be returned to the client login page.
+
+  </div>
+
+</section>
+
+
 <!-- SAVE -->
 
 <div class="save-area">
@@ -2084,19 +2265,13 @@ function setFieldValue(
       field
     );
 
-
   if (!element) {
-
     return;
-
   }
 
-
   element.value =
-    value === null ||
-    value === undefined
-      ? ""
-      : String(value);
+    value ??
+    "";
 
 }
 
@@ -2110,70 +2285,11 @@ function getFieldValue(
       field
     );
 
-
   if (!element) {
-
     return "";
-
   }
-
 
   return element.value;
-
-}
-
-
-/* =====================================
-   IMAGE URL
-===================================== */
-
-function getImageUrl(
-  path
-) {
-
-  if (!path) {
-
-    return "";
-
-  }
-
-
-  const cleanPath =
-    String(path)
-      .trim();
-
-
-  if (!cleanPath) {
-
-    return "";
-
-  }
-
-
-  if (
-    cleanPath.startsWith(
-      "http://"
-    ) ||
-    cleanPath.startsWith(
-      "https://"
-    )
-  ) {
-
-    return cleanPath;
-
-  }
-
-
-  if (
-    cleanPath.startsWith("/")
-  ) {
-
-    return cleanPath;
-
-  }
-
-
-  return "/" + cleanPath;
 
 }
 
@@ -2239,10 +2355,6 @@ function renderImageCards(
         );
 
 
-      image.alt =
-        item.title;
-
-
       const placeholder =
         document.createElement(
           "div"
@@ -2252,20 +2364,31 @@ function renderImageCards(
       placeholder.className =
         "image-placeholder";
 
+
       placeholder.textContent =
         "No image available";
+
+
+      preview.appendChild(
+        image
+      );
+
+
+      preview.appendChild(
+        placeholder
+      );
 
 
       const imagePath =
         content[
           item.field
-        ];
+        ] || "";
 
 
       const imageUrl =
-        getImageUrl(
-          imagePath
-        );
+        imagePath
+          ? imagePath
+          : "";
 
 
       if (imageUrl) {
@@ -2299,21 +2422,11 @@ function renderImageCards(
               "block";
 
             placeholder.textContent =
-              "Image preview unavailable";
+              "Image could not be loaded.";
 
           };
 
       }
-
-
-      preview.appendChild(
-        image
-      );
-
-
-      preview.appendChild(
-        placeholder
-      );
 
 
       const fileInput =
@@ -2326,12 +2439,12 @@ function renderImageCards(
         "file";
 
 
-      fileInput.className =
-        "file-input";
-
-
       fileInput.accept =
         "image/jpeg,image/png,image/webp";
+
+
+      fileInput.className =
+        "file-input";
 
 
       const uploadButton =
@@ -2360,6 +2473,63 @@ function renderImageCards(
 
       uploadStatus.className =
         "upload-status";
+
+
+      fileInput.addEventListener(
+        "change",
+        function() {
+
+          const file =
+            fileInput.files[0];
+
+
+          if (!file) {
+            return;
+          }
+
+
+          if (
+            !file.type.startsWith(
+              "image/"
+            )
+          ) {
+
+            uploadStatus.className =
+              "upload-status error";
+
+            uploadStatus.textContent =
+              "Please select an image file.";
+
+            return;
+
+          }
+
+
+          const reader =
+            new FileReader();
+
+
+          reader.onload =
+            function(event) {
+
+              image.src =
+                event.target.result;
+
+              image.style.display =
+                "block";
+
+              placeholder.style.display =
+                "none";
+
+            };
+
+
+          reader.readAsDataURL(
+            file
+          );
+
+        }
+      );
 
 
       uploadButton.addEventListener(
@@ -2420,23 +2590,16 @@ function renderImageCards(
 
 
 /* =====================================
-   IMAGE UPLOAD
+   UPLOAD IMAGE
 ===================================== */
 
 async function uploadImage(
-
   item,
-
   fileInput,
-
   uploadButton,
-
   uploadStatus,
-
   previewImage,
-
   placeholder
-
 ) {
 
   const file =
@@ -2450,6 +2613,19 @@ async function uploadImage(
 
     uploadStatus.textContent =
       "Please select an image first.";
+
+    return;
+
+  }
+
+
+  if (file.size > 5 * 1024 * 1024) {
+
+    uploadStatus.className =
+      "upload-status error";
+
+    uploadStatus.textContent =
+      "Image must be smaller than 5 MB.";
 
     return;
 
@@ -2476,22 +2652,6 @@ async function uploadImage(
 
     uploadStatus.textContent =
       "Only JPG, PNG and WebP images are allowed.";
-
-    return;
-
-  }
-
-
-  if (
-    file.size >
-    5 * 1024 * 1024
-  ) {
-
-    uploadStatus.className =
-      "upload-status error";
-
-    uploadStatus.textContent =
-      "Image must be smaller than 5 MB.";
 
     return;
 
@@ -2578,24 +2738,18 @@ async function uploadImage(
     }
 
 
-    currentContent[
-      item.field
-    ] =
-      data.path;
+    if (data.path) {
 
+      currentContent[
+        item.field
+      ] =
+        data.path;
 
-    const previewUrl =
-      getImageUrl(
-        data.path
-      );
-
-
-    if (previewUrl) {
 
       previewImage.src =
-        previewUrl +
+        data.path +
         (
-          previewUrl.includes("?")
+          data.path.includes("?")
             ? "&"
             : "?"
         ) +
@@ -2944,6 +3098,271 @@ async function saveContent() {
 saveButton.addEventListener(
   "click",
   saveContent
+);
+
+
+/* =====================================
+   CLIENT PASSWORD CHANGE
+===================================== */
+
+const changePasswordButton =
+  document.getElementById(
+    "changePasswordButton"
+  );
+
+
+const passwordChangeStatus =
+  document.getElementById(
+    "passwordChangeStatus"
+  );
+
+
+const currentClientPassword =
+  document.getElementById(
+    "currentClientPassword"
+  );
+
+
+const newClientPassword =
+  document.getElementById(
+    "newClientPassword"
+  );
+
+
+const confirmClientPassword =
+  document.getElementById(
+    "confirmClientPassword"
+  );
+
+
+function showPasswordChangeStatus(
+  text,
+  type
+) {
+
+  passwordChangeStatus.className =
+    "save-status " + type;
+
+  passwordChangeStatus.textContent =
+    text;
+
+  passwordChangeStatus.style.display =
+    "block";
+
+}
+
+
+changePasswordButton.addEventListener(
+  "click",
+  async function() {
+
+    const currentPassword =
+      currentClientPassword.value;
+
+
+    const newPassword =
+      newClientPassword.value;
+
+
+    const confirmPassword =
+      confirmClientPassword.value;
+
+
+    if (!currentPassword) {
+
+      showPasswordChangeStatus(
+        "Please enter your current password.",
+        "error"
+      );
+
+      currentClientPassword.focus();
+
+      return;
+
+    }
+
+
+    if (!newPassword) {
+
+      showPasswordChangeStatus(
+        "Please enter your new password.",
+        "error"
+      );
+
+      newClientPassword.focus();
+
+      return;
+
+    }
+
+
+    if (newPassword.length < 8) {
+
+      showPasswordChangeStatus(
+        "New password must be at least 8 characters.",
+        "error"
+      );
+
+      newClientPassword.focus();
+
+      return;
+
+    }
+
+
+    if (newPassword !== confirmPassword) {
+
+      showPasswordChangeStatus(
+        "New passwords do not match.",
+        "error"
+      );
+
+      confirmClientPassword.focus();
+
+      return;
+
+    }
+
+
+    if (currentPassword === newPassword) {
+
+      showPasswordChangeStatus(
+        "New password must be different from the current password.",
+        "error"
+      );
+
+      newClientPassword.focus();
+
+      return;
+
+    }
+
+
+    changePasswordButton.disabled =
+      true;
+
+
+    changePasswordButton.textContent =
+      "Changing Password...";
+
+
+    showPasswordChangeStatus(
+      "Changing your password...",
+      "info"
+    );
+
+
+    try {
+
+      const response =
+        await fetch(
+          "/api/client-change-password",
+          {
+            method:
+              "POST",
+
+            credentials:
+              "include",
+
+            cache:
+              "no-store",
+
+            headers: {
+              "Content-Type":
+                "application/json"
+            },
+
+            body:
+              JSON.stringify({
+                currentPassword:
+                  currentPassword,
+
+                newPassword:
+                  newPassword
+              })
+          }
+        );
+
+
+      const data =
+        await response.json();
+
+
+      if (
+        response.status ===
+        401
+      ) {
+
+        window.location.href =
+          "/client-login.html";
+
+        return;
+
+      }
+
+
+      if (
+        !response.ok ||
+        !data.success
+      ) {
+
+        throw new Error(
+          data.message ||
+          "Unable to change your password."
+        );
+
+      }
+
+
+      showPasswordChangeStatus(
+        "✓ Password changed successfully. Please sign in again with your new password.",
+        "success"
+      );
+
+
+      currentClientPassword.value =
+        "";
+
+
+      newClientPassword.value =
+        "";
+
+
+      confirmClientPassword.value =
+        "";
+
+
+      setTimeout(
+        function() {
+
+          window.location.href =
+            "/client-login.html";
+
+        },
+        1500
+      );
+
+
+    } catch (error) {
+
+      showPasswordChangeStatus(
+        error.message ||
+        "Unable to change your password. Please try again.",
+        "error"
+      );
+
+    } finally {
+
+      changePasswordButton.disabled =
+        false;
+
+
+      changePasswordButton.textContent =
+        "Change My Password";
+
+    }
+
+  }
 );
 
 
