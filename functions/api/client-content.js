@@ -436,62 +436,293 @@ export async function onRequest(
      * -------------------------------------
      */
 
+   /* =========================================
+   CLIENT-SAFE CONTENT FIELDS
+========================================= */
+
+const CLIENT_CONTENT_FIELDS = [
+
+  "business_name",
+  "phone",
+  "email",
+  "address",
+  "about",
+  "whatsapp",
+
+  "hero_title",
+  "hero_subtitle",
+  "hero_description",
+
+  "approach_title",
+  "approach_description",
+
+  "about_heading",
+  "about_description",
+
+  "mission",
+  "vision",
+  "values_text",
+
+  "agriculture_title",
+  "agriculture_description",
+  "agriculture_image",
+
+  "construction_title",
+  "construction_description",
+  "construction_image",
+
+  "transport_title",
+  "transport_description",
+  "transport_image",
+
+  "agro_company_name",
+  "agro_company_description",
+  "agro_company_image",
+
+  "construction_company_name",
+  "construction_company_description",
+  "construction_company_image",
+
+  "transport_company_name",
+  "transport_company_description",
+  "transport_company_image",
+
+  "projects_heading",
+  "projects_description",
+
+  "project1_category",
+  "project1_title",
+  "project1_description",
+  "project1_image",
+
+  "project2_category",
+  "project2_title",
+  "project2_description",
+  "project2_image",
+
+  "project3_category",
+  "project3_title",
+  "project3_description",
+  "project3_image"
+
+];
+
+
+/* =========================================
+   POST CLIENT CONTENT
+========================================= */
+
+if (
+  context.request.method ===
+  "POST"
+) {
+
+  const body =
+    await context.request.json();
+
+
+  if (
+    !body ||
+    typeof body.content !==
+    "object" ||
+    body.content === null ||
+    Array.isArray(body.content)
+  ) {
+
+    return json(
+      {
+        success: false,
+        message:
+          "Invalid content data."
+      },
+      400
+    );
+
+  }
+
+
+  /*
+   * Read the existing database row.
+   */
+
+  const existing =
+    await context.env.DB.prepare(`
+      SELECT *
+      FROM site_content
+      WHERE id = 1
+      LIMIT 1
+    `)
+      .first();
+
+
+  if (!existing) {
+
+    return json(
+      {
+        success: false,
+        message:
+          "Website content record not found."
+      },
+      404
+    );
+
+  }
+
+
+  /*
+   * Build a SAFE update object.
+   *
+   * Only fields explicitly listed in
+   * CLIENT_CONTENT_FIELDS are accepted.
+   *
+   * Security fields such as:
+   *
+   * id
+   * updated_at
+   * authentication data
+   * client accounts
+   * admin data
+   *
+   * can never be updated through this API.
+   */
+
+  const updates = {};
+
+
+  for (
+    const field of
+    CLIENT_CONTENT_FIELDS
+  ) {
+
     if (
-      context.request.method ===
-      "POST"
+      Object.prototype.hasOwnProperty.call(
+        body.content,
+        field
+      )
     ) {
 
-      const body =
-        await context.request.json();
-
-
-      if (
-        !body ||
-        typeof body.content !==
-        "object"
-      ) {
-
-        return json(
-          {
-            success: false,
-            message:
-              "Invalid content data."
-          },
-
-          400
-        );
-
-      }
+      const value =
+        body.content[field];
 
 
       /*
-       * IMPORTANT:
+       * Website content fields are
+       * stored as text.
        *
-       * At this stage we only test
-       * authenticated client access.
-       *
-       * We do NOT write to the
-       * database yet.
-       *
-       * The permission-filtering
-       * layer will be added before
-       * client saving is enabled.
+       * Convert incoming values to
+       * strings and prevent null,
+       * objects or arrays from being
+       * written into the database.
        */
 
-      return json({
+      if (
+        value === null ||
+        value === undefined
+      ) {
 
-        success: true,
+        updates[field] = "";
 
-        message:
-          "Client content received successfully.",
+      } else if (
+        typeof value === "string" ||
+        typeof value === "number" ||
+        typeof value === "boolean"
+      ) {
 
-        clientId:
-          authenticated.id
+        updates[field] =
+          String(value);
 
-      });
+      }
 
     }
 
+  }
+
+
+  /*
+   * Never perform an empty UPDATE.
+   */
+
+  const fields =
+    Object.keys(updates);
+
+
+  if (
+    fields.length === 0
+  ) {
+
+    return json(
+      {
+        success: false,
+        message:
+          "No permitted content fields were supplied."
+      },
+      400
+    );
+
+  }
+
+
+  /*
+   * Build the SQL UPDATE statement
+   * only from our hard-coded allow-list.
+   *
+   * The field names cannot come from
+   * the client request.
+   */
+
+  const assignments =
+    fields
+      .map(
+        field =>
+          `"${field}" = ?`
+      )
+      .join(", ");
+
+
+  const values =
+    fields.map(
+      field =>
+        updates[field]
+    );
+
+
+  /*
+   * Always control updated_at on
+   * the server.
+   */
+
+  const sql = `
+    UPDATE site_content
+    SET
+      ${assignments},
+      updated_at = CURRENT_TIMESTAMP
+    WHERE id = 1
+  `;
+
+
+  await context.env.DB.prepare(
+    sql
+  )
+    .bind(...values)
+    .run();
+
+
+  return json({
+
+    success: true,
+
+    message:
+      "Client content saved successfully.",
+
+    updatedFields:
+      fields,
+
+    clientId:
+      authenticated.id
+
+  });
+
+}
 
     return json(
       {
