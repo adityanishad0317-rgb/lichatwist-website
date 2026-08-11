@@ -546,6 +546,82 @@
     }
 
 
+    .save-status {
+
+      display:
+        none;
+
+      margin-top:
+        10px;
+
+      padding:
+        12px 14px;
+
+      border-radius:
+        10px;
+
+      font-size:
+        13px;
+
+      line-height:
+        1.5;
+
+      font-weight:
+        700;
+
+      word-break:
+        break-word;
+    }
+
+
+    .save-status.info {
+
+      display:
+        block;
+
+      background:
+        #eff6ff;
+
+      color:
+        #1e40af;
+
+      border:
+        1px solid #bfdbfe;
+    }
+
+
+    .save-status.success {
+
+      display:
+        block;
+
+      background:
+        #ecfdf5;
+
+      color:
+        #065f46;
+
+      border:
+        1px solid #a9dfcc;
+    }
+
+
+    .save-status.error {
+
+      display:
+        block;
+
+      background:
+        #fef2f2;
+
+      color:
+        #991b1b;
+
+      border:
+        1px solid #fecaca;
+    }
+
+
     .image-grid {
 
       display:
@@ -1692,6 +1768,14 @@
     Save All Content Changes
   </button>
 
+
+  <div
+    id="saveStatus"
+    class="save-status"
+    role="status"
+    aria-live="polite"
+  ></div>
+
 </div>
 
 
@@ -1721,6 +1805,12 @@ const message =
 const saveButton =
   document.getElementById(
     "saveButton"
+  );
+
+
+const saveStatus =
+  document.getElementById(
+    "saveStatus"
   );
 
 
@@ -2717,6 +2807,16 @@ async function saveContent() {
   );
 
 
+  saveStatus.className =
+    "save-status info";
+
+  saveStatus.textContent =
+    "Saving website content...";
+
+  saveStatus.style.display =
+    "block";
+
+
   try {
 
     const response =
@@ -2780,19 +2880,48 @@ async function saveContent() {
       };
 
 
+    const successMessage =
+      "✓ All website content changes have been saved successfully.";
+
+
     showMessage(
-      "✓ All website content changes have been saved successfully.",
+      successMessage,
       "success"
     );
 
 
+    saveStatus.className =
+      "save-status success";
+
+    saveStatus.textContent =
+      successMessage;
+
+    saveStatus.style.display =
+      "block";
+
+
   } catch (error) {
 
-    showMessage(
+    const errorMessage =
       error.message ||
-      "Unable to save website content.",
+      "Unable to save website content.";
+
+
+    showMessage(
+      errorMessage,
       "error"
     );
+
+
+    saveStatus.className =
+      "save-status error";
+
+    saveStatus.textContent =
+      "✕ " + errorMessage;
+
+    saveStatus.style.display =
+      "block";
+
 
   } finally {
 
