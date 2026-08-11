@@ -104,6 +104,12 @@
     }
 
 
+    .logout:hover {
+
+      opacity: .9;
+    }
+
+
     .container {
 
       width:
@@ -224,6 +230,21 @@
       box-shadow:
         0 8px 24px
         rgba(16,36,62,.06);
+
+      transition:
+        transform .15s ease,
+        box-shadow .15s ease;
+    }
+
+
+    .card:hover {
+
+      transform:
+        translateY(-2px);
+
+      box-shadow:
+        0 12px 28px
+        rgba(16,36,62,.09);
     }
 
 
@@ -321,6 +342,13 @@
           15px;
       }
 
+
+      .card {
+
+        padding:
+          20px;
+      }
+
     }
 
   </style>
@@ -330,6 +358,10 @@
 
 <body>
 
+
+  <!-- =====================================
+       TOP BAR
+  ====================================== -->
 
   <header class="topbar">
 
@@ -357,8 +389,14 @@
   </header>
 
 
+  <!-- =====================================
+       MAIN CONTENT
+  ====================================== -->
+
   <main class="container">
 
+
+    <!-- Welcome -->
 
     <section class="welcome">
 
@@ -378,8 +416,12 @@
     </section>
 
 
+    <!-- Dashboard Cards -->
+
     <section class="grid">
 
+
+      <!-- Website Content -->
 
       <div class="card">
 
@@ -399,6 +441,8 @@
       </div>
 
 
+      <!-- Images -->
+
       <div class="card">
 
         <h2>
@@ -417,6 +461,8 @@
       </div>
 
 
+      <!-- Company Information -->
+
       <div class="card">
 
         <h2>
@@ -434,6 +480,8 @@
 
       </div>
 
+
+      <!-- Account Security -->
 
       <div class="card">
 
@@ -456,188 +504,46 @@
     </section>
 
 
+    <!-- Footer -->
+
     <div class="footer">
 
       LichaTwist Client Administration
 
     </div>
-    <button
-  id="testContentButton"
-  type="button"
-  style="
-    margin-top:20px;
-    width:100%;
-    min-height:50px;
-    border:0;
-    border-radius:12px;
-    background:#dc2626;
-    color:white;
-    font-size:15px;
-    font-weight:700;
-    cursor:pointer;
-  "
->
-  TEST CLIENT CONTENT SAVE
-</button>
-
-<div
-  id="testContentMessage"
-  style="
-    margin-top:15px;
-    padding:12px;
-    border-radius:10px;
-    display:none;
-    line-height:1.5;
-  "
-></div>
 
 
   </main>
 
 
-<script>
+  <!-- =====================================
+       CLIENT DASHBOARD JAVASCRIPT
+  ====================================== -->
 
-document
-  .getElementById(
-    "logoutButton"
-  )
-  .addEventListener(
-    "click",
-    async function() {
+  <script>
 
-      /*
-       * Logout endpoint will be added
-       * in the next security step.
-       *
-       * For now we return to the
-       * client login page.
-       */
+    /*
+     * TEMPORARY LOGOUT REDIRECT
+     *
+     * A proper server-side logout endpoint
+     * will be added later.
+     */
 
-      window.location.href =
-        "/client-login.html";
+    document
+      .getElementById(
+        "logoutButton"
+      )
+      .addEventListener(
+        "click",
+        function() {
 
-    }
-  );
-const testContentButton =
-  document.getElementById(
-    "testContentButton"
-  );
+          window.location.href =
+            "/client-login.html";
 
+        }
+      );
 
-const testContentMessage =
-  document.getElementById(
-    "testContentMessage"
-  );
-
-
-testContentButton.addEventListener(
-  "click",
-  async function() {
-
-    testContentButton.disabled =
-      true;
-
-    testContentButton.textContent =
-      "Testing...";
-
-
-    testContentMessage.style.display =
-      "block";
-
-    testContentMessage.style.background =
-      "#eff6ff";
-
-    testContentMessage.style.color =
-      "#1e40af";
-
-    testContentMessage.textContent =
-      "Sending test content...";
-
-
-    try {
-
-      const response =
-        await fetch(
-          "/api/client-content",
-          {
-            method: "POST",
-
-            credentials:
-              "include",
-
-            headers: {
-              "Content-Type":
-                "application/json"
-            },
-
-            body:
-              JSON.stringify({
-                content: {
-                  business_name:
-                    "LichaTwist"
-                }
-              })
-          }
-        );
-
-
-      const data =
-        await response.json();
-
-
-      if (
-        !response.ok ||
-        !data.success
-      ) {
-
-        testContentMessage.style.background =
-          "#fef2f2";
-
-        testContentMessage.style.color =
-          "#991b1b";
-
-        testContentMessage.textContent =
-          data.message ||
-          "Test failed.";
-
-        return;
-
-      }
-
-
-      testContentMessage.style.background =
-        "#ecfdf5";
-
-      testContentMessage.style.color =
-        "#065f46";
-
-      testContentMessage.textContent =
-        "✓ Test successful. The client API saved the test content.";
-
-    } catch {
-
-      testContentMessage.style.background =
-        "#fef2f2";
-
-      testContentMessage.style.color =
-        "#991b1b";
-
-      testContentMessage.textContent =
-        "Unable to connect to the client content API.";
-
-    } finally {
-
-      testContentButton.disabled =
-        false;
-
-      testContentButton.textContent =
-        "TEST CLIENT CONTENT SAVE";
-
-    }
-
-  }
-);
-</script>
+  </script>
 
 
 </body>
