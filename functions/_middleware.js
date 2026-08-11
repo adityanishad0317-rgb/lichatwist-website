@@ -1,97 +1,380 @@
-const COOKIE_NAME = "ADMIN_SESSION_V2";
+const ADMIN_COOKIE_NAME = "ADMIN_SESSION_V2";
+const CLIENT_COOKIE_NAME = "CLIENT_SESSION_V1";
 
-function base64urlEncode(value) {
-  return btoa(value)
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_")
-    .replace(/=+$/, "");
-}
 
 function base64urlDecode(value) {
-  value = value.replace(/-/g, "+").replace(/_/g, "/");
+
+  value =
+    value
+      .replace(/-/g, "+")
+      .replace(/_/g, "/");
 
   while (value.length % 4) {
     value += "=";
   }
 
-  const binary = atob(value);
-  const bytes = Uint8Array.from(binary, c => c.charCodeAt(0));
+  const binary =
+    atob(value);
 
-  return new TextDecoder().decode(bytes);
+  const bytes =
+    Uint8Array.from(
+      binary,
+      c => c.charCodeAt(0)
+    );
+
+  return new TextDecoder()
+    .decode(bytes);
 }
 
-async function createSignature(data, secret) {
-  const key = await crypto.subtle.importKey(
-    "raw",
-    new TextEncoder().encode(secret),
-    {
-      name: "HMAC",
-      hash: "SHA-256"
-    },
-    false,
-    ["sign"]
-  );
 
-  const signature = await crypto.subtle.sign(
-    "HMAC",
-    key,
-    new TextEncoder().encode(data)
-  );
+async function createSignature(
+  data,
+  secret
+) {
+
+  const key =
+    await crypto.subtle.importKey(
+      "raw",
+      new TextEncoder().encode(secret),
+      {
+        name: "HMAC",
+        hash: "SHA-256"
+      },
+      false,
+      ["sign"]
+    );
+
+
+  const signature =
+    await crypto.subtle.sign(
+      "HMAC",
+      key,
+      new TextEncoder().encode(data)
+    );
+
 
   return btoa(
-    String.fromCharCode(...new Uint8Array(signature))
+    String.fromCharCode(
+      ...new Uint8Array(signature)
+    )
   )
     .replace(/\+/g, "-")
     .replace(/\//g, "_")
     .replace(/=+$/, "");
 }
 
-async function verifySession(cookie, secret) {
+
+function getCookie(
+  request,
+  name
+) {
+
+  const cookies =
+    request.headers.get("Cookie") || "";
+
+
+  const parts =
+    cookies.split(";");
+
+
+  for (
+    const part of parts
+  ) {
+
+    const trimmed =
+      part.trim();
+
+
+    if (
+      trimmed.startsWith(
+        name + "="
+      )
+    ) {
+
+      return trimmed.substring(
+        name.length + 1
+      );
+
+    }
+
+  }
+
+
+  return null;
+}
+
+
+/* =========================================
+   VERIFY ADMIN SESSION
+========================================= */
+
+async function verifyAdminSession(
+  cookie,
+  secret
+) {
+
   if (!cookie) {
     return false;
   }
 
-  const parts = cookie.split(".");
+
+  const parts =
+    cookie.split(".");
+
 
   if (parts.length !== 2) {
     return false;
   }
 
-  const [payload, signature] = parts;
+
+  const [
+    payload,
+    signature
+  ] = parts;
+
 
   try {
-    const expected = await createSignature(
-      payload,
-      secret
-    );
 
-    if (signature !== expected) {
+    const expected =
+      await createSignature(
+        payload,
+        secret
+      );
+
+
+    if (
+      signature !== expected
+    ) {
       return false;
     }
 
-    const session = JSON.parse(
-      base64urlDecode(payload)
-    );
 
-    return (
+    const session =
+      JSON.parse(
+        base64urlDecode(payload)
+      );
+
+
+    /*
+     * Existing Owner sessions created
+     * by /api/login do not contain a
+     * role field.
+     *
+     * Therefore:
+     *
+     * missing role = existing Owner session
+     *
+     * role = client = NOT an Owner session
+     */
+
+    if (
+      session.role === "client"
+    ) {
+      return false;
+    }
+
+
+    return Boolean(
       session.exp &&
       Date.now() < session.exp
     );
+
+
   } catch {
+
     return false;
+
   }
 }
 
+
+/* =========================================
+   VERIFY CLIENT SESSION
+========================================= */
+
+async function verifyClientSession(
+  cookie,
+  secret,
+  db
+) {
+
+  if (!cookie) {
+    return null;
+  }
+
+
+  const parts =
+    cookie.split(".");
+
+
+  if (parts.length !== 2) {
+    return null;
+  }
+
+
+  const [
+    payload,
+    signature
+  ] = parts;
+
+
+  try {
+
+    const expected =
+      await createSignature(
+        payload,
+        secret
+      );
+
+
+    if (
+      signature !== expected
+    ) {
+      return null;
+    }
+
+
+    const session =
+      JSON.parse(
+        base64urlDecode(payload)
+      );
+
+
+    /*
+     * Must be an actual Client session.
+     */
+
+    if (
+      session.role !== "client"
+    ) {
+      return null;
+    }
+
+
+    /*
+     * Session must not be expired.
+     */
+
+    if (
+      !session.exp ||
+      Date.now() >= session.exp
+    ) {
+      return null;
+    }
+
+
+    /*
+     * Client ID must exist.
+     */
+
+    const clientId =
+      Number(session.sub);
+
+
+    if (
+      !Number.isInteger(clientId) ||
+      clientId <= 0
+    ) {
+      return null;
+    }
+
+
+    /*
+     * Check the current account.
+     *
+     * This also lets us invalidate
+     * sessions after password changes.
+     */
+
+    const client =
+      await db.prepare(`
+        SELECT
+          id,
+          status,
+          session_version
+        FROM client_accounts
+        WHERE id = ?
+        LIMIT 1
+      `)
+        .bind(clientId)
+        .first();
+
+
+    if (!client) {
+      return null;
+    }
+
+
+    /*
+     * Inactive client accounts cannot
+     * access the dashboard.
+     */
+
+    if (
+      client.status !== "active"
+    ) {
+      return null;
+    }
+
+
+    /*
+     * The session version in the
+     * signed cookie must match D1.
+     */
+
+    const databaseVersion =
+      Number(
+        client.session_version || 1
+      );
+
+
+    const sessionVersion =
+      Number(
+        session.version || 0
+      );
+
+
+    if (
+      sessionVersion !==
+      databaseVersion
+    ) {
+      return null;
+    }
+
+
+    return session;
+
+
+  } catch {
+
+    return null;
+
+  }
+}
+
+
+/* =========================================
+   OWNER LOGIN PAGE
+========================================= */
+
 function loginPage() {
+
   return new Response(`
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
   <title>LichaTwist Admin Login</title>
 
   <style>
+
     body {
       font-family: Arial, sans-serif;
       background: #f4f6f8;
@@ -107,7 +390,9 @@ function loginPage() {
       padding: 30px;
       border-radius: 14px;
       width: min(90%, 380px);
-      box-shadow: 0 4px 20px rgba(0,0,0,.12);
+      box-shadow:
+        0 4px 20px
+        rgba(0,0,0,.12);
     }
 
     h1 {
@@ -138,14 +423,22 @@ function loginPage() {
       margin-top: 15px;
       color: #dc2626;
     }
+
   </style>
+
 </head>
 
 <body>
 
   <div class="box">
-    <h1>LichaTwist Admin</h1>
-    <p>Owner login</p>
+
+    <h1>
+      LichaTwist Admin
+    </h1>
+
+    <p>
+      Owner login
+    </p>
 
     <form id="loginForm">
 
@@ -163,98 +456,222 @@ function loginPage() {
       <div id="message"></div>
 
     </form>
+
   </div>
 
   <script>
+
     document
       .getElementById("loginForm")
-      .addEventListener("submit", async function(e) {
+      .addEventListener(
+        "submit",
+        async function(e) {
 
-        e.preventDefault();
+          e.preventDefault();
 
-        const password =
-          document.getElementById("password").value;
+          const password =
+            document
+              .getElementById("password")
+              .value;
 
-        const message =
-          document.getElementById("message");
+          const message =
+            document
+              .getElementById("message");
 
-        try {
+          try {
 
-          const response = await fetch(
-            "/api/login",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json"
-              },
-              body: JSON.stringify({
-                password: password
-              })
+            const response =
+              await fetch(
+                "/api/login",
+                {
+                  method: "POST",
+
+                  headers: {
+                    "Content-Type":
+                      "application/json"
+                  },
+
+                  body:
+                    JSON.stringify({
+                      password:
+                        password
+                    })
+                }
+              );
+
+            const data =
+              await response.json();
+
+            if (data.success) {
+
+              window.location.href =
+                "/admin.html";
+
+            } else {
+
+              message.textContent =
+                "Invalid password.";
+
             }
-          );
 
-          const data = await response.json();
+          } catch {
 
-          if (data.success) {
-            window.location.href = "/admin.html";
-          } else {
             message.textContent =
-              "Invalid password.";
+              "Unable to connect to login service.";
+
           }
 
-        } catch {
-          message.textContent =
-            "Unable to connect to login service.";
         }
+      );
 
-      });
   </script>
 
 </body>
 </html>
   `, {
+
     status: 401,
+
     headers: {
-      "Content-Type": "text/html; charset=UTF-8"
+      "Content-Type":
+        "text/html; charset=UTF-8"
     }
+
   });
+
 }
 
-export async function onRequest(context) {
 
-  const url = new URL(context.request.url);
+/* =========================================
+   MIDDLEWARE
+========================================= */
 
- // Protect the admin page.
-if (url.pathname !== "/admin" && url.pathname !== "/admin.html") {
-  return context.next();
-}
-  const secret = context.env.ADMIN_PASSWORD;
+export async function onRequest(
+  context
+) {
+
+  const url =
+    new URL(
+      context.request.url
+    );
+
+
+  const secret =
+    context.env.ADMIN_PASSWORD;
+
+
+  /*
+   * If the server secret is missing,
+   * preserve the existing behavior for
+   * protected routes.
+   */
 
   if (!secret) {
-    return new Response(
-      "Server configuration error.",
-      {
-        status: 500
-      }
-    );
+
+    if (
+      url.pathname === "/admin" ||
+      url.pathname === "/admin.html" ||
+      url.pathname === "/client-dashboard" ||
+      url.pathname === "/client-dashboard.html"
+    ) {
+
+      return new Response(
+        "Server configuration error.",
+        {
+          status: 500
+        }
+      );
+
+    }
+
+
+    return context.next();
+
   }
 
-  const cookies =
-    context.request.headers.get("Cookie") || "";
 
-  const match = cookies.match(
-    new RegExp(`${COOKIE_NAME}=([^;]+)`)
-  );
+  /* =====================================
+     OWNER / ADMIN PAGE
+  ===================================== */
 
-  const authenticated =
-    await verifySession(
-      match ? match[1] : null,
-      secret
-    );
+  if (
+    url.pathname === "/admin" ||
+    url.pathname === "/admin.html"
+  ) {
 
-  if (!authenticated) {
-    return loginPage();
+    const cookie =
+      getCookie(
+        context.request,
+        ADMIN_COOKIE_NAME
+      );
+
+
+    const authenticated =
+      await verifyAdminSession(
+        cookie,
+        secret
+      );
+
+
+    if (!authenticated) {
+
+      return loginPage();
+
+    }
+
+
+    return context.next();
+
   }
+
+
+  /* =====================================
+     CLIENT DASHBOARD
+  ===================================== */
+
+  if (
+    url.pathname === "/client-dashboard" ||
+    url.pathname === "/client-dashboard.html"
+  ) {
+
+    const cookie =
+      getCookie(
+        context.request,
+        CLIENT_COOKIE_NAME
+      );
+
+
+    const session =
+      await verifyClientSession(
+        cookie,
+        secret,
+        context.env.DB
+      );
+
+
+    if (!session) {
+
+      return Response.redirect(
+        new URL(
+          "/client-login.html",
+          context.request.url
+        ),
+        302
+      );
+
+    }
+
+
+    return context.next();
+
+  }
+
+
+  /*
+   * Everything else behaves exactly
+   * as before.
+   */
 
   return context.next();
-                      }
+
+}
