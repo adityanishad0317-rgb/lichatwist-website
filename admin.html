@@ -436,7 +436,8 @@ footer{
   <div class="quick-nav-title">Quick Edit</div>
 
   <div class="quick-nav-links">
-    <button onclick="goTo('clientAccountsManagement')">👥 Clients</button>
+    <button onclick="goTo('clientManagement')">👤 Create Client</button>
+    <button onclick="goTo('clientAccountsManagement')">👥 Manage Clients</button>
     <button onclick="goTo('imageManagement')">🖼️ Images</button>
     <button onclick="goTo('homeEditor')">🏠 Home</button>
     <button onclick="goTo('aboutEditor')">ℹ️ About</button>
@@ -472,7 +473,13 @@ footer{
   <div class="card">
     <h3>👥 Clients</h3>
     <p>Create and manage client accounts.</p>
-    <button onclick="goTo('clientAccountsManagement')">Manage Clients</button>
+    <button onclick="goTo('clientManagement')">Create Client</button>
+    <button
+      class="secondary"
+      style="margin-top:8px"
+      onclick="goTo('clientAccountsManagement')">
+      Manage Clients
+    </button>
   </div>
 
   <div class="card">
@@ -1212,7 +1219,13 @@ async function createClientAccount(){
     nameInput.value="";
     emailInput.value="";
 
-    await loadClientManagement();
+    /*
+     * The create-client operation is kept
+     * independent from the management list.
+     *
+     * This preserves the original working
+     * client creation behavior.
+     */
 
   }catch(error){
 
