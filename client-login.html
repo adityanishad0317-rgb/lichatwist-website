@@ -12,18 +12,24 @@
 
   <title>LichaTwist Client Login</title>
 
+
   <style>
 
     * {
       box-sizing: border-box;
     }
 
+
     body {
+
       margin: 0;
+
       min-height: 100vh;
 
       display: flex;
+
       justify-content: center;
+
       align-items: center;
 
       padding: 20px;
@@ -49,22 +55,24 @@
           #e4eaf0 100%
         );
 
-      color: #16263a;
+      color:
+        #16263a;
     }
 
 
     .login-box {
 
-      width: min(
-        100%,
-        420px
-      );
+      width:
+        min(100%, 420px);
 
-      background: #f8fafc;
+      background:
+        #f8fafc;
 
-      padding: 32px;
+      padding:
+        32px;
 
-      border-radius: 22px;
+      border-radius:
+        22px;
 
       border:
         1px solid #d7e0e8;
@@ -78,97 +86,128 @@
 
 
     .logo-area {
-      text-align: center;
-      margin-bottom: 25px;
+
+      text-align:
+        center;
+
+      margin-bottom:
+        25px;
     }
 
 
     .logo-area h1 {
 
-      margin: 0;
+      margin:
+        0;
 
-      color: #071a33;
+      color:
+        #071a33;
 
-      font-size: 28px;
+      font-size:
+        28px;
     }
 
 
     .logo-area p {
 
-      margin-top: 8px;
+      margin-top:
+        8px;
 
-      color: #667589;
+      color:
+        #667589;
 
-      font-size: 14px;
+      font-size:
+        14px;
     }
 
 
     h2 {
 
-      margin-top: 0;
+      margin-top:
+        0;
 
-      color: #10243e;
+      color:
+        #10243e;
 
-      font-size: 22px;
+      font-size:
+        22px;
     }
 
 
     .description {
 
-      color: #667589;
+      color:
+        #667589;
 
-      line-height: 1.5;
+      line-height:
+        1.5;
 
-      font-size: 14px;
+      font-size:
+        14px;
 
-      margin-bottom: 22px;
+      margin-bottom:
+        22px;
     }
 
 
     .field {
 
-      margin-bottom: 18px;
+      margin-bottom:
+        18px;
     }
 
 
     label {
 
-      display: block;
+      display:
+        block;
 
-      margin-bottom: 7px;
+      margin-bottom:
+        7px;
 
-      color: #071a33;
+      color:
+        #071a33;
 
-      font-weight: 700;
+      font-weight:
+        700;
     }
 
 
     input {
 
-      width: 100%;
+      width:
+        100%;
 
-      padding: 14px;
+      padding:
+        14px;
 
-      font-size: 16px;
+      font-size:
+        16px;
 
       border:
         1.5px solid #cfd9e3;
 
-      border-radius: 14px;
+      border-radius:
+        14px;
 
-      background: #eef3f7;
+      background:
+        #eef3f7;
 
-      color: #16263a;
+      color:
+        #16263a;
     }
 
 
     input:focus {
 
-      outline: none;
+      outline:
+        none;
 
-      background: #ffffff;
+      background:
+        #ffffff;
 
-      border-color: #1769e0;
+      border-color:
+        #1769e0;
 
       box-shadow:
         0 0 0 4px
@@ -178,13 +217,17 @@
 
     button {
 
-      width: 100%;
+      width:
+        100%;
 
-      min-height: 52px;
+      min-height:
+        52px;
 
-      border: none;
+      border:
+        none;
 
-      border-radius: 13px;
+      border-radius:
+        13px;
 
       background:
         linear-gradient(
@@ -193,45 +236,59 @@
           #0d4fae
         );
 
-      color: white;
+      color:
+        white;
 
-      font-size: 16px;
+      font-size:
+        16px;
 
-      font-weight: 700;
+      font-weight:
+        700;
 
-      cursor: pointer;
+      cursor:
+        pointer;
     }
 
 
     button:disabled {
 
-      opacity: .65;
+      opacity:
+        .65;
 
-      cursor: wait;
+      cursor:
+        wait;
     }
 
 
     #message {
 
-      display: none;
+      display:
+        none;
 
-      margin-top: 18px;
+      margin-top:
+        18px;
 
-      padding: 13px;
+      padding:
+        13px;
 
-      border-radius: 12px;
+      border-radius:
+        12px;
 
-      line-height: 1.5;
+      line-height:
+        1.5;
 
-      word-break: break-word;
+      word-break:
+        break-word;
     }
 
 
     .success {
 
-      background: #ecfdf5;
+      background:
+        #ecfdf5;
 
-      color: #065f46;
+      color:
+        #065f46;
 
       border:
         1px solid #a9dfcc;
@@ -240,9 +297,11 @@
 
     .error {
 
-      background: #fef2f2;
+      background:
+        #fef2f2;
 
-      color: #991b1b;
+      color:
+        #991b1b;
 
       border:
         1px solid #fecaca;
@@ -251,24 +310,40 @@
 
     .info {
 
-      background: #eff6ff;
+      background:
+        #eff6ff;
 
-      color: #1e40af;
+      color:
+        #1e40af;
 
       border:
         1px solid #bfdbfe;
     }
 
 
+    #changePasswordBox {
+
+      display:
+        none;
+
+      margin-top:
+        20px;
+    }
+
+
     .footer {
 
-      margin-top: 22px;
+      margin-top:
+        22px;
 
-      text-align: center;
+      text-align:
+        center;
 
-      font-size: 13px;
+      font-size:
+        13px;
 
-      color: #667589;
+      color:
+        #667589;
     }
 
   </style>
@@ -279,23 +354,23 @@
 <body>
 
 
-  <div class="login-box">
+<div class="login-box">
 
 
-    <div class="logo-area">
+  <div class="logo-area">
 
-      <h1>LichaTwist</h1>
+    <h1>
+      LichaTwist
+    </h1>
 
-      <p>
-        Website Management
-      </p>
+    <p>
+      Website Management
+    </p>
 
-    </div>
+  </div>
 
 
-    <!-- =========================
-         CLIENT LOGIN
-    ========================== -->
+  <div id="loginSection">
 
     <h2>
       Client Login
@@ -357,110 +432,110 @@
 
     </form>
 
-
-    <!-- =========================
-         LOGIN MESSAGE
-    ========================== -->
-
-    <div id="message"></div>
+  </div>
 
 
-    <!-- =========================
-         CREATE PASSWORD
-    ========================== -->
+  <!-- =====================================
+       CHANGE PASSWORD
+  ====================================== -->
 
-    <div
-      id="changePasswordBox"
-      style="display:none; margin-top:20px;"
-    >
+  <div
+    id="changePasswordBox"
+  >
 
-      <h2>
-        Create Your Password
-      </h2>
-
-
-      <p class="description">
-
-        Your temporary password can only be used for
-        initial access. Please create your own private
-        password to continue.
-
-      </p>
+    <h2>
+      Create Your Password
+    </h2>
 
 
-      <div class="field">
+    <p class="description">
 
-        <label for="currentClientPassword">
-          Temporary Password
-        </label>
+      Your temporary password can only be
+      used for initial access. Please create
+      your own private password to continue.
 
-        <input
-          id="currentClientPassword"
-          type="password"
-          autocomplete="current-password"
-          placeholder="Enter your temporary password"
-        >
-
-      </div>
+    </p>
 
 
-      <div class="field">
+    <div class="field">
 
-        <label for="newClientPassword">
-          New Password
-        </label>
+      <label for="currentClientPassword">
+        Temporary Password
+      </label>
 
-        <input
-          id="newClientPassword"
-          type="password"
-          autocomplete="new-password"
-          placeholder="Minimum 8 characters"
-        >
-
-      </div>
-
-
-      <div class="field">
-
-        <label for="confirmClientPassword">
-          Confirm New Password
-        </label>
-
-        <input
-          id="confirmClientPassword"
-          type="password"
-          autocomplete="new-password"
-          placeholder="Enter the new password again"
-        >
-
-      </div>
-
-
-      <button
-        id="changePasswordButton"
-        type="button"
+      <input
+        id="currentClientPassword"
+        type="password"
+        autocomplete="current-password"
+        placeholder="Enter your temporary password"
       >
-        Set New Password
-      </button>
 
     </div>
 
 
-    <!-- =========================
-         FOOTER
-    ========================== -->
+    <div class="field">
 
-    <div class="footer">
+      <label for="newClientPassword">
+        New Password
+      </label>
 
-      LichaTwist Client Administration
+      <input
+        id="newClientPassword"
+        type="password"
+        autocomplete="new-password"
+        placeholder="Minimum 8 characters"
+      >
 
     </div>
 
+
+    <div class="field">
+
+      <label for="confirmClientPassword">
+        Confirm New Password
+      </label>
+
+      <input
+        id="confirmClientPassword"
+        type="password"
+        autocomplete="new-password"
+        placeholder="Enter the new password again"
+      >
+
+    </div>
+
+
+    <button
+      id="changePasswordButton"
+      type="button"
+    >
+      Set New Password
+    </button>
 
   </div>
 
 
+  <div
+    id="message"
+  ></div>
+
+
+  <div class="footer">
+
+    LichaTwist Client Administration
+
+  </div>
+
+
+</div>
+
+
 <script>
+
+
+/* =====================================
+   ELEMENTS
+===================================== */
 
 const form =
   document.getElementById(
@@ -480,9 +555,15 @@ const passwordInput =
   );
 
 
-const button =
+const loginButton =
   document.getElementById(
     "loginButton"
+  );
+
+
+const loginSection =
+  document.getElementById(
+    "loginSection"
   );
 
 
@@ -522,6 +603,10 @@ const changePasswordButton =
   );
 
 
+/* =====================================
+   MESSAGE
+===================================== */
+
 function showMessage(
   text,
   type
@@ -539,13 +624,19 @@ function showMessage(
 }
 
 
+/* =====================================
+   CHANGE CLIENT PASSWORD
+===================================== */
+
 async function changeClientPassword() {
 
   const currentPassword =
     currentClientPassword.value;
 
+
   const newPassword =
     newClientPassword.value;
+
 
   const confirmPassword =
     confirmClientPassword.value;
@@ -575,7 +666,10 @@ async function changeClientPassword() {
   }
 
 
-  if (newPassword.length < 8) {
+  if (
+    newPassword.length <
+    8
+  ) {
 
     showMessage(
       "New password must be at least 8 characters.",
@@ -605,6 +699,7 @@ async function changeClientPassword() {
   changePasswordButton.disabled =
     true;
 
+
   changePasswordButton.textContent =
     "Saving...";
 
@@ -621,23 +716,28 @@ async function changeClientPassword() {
       await fetch(
         "/api/client-change-password",
         {
-          method: "POST",
+          method:
+            "POST",
 
           credentials:
             "include",
 
           headers: {
+
             "Content-Type":
               "application/json"
+
           },
 
           body:
             JSON.stringify({
+
               currentPassword:
                 currentPassword,
 
               newPassword:
                 newPassword
+
             })
         }
       );
@@ -676,11 +776,33 @@ async function changeClientPassword() {
     currentClientPassword.value =
       "";
 
+
     newClientPassword.value =
       "";
 
+
     confirmClientPassword.value =
       "";
+
+
+    /*
+     * Password has changed.
+     *
+     * The existing authenticated
+     * client session remains valid.
+     *
+     * Redirect directly to dashboard.
+     */
+
+    setTimeout(
+      function() {
+
+        window.location.href =
+          "/client-dashboard.html";
+
+      },
+      1200
+    );
 
 
   } catch {
@@ -708,6 +830,10 @@ changePasswordButton.addEventListener(
   changeClientPassword
 );
 
+
+/* =====================================
+   CLIENT LOGIN
+===================================== */
 
 form.addEventListener(
   "submit",
@@ -750,10 +876,11 @@ form.addEventListener(
     }
 
 
-    button.disabled =
+    loginButton.disabled =
       true;
 
-    button.textContent =
+
+    loginButton.textContent =
       "Signing in...";
 
 
@@ -769,23 +896,28 @@ form.addEventListener(
         await fetch(
           "/api/client-login",
           {
-            method: "POST",
+            method:
+              "POST",
 
             credentials:
               "include",
 
             headers: {
+
               "Content-Type":
                 "application/json"
+
             },
 
             body:
               JSON.stringify({
+
                 email:
                   email,
 
                 password:
                   password
+
               })
           }
         );
@@ -811,12 +943,9 @@ form.addEventListener(
       }
 
 
-      /*
-       * TEMPORARY TEST BEHAVIOUR
-       *
-       * If this is the first login,
-       * show the password creation screen.
-       */
+      /* =================================
+         TEMPORARY PASSWORD
+      ================================= */
 
       if (
         data.mustChangePassword
@@ -832,35 +961,54 @@ form.addEventListener(
           "block";
 
 
-        /*
-         * Keep the temporary password
-         * available for password change.
-         */
-
         currentClientPassword.value =
           password;
 
 
-        /*
-         * Hide login form after
-         * successful temporary login.
-         */
-
-        form.style.display =
+        loginSection.style.display =
           "none";
 
 
-      } else {
-
-        showMessage(
-          "✓ Client login successful.",
-          "success"
-        );
+        return;
 
       }
 
 
-    } catch (error) {
+      /* =================================
+         NORMAL CLIENT LOGIN
+      ================================= */
+
+      showMessage(
+        "✓ Client login successful. Opening dashboard...",
+        "success"
+      );
+
+
+      /*
+       * IMPORTANT:
+       *
+       * This was the missing part.
+       *
+       * The previous login page showed
+       * "Client login successful" but did
+       * not navigate anywhere.
+       *
+       * Now the authenticated client is
+       * sent to the dashboard.
+       */
+
+      setTimeout(
+        function() {
+
+          window.location.href =
+            "/client-dashboard.html";
+
+        },
+        500
+      );
+
+
+    } catch {
 
       showMessage(
         "Unable to connect to the client login service.",
@@ -869,16 +1017,17 @@ form.addEventListener(
 
     } finally {
 
-      button.disabled =
+      loginButton.disabled =
         false;
 
-      button.textContent =
+      loginButton.textContent =
         "Sign In";
 
     }
 
   }
 );
+
 
 </script>
 
