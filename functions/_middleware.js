@@ -449,12 +449,26 @@ function loginPage() {
         required
       >
 
-      <button type="submit">
-        Sign in
-      </button>
+   <button type="submit">
+  Sign in
+</button>
 
-      <div id="message"></div>
+<a
+  href="/admin-recovery.html"
+  style="
+    display:block;
+    margin-top:14px;
+    text-align:center;
+    color:#2563eb;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:700;
+  "
+>
+  Forgot Admin Password?
+</a>
 
+<div id="message"></div>
     </form>
 
   </div>
