@@ -331,15 +331,13 @@ async function getWebsiteContent(
 ) {
 
   const row =
-    await db.prepare(`
-      SELECT
-        content
-      FROM website_content
-      WHERE id = 1
-      LIMIT 1
-    `)
-      .first();
-
+  await db.prepare(`
+    SELECT *
+    FROM site_content
+    WHERE id = 1
+    LIMIT 1
+  `)
+    .first();
 
   if (!row) {
 
@@ -348,18 +346,7 @@ async function getWebsiteContent(
   }
 
 
-  try {
-
-    return JSON.parse(
-      row.content
-    );
-
-  } catch {
-
-    return {};
-
-  }
-
+return row || {};
 }
 
 
