@@ -1,2852 +1,1813 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LichaTwist Admin Panel</title>
 
-  <title>LichaTwist Admin Panel</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f6f8;
-      color: #222;
-    }
-
-    header {
-      background: #111827;
-      color: white;
-      padding: 18px 20px;
-    }
-
-    header h1 {
-      font-size: 22px;
-    }
-
-    header p {
-      margin-top: 5px;
-      color: #cbd5e1;
-      font-size: 14px;
-    }
-/* =========================================
-   ADMIN HEADER
-========================================= */
-
-.admin-header-content {
-  max-width: 1100px;
-  margin: auto;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 20px;
+:root{
+  --navy:#071a33;
+  --navy2:#10243e;
+  --blue:#1769e0;
+  --green:#07966e;
+  --red:#dc2626;
+  --gold:#c9a227;
+  --page:#e9eef3;
+  --card:#f8fafc;
+  --input:#eef3f7;
+  --text:#16263a;
+  --muted:#667589;
+  --border:#d7e0e8;
 }
 
-.logout-button {
-  width: auto !important;
-  min-height: 46px !important;
+html,body{
+  min-height:100%;
+  background:var(--page);
+  color:var(--text);
+  font-family:Arial,sans-serif;
+}
 
-  padding: 11px 18px !important;
-
+body{
   background:
-    linear-gradient(
-      135deg,
-      #dc2626,
-      #991b1b
-    ) !important;
-
-  color: #ffffff !important;
-
-  border: 1px solid
-    rgba(255,255,255,.18) !important;
-
-  border-radius: 12px !important;
-
-  font-weight: 700 !important;
-
-  box-shadow:
-    0 6px 18px
-    rgba(153,27,27,.25) !important;
+    radial-gradient(circle at 0 0,rgba(201,162,39,.10),transparent 28%),
+    radial-gradient(circle at 100% 10%,rgba(23,105,224,.08),transparent 30%),
+    linear-gradient(135deg,#edf2f6,#e4eaf0);
 }
 
-.logout-button:hover {
-  background:
-    linear-gradient(
-      135deg,
-      #ef4444,
-      #b91c1c
-    ) !important;
-
-  transform:
-    translateY(-1px);
+header{
+  background:linear-gradient(135deg,#071a33,#12365b);
+  color:#fff;
+  border-bottom:3px solid var(--gold);
+  box-shadow:0 10px 30px rgba(7,26,51,.18);
 }
 
-@media (max-width: 600px) {
-
-  .admin-header-content {
-    align-items: flex-start;
-  }
-
-  .logout-button {
-    width: auto !important;
-    min-width: 105px;
-    flex-shrink: 0;
-  }
-
+.header-inner{
+  max-width:1100px;
+  margin:auto;
+  padding:18px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
 }
-    .container {
-      max-width: 1100px;
-      margin: auto;
-      padding: 20px;
-    }
 
-    .welcome {
-      background: white;
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,.08);
-    }
+header h1{font-size:22px}
+header p{margin-top:5px;color:#cbd5e1;font-size:14px}
 
-    .welcome h2 {
-      margin-bottom: 8px;
-    }
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+}
 
-    .welcome p {
-      color: #64748b;
-    }
+.welcome,
+.card,
+.editor-section{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  box-shadow:0 10px 28px rgba(16,36,62,.07);
+}
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 15px;
-    }
+.welcome{
+  padding:22px;
+  margin-bottom:20px;
+}
 
-    .card {
-      background: white;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,.08);
-    }
+.welcome h2{margin-bottom:8px}
+.welcome p{color:var(--muted)}
 
-    .card h3 {
-      margin-bottom: 10px;
-    }
+.quick-nav{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:16px;
+  margin-bottom:20px;
+}
 
-    .card p {
-      color: #64748b;
-      font-size: 14px;
-      margin-bottom: 15px;
-    }
+.quick-nav-title{
+  font-weight:700;
+  margin-bottom:12px;
+}
 
-    button {
-      border: none;
-      border-radius: 8px;
-      padding: 11px 16px;
-      background: #2563eb;
-      color: white;
-      font-size: 14px;
-      cursor: pointer;
-    }
+.quick-nav-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+}
 
-    button:hover {
-      background: #1d4ed8;
-    }
+.quick-nav-links button{
+  min-height:auto;
+  padding:9px 12px;
+}
 
-    .danger {
-      background: #dc2626;
-    }
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;
+}
 
-    .danger:hover {
-      background: #b91c1c;
-    }
+.card{
+  padding:20px;
+}
 
-    .status {
-      margin-top: 20px;
-      background: #ecfdf5;
-      border: 1px solid #a7f3d0;
-      color: #065f46;
-      padding: 15px;
-      border-radius: 10px;
-    }
+.card h3{
+  margin-bottom:10px;
+  color:var(--navy2);
+}
 
-    .editor-section {
-      background: white;
-      border-radius: 12px;
-      padding: 22px;
-      margin-top: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,.08);
-    }
+.card p{
+  color:var(--muted);
+  font-size:14px;
+  margin-bottom:15px;
+}
 
-    .editor-section h2 {
-      margin-bottom: 6px;
-    }
+.editor-section{
+  padding:22px;
+  margin-top:20px;
+}
 
-    .editor-description {
-      color: #64748b;
-      margin-bottom: 20px;
-      font-size: 14px;
-    }
+.editor-section h2{
+  margin-bottom:7px;
+  color:var(--navy);
+}
 
-    .field {
-      margin-bottom: 17px;
-    }
+.editor-description{
+  color:var(--muted);
+  font-size:14px;
+  margin-bottom:20px;
+}
 
-    .field label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 7px;
-    }
+.field{
+  margin-bottom:16px;
+}
 
-    input,
-    textarea {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #cbd5e1;
-      border-radius: 8px;
-      font-size: 15px;
-      font-family: Arial, sans-serif;
-    }
+.field label{
+  display:block;
+  font-weight:700;
+  margin-bottom:7px;
+  color:var(--navy2);
+}
 
-    textarea {
-      min-height: 110px;
-      resize: vertical;
-    }
+input,textarea,select{
+  width:100%;
+  padding:12px;
+  border:1px solid #cbd5e1;
+  border-radius:12px;
+  font:15px Arial,sans-serif;
+  background:var(--input);
+  color:var(--text);
+}
 
-    .two-column {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
+textarea{
+  min-height:100px;
+  resize:vertical;
+}
 
-    .service-box {
-      border: 1px solid #e2e8f0;
-      border-radius: 10px;
-      padding: 16px;
-      margin-bottom: 15px;
-    }
+input:focus,textarea:focus,select:focus{
+  outline:none;
+  background:#fff;
+  border-color:var(--blue);
+  box-shadow:0 0 0 4px rgba(23,105,224,.10);
+}
 
-    .service-box h3 {
-      margin-bottom: 15px;
-    }
+.two-column{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+}
 
-    .save-panel {
-      background: #111827;
-      color: white;
-      border-radius: 12px;
-      padding: 22px;
-      margin-top: 20px;
-      text-align: center;
-    }
+.service-box{
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:17px;
+  margin-bottom:16px;
+  background:#fbfcfd;
+}
 
-    .save-panel p {
-      color: #cbd5e1;
-      margin: 8px 0 18px;
-    }
+.service-box h3{
+  margin-bottom:15px;
+}
 
-    .save-button {
-      background: #059669;
-      font-size: 16px;
-      padding: 13px 24px;
-    }
+button{
+  border:0;
+  border-radius:12px;
+  min-height:48px;
+  padding:11px 17px;
+  background:linear-gradient(135deg,#1769e0,#0d4fae);
+  color:#fff;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 7px 18px rgba(23,105,224,.18);
+}
 
-    .save-button:hover {
-      background: #047857;
-    }
+button:hover{
+  transform:translateY(-1px);
+}
 
-    #editorMessage {
-      margin-top: 15px;
-      padding: 12px;
-      border-radius: 8px;
-      display: none;
-    }
+button:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+  transform:none;
+}
 
-    .success-message {
-      display: block !important;
-      background: #ecfdf5;
-      color: #065f46;
-    }
+.logout{
+  background:linear-gradient(135deg,#dc2626,#991b1b);
+  min-height:44px;
+}
 
-    .error-message {
-      display: block !important;
-      background: #fef2f2;
-      color: #991b1b;
-    }
+.save-panel{
+  background:#111827;
+  color:#fff;
+  border-radius:18px;
+  padding:22px;
+  margin-top:20px;
+  text-align:center;
+}
 
-    .info-box {
-      background: #eff6ff;
-      border: 1px solid #bfdbfe;
-      color: #1e40af;
-      padding: 13px;
-      border-radius: 8px;
-      margin-bottom: 18px;
-      font-size: 14px;
-    }
+.save-panel p{
+  color:#cbd5e1;
+  margin:8px 0 18px;
+}
 
-    footer {
-      text-align: center;
-      color: #64748b;
-      font-size: 13px;
-      padding: 30px 10px;
-    }
+.save-button{
+  background:linear-gradient(135deg,#07966e,#087b5c);
+  font-size:16px;
+}
 
-    @media (max-width: 700px) {
-      .two-column {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+.message{
+  display:none;
+  margin-top:14px;
+  padding:12px;
+  border-radius:10px;
+  word-break:break-word;
+}
+
+.success{
+  display:block!important;
+  background:#e5f6ef!important;
+  color:#087b5c!important;
+  border:1px solid #a9dfcc;
+}
+
+.error{
+  display:block!important;
+  background:#fef2f2!important;
+  color:#991b1b!important;
+  border:1px solid #fecaca;
+}
+
+.info{
+  display:block!important;
+  background:#eff6ff!important;
+  color:#1e40af!important;
+  border:1px solid #bfdbfe;
+}
+
+.info-box{
+  background:#eff6ff;
+  border:1px solid #bfdbfe;
+  color:#1e40af;
+  padding:13px;
+  border-radius:10px;
+  margin-bottom:18px;
+  font-size:14px;
+}
+
+.preview{
+  width:180px;
+  height:100px;
+  object-fit:cover;
+  border-radius:9px;
+  margin-top:7px;
+  border:1px solid var(--border);
+}
+
+.client-toolbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:15px;
+}
+
+.client-list{
+  display:grid;
+  gap:16px;
+}
+
+.client-card{
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:18px;
+  background:#fbfcfd;
+}
+
+.client-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:15px;
+}
+
+.client-title{
+  font-size:17px;
+  font-weight:700;
+  color:var(--navy2);
+}
+
+.badge{
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:700;
+  margin-left:5px;
+}
+
+.badge-active{
+  background:#e5f6ef;
+  color:#087b5c;
+  border:1px solid #a9dfcc;
+}
+
+.badge-inactive{
+  background:#fef2f2;
+  color:#991b1b;
+  border:1px solid #fecaca;
+}
+
+.badge-temp{
+  background:#fff7ed;
+  color:#9a3412;
+  border:1px solid #fed7aa;
+}
+
+.client-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin-top:8px;
+}
+
+.client-actions button{
+  min-width:145px;
+}
+
+.secondary{
+  background:#475569;
+}
+
+.danger{
+  background:linear-gradient(135deg,#dc2626,#991b1b);
+}
+
+.green{
+  background:linear-gradient(135deg,#059669,#047857);
+}
+
+.temp-box{
+  display:none;
+  margin-top:14px;
+  padding:14px;
+  border-radius:11px;
+  background:#fff7ed;
+  border:1px solid #fed7aa;
+}
+
+.temp-box strong{color:#9a3412}
+
+.temp-password{
+  margin-top:8px;
+  font-family:monospace;
+  font-weight:700;
+}
+
+footer{
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+  padding:30px 10px;
+}
+
+@media(max-width:700px){
+  .two-column{grid-template-columns:1fr}
+  .header-inner{align-items:flex-start}
+  .quick-nav-links button{width:100%}
+  .client-actions button{width:100%}
+}
+</style>
 </head>
 
 <body>
 
-<header class="admin-header">
-
-  <div class="admin-header-content">
-
+<header>
+  <div class="header-inner">
     <div>
       <h1>🔐 LichaTwist Admin Panel</h1>
       <p>Owner dashboard • Secure administration</p>
     </div>
 
     <button
-      class="logout-button"
       type="button"
+      class="logout"
       onclick="logoutAdmin()">
-
       🚪 Log Out
-
     </button>
-
   </div>
-
 </header>
 
 <main class="container">
-<main class="container">
 
-  <!-- ADMIN QUICK NAVIGATION -->
-
-  <nav class="admin-quick-nav" aria-label="Admin section navigation">
-
-    <div class="admin-quick-nav-title">
-      Quick Edit
-    </div>
-
-    <div class="admin-quick-nav-links">
-
-      <button type="button" onclick="goToAdminSection('imageManagement')">
-        🖼️ Images
-      </button>
-
-      <button type="button" onclick="goToAdminSection('homeEditor')">
-        🏠 Home
-      </button>
-
-      <button type="button" onclick="goToAdminSection('aboutEditor')">
-        ℹ️ About
-      </button>
-
-      <button type="button" onclick="goToAdminSection('missionEditor')">
-        🎯 Mission
-      </button>
-
-      <button type="button" onclick="goToAdminSection('servicesEditor')">
-        🛠️ Services
-      </button>
-
-      <button type="button" onclick="goToAdminSection('companiesEditor')">
-        🏢 Companies
-      </button>
-
-      <button type="button" onclick="goToAdminSection('projectsEditor')">
-        📁 Projects
-      </button>
-
-      <button type="button" onclick="goToAdminSection('contactEditor')">
-        📞 Contact
-      </button>
-
-      <button type="button" onclick="goToAdminSection('saveEditor')">
-        💾 Save
-      </button>
-
-    </div>
-
-  </nav>
-
-
-  <!-- OLD DASHBOARD -->
-
-  <!-- OLD DASHBOARD -->
-
-  <section class="welcome">
-
-    <h2>Welcome, Owner</h2>
-
-    <p>
-      Manage your LichaTwist website from this administration panel.
-    </p>
-
-  </section>
-
-
-  <section class="grid">
-
-
-    <div class="card">
-
-      <h3>🌐 Website</h3>
-
-      <p>
-        Open and check the public website.
-      </p>
-
-      <button onclick="openWebsite()">
-        Open Website
-      </button>
-
-    </div>
-
-
-    <div class="card">
-
-      <h3>📊 Dashboard</h3>
-
-      <p>
-        Website administration and information.
-      </p>
-
-      <button onclick="showMessage('Dashboard is ready.')">
-        View Dashboard
-      </button>
-
-    </div>
-
-
-    <div class="card">
-
-      <h3>📝 Content</h3>
-
-      <p>
-        Manage the complete website content below.
-      </p>
-
-      <button onclick="scrollToEditor()">
-        Manage Content
-      </button>
-
-    </div>
-
-
-    <div class="card">
-
-      <h3>🖼️ Images</h3>
-
-      <p>
-        Image management will be connected next.
-      </p>
-
-      <button onclick="showMessage('Image management will be connected next.')">
-        Manage Images
-      </button>
-
-    </div>
-
-
-    <div class="card">
-
-      <h3>⚙️ Settings</h3>
-
-      <p>
-        Website and administration settings.
-      </p>
-
-      <button onclick="showMessage('Settings will be connected next.')">
-        Settings
-      </button>
-
-    </div>
-
-
-    <div class="card">
-
-      <h3>🔐 Security</h3>
-
-      <p>
-        Owner authentication and access protection.
-      </p>
-
-      <button onclick="showMessage('Admin authentication is active.')">
-        Security
-      </button>
-
-    </div>
-
-
-  </section>
-
-
-  <div id="status" class="status">
-    Admin panel loaded successfully.
-  </div>
-  <!-- CHANGE ADMIN PASSWORD -->
-
-<section class="editor-section">
-
-  <h2>🔐 Change Admin Password</h2>
-
-  <p class="editor-description">
-    Change the password used to access the LichaTwist Admin Panel.
+<section class="welcome">
+  <h2>Welcome, Owner</h2>
+  <p>
+    Manage your LichaTwist website, images, security and client accounts.
   </p>
+</section>
 
-  <div class="info-box">
-    Your new password will replace the current admin password.
-    Keep it secure and do not share it with anyone.
+<nav class="quick-nav">
+  <div class="quick-nav-title">Quick Edit</div>
+
+  <div class="quick-nav-links">
+    <button onclick="goTo('clientAccountsManagement')">👥 Clients</button>
+    <button onclick="goTo('imageManagement')">🖼️ Images</button>
+    <button onclick="goTo('homeEditor')">🏠 Home</button>
+    <button onclick="goTo('aboutEditor')">ℹ️ About</button>
+    <button onclick="goTo('missionEditor')">🎯 Mission</button>
+    <button onclick="goTo('servicesEditor')">🛠️ Services</button>
+    <button onclick="goTo('companiesEditor')">🏢 Companies</button>
+    <button onclick="goTo('projectsEditor')">📁 Projects</button>
+    <button onclick="goTo('contactEditor')">📞 Contact</button>
+    <button onclick="goTo('saveEditor')">💾 Save</button>
+  </div>
+</nav>
+
+<section class="grid">
+
+  <div class="card">
+    <h3>🌐 Website</h3>
+    <p>Open and check the public website.</p>
+    <button onclick="openWebsite()">Open Website</button>
   </div>
 
-  <div class="field">
-
-    <label for="currentAdminPassword">
-      Current Password
-    </label>
-
-    <input
-      id="currentAdminPassword"
-      type="password"
-      autocomplete="current-password"
-      placeholder="Enter current password">
-
+  <div class="card">
+    <h3>📝 Content</h3>
+    <p>Manage the complete website content.</p>
+    <button onclick="goTo('homeEditor')">Manage Content</button>
   </div>
 
-
-  <div class="field">
-
-    <label for="newAdminPassword">
-      New Password
-    </label>
-
-    <input
-      id="newAdminPassword"
-      type="password"
-      autocomplete="new-password"
-      placeholder="Enter new password">
-
+  <div class="card">
+    <h3>🖼️ Images</h3>
+    <p>Upload and replace website images.</p>
+    <button onclick="goTo('imageManagement')">Manage Images</button>
   </div>
 
-
-  <div class="field">
-
-    <label for="confirmAdminPassword">
-      Confirm New Password
-    </label>
-
-    <input
-      id="confirmAdminPassword"
-      type="password"
-      autocomplete="new-password"
-      placeholder="Confirm new password">
-
+  <div class="card">
+    <h3>👥 Clients</h3>
+    <p>Create and manage client accounts.</p>
+    <button onclick="goTo('clientAccountsManagement')">Manage Clients</button>
   </div>
 
-
-  <button
-    type="button"
-    onclick="changeAdminPassword()">
-
-    🔑 Change Password
-
-  </button>
-
-
-  <div
-    id="passwordMessage"
-    style="
-      margin-top:15px;
-      padding:12px;
-      border-radius:8px;
-      display:none;
-    ">
+  <div class="card">
+    <h3>🔐 Security</h3>
+    <p>Change the owner administration password.</p>
+    <button onclick="goTo('adminPassword')">Security</button>
   </div>
 
 </section>
 
+<div id="status" class="message info" style="display:block">
+  Admin panel loaded successfully.
+</div>
 
-<!-- CLIENT MANAGEMENT -->
+<!-- OWNER PASSWORD -->
+
+<section class="editor-section" id="adminPassword">
+
+<h2>🔐 Change Admin Password</h2>
+
+<p class="editor-description">
+Change the password used to access the LichaTwist Admin Panel.
+</p>
+
+<div class="info-box">
+Your new password replaces the current admin password.
+Keep it secure.
+</div>
+
+<div class="field">
+<label for="currentAdminPassword">Current Password</label>
+<input
+  id="currentAdminPassword"
+  type="password"
+  autocomplete="current-password"
+  placeholder="Enter current password">
+</div>
+
+<div class="field">
+<label for="newAdminPassword">New Password</label>
+<input
+  id="newAdminPassword"
+  type="password"
+  autocomplete="new-password"
+  placeholder="Enter new password">
+</div>
+
+<div class="field">
+<label for="confirmAdminPassword">Confirm New Password</label>
+<input
+  id="confirmAdminPassword"
+  type="password"
+  autocomplete="new-password"
+  placeholder="Confirm new password">
+</div>
+
+<button onclick="changeAdminPassword()">
+🔑 Change Password
+</button>
+
+<div id="passwordMessage" class="message"></div>
+
+</section>
+
+<!-- CREATE CLIENT -->
 
 <section class="editor-section" id="clientManagement">
 
-  <h2>👤 Client Management</h2>
+<h2>👤 Create Client Account</h2>
 
-  <p class="editor-description">
-    Create and manage the client account used to access website administration.
-  </p>
+<p class="editor-description">
+Create a client account that can access the client dashboard.
+</p>
 
-  <div class="info-box">
-    The client will receive a temporary password and must create a new
-    private password after the first login.
-  </div>
+<div class="info-box">
+A temporary password will be generated. The client must create a private
+password after the first login.
+</div>
 
-  <div class="field">
+<div class="field">
+<label for="clientName">Client Name</label>
+<input
+  id="clientName"
+  type="text"
+  maxlength="100"
+  autocomplete="name"
+  placeholder="Enter client name">
+</div>
 
-    <label for="clientName">
-      Client Name
-    </label>
+<div class="field">
+<label for="clientEmail">Client Email</label>
+<input
+  id="clientEmail"
+  type="email"
+  autocomplete="email"
+  placeholder="Enter client email">
+</div>
 
-    <input
-      id="clientName"
-      type="text"
-      autocomplete="name"
-      placeholder="Enter client name"
-      maxlength="100">
+<button onclick="createClientAccount()">
+👤 Create Client Account
+</button>
 
-  </div>
+<div id="clientMessage" class="message"></div>
 
+<div id="temporaryPasswordBox" class="temp-box">
 
-  <div class="field">
+<strong>⚠️ Temporary Client Password</strong>
 
-    <label for="clientEmail">
-      Client Email
-    </label>
+<p style="margin-top:6px">
+Give this password securely to the client.
+It is shown here only after account creation.
+</p>
 
-    <input
-      id="clientEmail"
-      type="email"
-      autocomplete="email"
-      placeholder="Enter client email">
+<input
+  id="temporaryClientPassword"
+  class="temp-password"
+  type="text"
+  readonly>
 
-  </div>
-
-
-  <button
-    type="button"
-    onclick="createClientAccount()">
-
-    👤 Create Client Account
-
-  </button>
-
-
-  <div
-    id="clientMessage"
-    style="
-      margin-top:15px;
-      padding:12px;
-      border-radius:8px;
-      display:none;
-      word-break:break-word;
-    ">
-  </div>
-
-
-  <div
-    id="temporaryPasswordBox"
-    style="
-      display:none;
-      margin-top:15px;
-      padding:15px;
-      border-radius:10px;
-      background:#fff7ed;
-      border:1px solid #fed7aa;
-    ">
-
-    <strong>
-      ⚠️ Temporary Client Password
-    </strong>
-
-    <p>
-      This password is shown only once. Give it securely to the client.
-    </p>
-
-    <input
-      id="temporaryClientPassword"
-      type="text"
-      readonly
-      style="
-        font-family:monospace;
-        font-weight:700;
-      ">
-
-  </div>
+</div>
 
 </section>
 
+<!-- MANAGE CLIENTS -->
 
-<!-- WEBSITE EDITOR -->
+<section class="editor-section" id="clientAccountsManagement">
 
-<div id="websiteEditor">    <!-- IMAGE MANAGEMENT -->
+<h2>👥 Manage Client Accounts</h2>
+
+<p class="editor-description">
+The owner can view, edit, activate, deactivate and reset client accounts.
+</p>
+
+<div class="info-box">
+Client password resets generate a new temporary password.
+The owner account and owner password are never exposed to clients.
+</div>
+
+<div class="client-toolbar">
+
+<strong id="clientCountLabel">
+Client accounts
+</strong>
+
+<button
+  class="secondary"
+  onclick="loadClientManagement()">
+🔄 Refresh Clients
+</button>
+
+</div>
+
+<div id="clientManagementMessage" class="message"></div>
+
+<div id="clientList" class="client-list">
+<div class="info-box">Loading client accounts...</div>
+</div>
+
+</section>
+
+<!-- IMAGE MANAGEMENT -->
 
 <section class="editor-section" id="imageManagement">
 
-  <h2>🖼️ Image Management</h2>
+<h2>🖼️ Image Management</h2>
 
-  <p class="editor-description">
-    Upload and replace the images used on the public website.
-    Maximum file size: 5 MB.
-  </p>
+<p class="editor-description">
+Upload and replace images used on the public website.
+Maximum file size: 5 MB.
+</p>
 
-
-  <div class="service-box">
-
-    <h3>🏠 Hero Image</h3>
-
-    <div class="field">
-
-      <label>Select Hero Image</label>
-
-      <input
-        type="file"
-        id="heroImageFile"
-        accept="image/jpeg,image/png,image/webp">
-      <div style="margin-top:12px;">
-  <small>Current Hero Image</small>
-  <br>
-  <img
-    id="heroImagePreview"
-    src="/images/hero.jpg"
-    alt="Current Hero Image"
-    style="width:180px;height:100px;object-fit:cover;border-radius:8px;margin-top:6px;">
-</div>
-
-    </div>
-
-    <button
-      type="button"
-      onclick="uploadWebsiteImage('hero', 'heroImageFile', 'heroImageMessage')">
-
-      Upload Hero Image
-
-    </button>
-
-    <div
-      id="heroImageMessage"
-      style="margin-top:10px;">
-    </div>
-
-  </div>
-
-
-  <div class="service-box">
-
-    <h3>🏢 About Image</h3>
-
-    <div class="field">
-
-      <label>Select About Image</label>
-
-      <input
-        type="file"
-        id="aboutImageFile"
-        accept="image/jpeg,image/png,image/webp">
-      <div style="margin-top:12px;">
-  <small>Current About Image</small>
-  <br>
-  <img
-    id="aboutImagePreview"
-    src="/images/office.jpg"
-    alt="Current About Image"
-    style="width:180px;height:100px;object-fit:cover;border-radius:8px;margin-top:6px;">
-</div>
-
-    </div>
-
-    <button
-      type="button"
-      onclick="uploadWebsiteImage('about', 'aboutImageFile', 'aboutImageMessage')">
-
-      Upload About Image
-
-    </button>
-
-    <div
-      id="aboutImageMessage"
-      style="margin-top:10px;">
-    </div>
-
-  </div>
-
-
-  <div class="service-box">
-
-    <h3>🌱 Agriculture Image</h3>
-
-    <div class="field">
-
-      <label>Select Agriculture Image</label>
-
-      <input
-        type="file"
-        id="agricultureImageFile"
-        accept="image/jpeg,image/png,image/webp">
-      <div style="margin-top:12px;">
-  <small>Current Agriculture Image</small>
-  <br>
-  <img
-    id="agricultureImagePreview"
-    src="/images/agriculture.jpg"
-    alt="Current Agriculture Image"
-    style="width:180px;height:100px;object-fit:cover;border-radius:8px;margin-top:6px;">
-</div>
-
-    </div>
-
-    <button
-      type="button"
-      onclick="uploadWebsiteImage('agriculture', 'agricultureImageFile', 'agricultureImageMessage')">
-
-      Upload Agriculture Image
-
-    </button>
-
-    <div
-      id="agricultureImageMessage"
-      style="margin-top:10px;">
-    </div>
-
-  </div>
-
-
-  <div class="service-box">
-
-    <h3>🏗️ Construction Image</h3>
-
-    <div class="field">
-
-      <label>Select Construction Image</label>
-
-      <input
-        type="file"
-        id="constructionImageFile"
-        accept="image/jpeg,image/png,image/webp">
-      <div style="margin-top:12px;">
-  <small>Current Construction Image</small>
-  <br>
-  <img
-    id="constructionImagePreview"
-    src="/images/construction.jpg"
-    alt="Current Construction Image"
-    style="width:180px;height:100px;object-fit:cover;border-radius:8px;margin-top:6px;">
-</div>
-
-    </div>
-
-    <button
-      type="button"
-      onclick="uploadWebsiteImage('construction', 'constructionImageFile', 'constructionImageMessage')">
-
-      Upload Construction Image
-
-    </button>
-
-    <div
-      id="constructionImageMessage"
-      style="margin-top:10px;">
-    </div>
-
-  </div>
-
-
-  <div class="service-box">
-
-    <h3>🚚 Transport Image</h3>
-
-    <div class="field">
-
-      <label>Select Transport Image</label>
-
-      <input
-        type="file"
-        id="transportImageFile"
-        accept="image/jpeg,image/png,image/webp">
-      <div style="margin-top:12px;">
-  <small>Current Transport Image</small>
-  <br>
-  <img
-    id="transportImagePreview"
-    src="/images/transport.jpg"
-    alt="Current Transport Image"
-    style="width:180px;height:100px;object-fit:cover;border-radius:8px;margin-top:6px;">
-</div>
-
-    </div>
-
-    <button
-      type="button"
-      onclick="uploadWebsiteImage('transport', 'transportImageFile', 'transportImageMessage')">
-
-      Upload Transport Image
-
-    </button>
-
-    <div
-      id="transportImageMessage"
-      style="margin-top:10px;">
-    </div>
-
-  </div>
+<div id="imageManagementContainer"></div>
 
 </section>
 
+<!-- HOME -->
 
-    <!-- HOME -->
+<section class="editor-section" id="homeEditor">
 
-   <section class="editor-section" id="homeEditor">
+<h2>🏠 Home / Hero</h2>
 
-      <h2>🏠 Home / Hero</h2>
+<p class="editor-description">
+Edit the main content visitors see on the homepage.
+</p>
 
-      <p class="editor-description">
-        Edit the main content visitors see on the homepage.
-      </p>
+<div class="field">
+<label>Hero Title</label>
+<input id="heroTitle">
+</div>
 
-      <div class="field">
+<div class="field">
+<label>Hero Subtitle</label>
+<input id="heroSubtitle">
+</div>
 
-        <label>Hero Title</label>
+<div class="field">
+<label>Hero Description</label>
+<textarea id="heroDescription"></textarea>
+</div>
 
-        <input id="heroTitle" type="text">
+<div class="two-column">
 
-      </div>
+<div class="field">
+<label>Approach Card Title</label>
+<input id="approachTitle">
+</div>
 
+<div class="field">
+<label>Approach Card Description</label>
+<textarea id="approachDescription"></textarea>
+</div>
 
-      <div class="field">
+</div>
 
-        <label>Hero Subtitle</label>
+</section>
 
-        <input id="heroSubtitle" type="text">
+<!-- ABOUT -->
 
-      </div>
+<section class="editor-section" id="aboutEditor">
 
+<h2>ℹ️ About LichaTwist</h2>
 
-      <div class="field">
+<div class="field">
+<label>About Heading</label>
+<input id="aboutHeading">
+</div>
 
-        <label>Hero Description</label>
+<div class="field">
+<label>About Description</label>
+<textarea id="aboutDescription"></textarea>
+</div>
 
-        <textarea id="heroDescription"></textarea>
+<div class="field">
+<label>Company Description</label>
+<textarea id="about"></textarea>
+</div>
 
-      </div>
+</section>
 
+<!-- MISSION -->
 
-      <div class="two-column">
+<section class="editor-section" id="missionEditor">
 
-        <div class="field">
+<h2>🎯 Mission, Vision & Values</h2>
 
-          <label>Approach Card Title</label>
+<div class="field">
+<label>Mission</label>
+<textarea id="mission"></textarea>
+</div>
 
-          <input id="approachTitle" type="text">
+<div class="field">
+<label>Vision</label>
+<textarea id="vision"></textarea>
+</div>
 
-        </div>
+<div class="field">
+<label>Values</label>
+<textarea id="valuesText"></textarea>
+</div>
 
+</section>
 
-        <div class="field">
+<!-- SERVICES -->
 
-          <label>Approach Card Description</label>
+<section class="editor-section" id="servicesEditor">
 
-          <textarea id="approachDescription"></textarea>
+<h2>🛠️ Services</h2>
 
-        </div>
+<div class="service-box">
 
-      </div>
+<h3>🌱 Agriculture</h3>
 
-    </section>
+<div class="field">
+<label>Title</label>
+<input id="agricultureTitle">
+</div>
 
+<div class="field">
+<label>Description</label>
+<textarea id="agricultureDescription"></textarea>
+</div>
 
-    <!-- ABOUT -->
+<div class="field">
+<label>Image Path</label>
+<input id="agricultureImage">
+</div>
 
-   <section class="editor-section" id="aboutEditor">
+</div>
 
-      <h2>ℹ️ About LichaTwist</h2>
+<div class="service-box">
 
-      <p class="editor-description">
-        Edit the About section and company information.
-      </p>
+<h3>🏗️ Construction</h3>
 
+<div class="field">
+<label>Title</label>
+<input id="constructionTitle">
+</div>
 
-      <div class="field">
+<div class="field">
+<label>Description</label>
+<textarea id="constructionDescription"></textarea>
+</div>
 
-        <label>About Heading</label>
+<div class="field">
+<label>Image Path</label>
+<input id="constructionImage">
+</div>
 
-        <input id="aboutHeading" type="text">
+</div>
 
-      </div>
+<div class="service-box">
 
+<h3>🚚 Transport</h3>
 
-      <div class="field">
+<div class="field">
+<label>Title</label>
+<input id="transportTitle">
+</div>
 
-        <label>About Description</label>
+<div class="field">
+<label>Description</label>
+<textarea id="transportDescription"></textarea>
+</div>
 
-        <textarea id="aboutDescription"></textarea>
+<div class="field">
+<label>Image Path</label>
+<input id="transportImage">
+</div>
 
-      </div>
+</div>
 
+</section>
 
-      <div class="field">
-
-        <label>Company Description</label>
-
-        <textarea id="about"></textarea>
-
-      </div>
-
-    </section>
-
-
-    <!-- MISSION -->
-
-   <section class="editor-section" id="missionEditor">
-
-      <h2>🎯 Mission, Vision & Values</h2>
-
-      <p class="editor-description">
-        Edit the principles displayed on the website.
-      </p>
-
-
-      <div class="field">
-
-        <label>Mission</label>
-
-        <textarea id="mission"></textarea>
-
-      </div>
-
-
-      <div class="field">
-
-        <label>Vision</label>
-
-        <textarea id="vision"></textarea>
-
-      </div>
-
-
-      <div class="field">
-
-        <label>Values</label>
-
-        <textarea id="valuesText"></textarea>
-
-      </div>
-
-    </section>
-
-
-    <!-- SERVICES -->
-
-   <section class="editor-section" id="servicesEditor">
-
-      <h2>🛠️ Services</h2>
-
-      <p class="editor-description">
-        Edit Agriculture, Construction and Transport.
-      </p>
-
-
-      <div class="service-box">
-
-        <h3>🌱 Agriculture</h3>
-
-        <div class="field">
-
-          <label>Title</label>
-
-          <input id="agricultureTitle" type="text">
-
-        </div>
-
-        <div class="field">
-
-          <label>Description</label>
-
-          <textarea id="agricultureDescription"></textarea>
-
-        </div>
-
-        <div class="field">
-
-          <label>Image Path</label>
-
-          <input id="agricultureImage" type="text">
-
-        </div>
-
-      </div>
-
-
-      <div class="service-box">
-
-        <h3>🏗️ Construction</h3>
-
-        <div class="field">
-
-          <label>Title</label>
-
-          <input id="constructionTitle" type="text">
-
-        </div>
-
-        <div class="field">
-
-          <label>Description</label>
-
-          <textarea id="constructionDescription"></textarea>
-
-        </div>
-
-        <div class="field">
-
-          <label>Image Path</label>
-
-          <input id="constructionImage" type="text">
-
-        </div>
-
-      </div>
-
-
-      <div class="service-box">
-
-        <h3>🚚 Transport</h3>
-
-        <div class="field">
-
-          <label>Title</label>
-
-          <input id="transportTitle" type="text">
-
-        </div>
-
-        <div class="field">
-
-          <label>Description</label>
-
-          <textarea id="transportDescription"></textarea>
-
-        </div>
-
-        <div class="field">
-
-          <label>Image Path</label>
-
-          <input id="transportImage" type="text">
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-   <!-- COMPANIES -->
+<!-- COMPANIES -->
 
 <section class="editor-section" id="companiesEditor">
 
-  <h2>🏢 Companies</h2>
+<h2>🏢 Companies</h2>
 
-  <p class="editor-description">
-    Edit your three business divisions.
-  </p>
+<div class="service-box">
 
+<h3>LichaTwist Agro</h3>
 
-  <!-- AGRO COMPANY -->
+<div class="field">
+<label>Company Name</label>
+<input id="agroCompanyName">
+</div>
 
-  <div class="service-box">
+<div class="field">
+<label>Description</label>
+<textarea id="agroCompanyDescription"></textarea>
+</div>
 
-    <h3>LichaTwist Agro</h3>
+<div class="field">
+<label>Company Image</label>
+<input id="agroCompanyImage" placeholder="images/agro-company.jpg">
+</div>
 
-    <div class="field">
+</div>
 
-      <label>Company Name</label>
+<div class="service-box">
 
-      <input
-        id="agroCompanyName"
-        type="text">
+<h3>LichaTwist Construction</h3>
 
-    </div>
+<div class="field">
+<label>Company Name</label>
+<input id="constructionCompanyName">
+</div>
 
-    <div class="field">
+<div class="field">
+<label>Description</label>
+<textarea id="constructionCompanyDescription"></textarea>
+</div>
 
-      <label>Description</label>
+<div class="field">
+<label>Company Image</label>
+<input id="constructionCompanyImage" placeholder="images/construction-company.jpg">
+</div>
 
-      <textarea
-        id="agroCompanyDescription"></textarea>
+</div>
 
-    </div>
+<div class="service-box">
 
-    <div class="field">
+<h3>LichaTwist Transport</h3>
 
-  <label>Company Image</label>
+<div class="field">
+<label>Company Name</label>
+<input id="transportCompanyName">
+</div>
 
-  <input
-    id="agroCompanyImage"
-    type="text"
-    placeholder="images/agro-company.jpg">
+<div class="field">
+<label>Description</label>
+<textarea id="transportCompanyDescription"></textarea>
+</div>
 
-  <input
-    type="file"
-    id="agroCompanyImageFile"
-    accept="image/jpeg,image/png,image/webp">
-      <div style="margin-top:12px;">
-  <small>Current Agro Company Image</small>
-  <br>
-  <img
-    id="agroCompanyImagePreview"
-    src="/images/agro-company.jpg"
-    alt="Current Agro Company Image"
-    style="width:180px;height:100px;object-fit:cover;border-radius:8px;margin-top:6px;">
-      </div>
+<div class="field">
+<label>Company Image</label>
+<input id="transportCompanyImage" placeholder="images/transport-company.jpg">
+</div>
 
-  <button
-    type="button"
-    onclick="uploadWebsiteImage(
-      'agroCompany',
-      'agroCompanyImageFile',
-      'agroCompanyImageMessage'
-    )">
-
-    Upload Agro Company Image
-
-  </button>
-
-  <div
-    id="agroCompanyImageMessage"
-    style="margin-top:10px;">
-  </div>
-
-    </div>
-  </div>
-
-
-  <!-- CONSTRUCTION COMPANY -->
-
-  <div class="service-box">
-
-    <h3>LichaTwist Construction</h3>
-
-    <div class="field">
-
-      <label>Company Name</label>
-
-      <input
-        id="constructionCompanyName"
-        type="text">
-
-    </div>
-
-    <div class="field">
-
-      <label>Description</label>
-
-      <textarea
-        id="constructionCompanyDescription"></textarea>
-
-    </div>
-
-    <div class="field">
-
-  <label>Company Image</label>
-
-  <input
-    id="constructionCompanyImage"
-    type="text"
-    placeholder="images/construction-company.jpg">
-
-  <input
-    type="file"
-    id="constructionCompanyImageFile"
-    accept="image/jpeg,image/png,image/webp">
-      <div style="margin-top:12px;">
-  <small>Current Construction Company Image</small>
-  <br>
-  <img
-    id="constructionCompanyImagePreview"
-    src="/images/construction-company.jpg"
-    alt="Current Construction Company Image"
-    style="width:180px;height:100px;object-fit:cover;border-radius:8px;margin-top:6px;">
-      </div>
-
-  <button
-    type="button"
-    onclick="uploadWebsiteImage(
-      'constructionCompany',
-      'constructionCompanyImageFile',
-      'constructionCompanyImageMessage'
-    )">
-
-    Upload Construction Company Image
-
-  </button>
-
-  <div
-    id="constructionCompanyImageMessage"
-    style="margin-top:10px;">
-  </div>
-
-    </div>
-  </div>
-
-
-  <!-- TRANSPORT COMPANY -->
-
-  <div class="service-box">
-
-    <h3>LichaTwist Transport</h3>
-
-    <div class="field">
-
-      <label>Company Name</label>
-
-      <input
-        id="transportCompanyName"
-        type="text">
-
-    </div>
-
-    <div class="field">
-
-      <label>Description</label>
-
-      <textarea
-        id="transportCompanyDescription"></textarea>
-
-    </div>
-
-    <div class="field">
-
-  <label>Company Image</label>
-
-  <input
-    id="transportCompanyImage"
-    type="text"
-    placeholder="images/transport-company.jpg">
-
-  <input
-    type="file"
-    id="transportCompanyImageFile"
-    accept="image/jpeg,image/png,image/webp">
-      <div style="margin-top:12px;">
-  <small>Current Transport Company Image</small>
-  <br>
-  <img
-    id="transportCompanyImagePreview"
-    src="/images/transport-company.jpg"
-    alt="Current Transport Company Image"
-    style="width:180px;height:100px;object-fit:cover;border-radius:8px;margin-top:6px;">
-      </div>
-
-  <button
-    type="button"
-    onclick="uploadWebsiteImage(
-      'transportCompany',
-      'transportCompanyImageFile',
-      'transportCompanyImageMessage'
-    )">
-
-    Upload Transport Company Image
-
-  </button>
-
-  <div
-    id="transportCompanyImageMessage"
-    style="margin-top:10px;">
-  </div>
-
-    </div>
-  </div>
+</div>
 
 </section>
 
-    <!-- PROJECTS -->
-
-  <!-- PROJECTS -->
+<!-- PROJECTS -->
 
 <section class="editor-section" id="projectsEditor">
 
-  <h2>📁 Projects</h2>
+<h2>📁 Projects</h2>
 
-  <p class="editor-description">
-    Edit the Projects section and the three projects displayed on your website.
-  </p>
-
-
-  <!-- PROJECTS SECTION -->
-
-  <div class="service-box">
-
-    <h3>📋 Projects Section</h3>
-
-    <div class="field">
-
-      <label>Projects Heading</label>
-
-      <input
-        id="projectsHeading"
-        type="text">
-
-    </div>
-
-
-    <div class="field">
-
-      <label>Projects Description</label>
-
-      <textarea
-        id="projectsDescription"></textarea>
-
-    </div>
-
-  </div>
-
-
-  <!-- PROJECT 1 -->
-
-  <div class="service-box">
-
-    <h3>🌱 Project 01</h3>
-
-    <div class="field">
-
-      <label>Category</label>
-
-      <input
-        id="project1Category"
-        type="text"
-        placeholder="AGRICULTURE">
-
-    </div>
-
-
-    <div class="field">
-
-      <label>Project Title</label>
-
-      <input
-        id="project1Title"
-        type="text"
-        placeholder="Sustainable Agriculture">
-
-    </div>
-
-
-    <div class="field">
-
-      <label>Project Description</label>
-
-      <textarea
-        id="project1Description"
-        placeholder="Describe this project"></textarea>
-
-    </div>
-    <div class="field">
-
-  <label>Project Image</label>
-
-  <input
-    id="project1Image"
-    type="text"
-    placeholder="images/agriculture.jpg">
-
-</div>
 <div class="field">
-
-  <label>Upload Project 1 Image</label>
-
-  <input
-    id="project1ImageFile"
-    type="file"
-    accept="image/jpeg,image/png,image/webp">
-  <div style="margin-top:12px;">
-  <small>Current Project 1 Image</small>
-  <br>
-  <img
-    id="project1ImagePreview"
-    src="/images/project1.jpg"
-    alt="Current Project 1 Image"
-    style="width:180px;height:100px;object-fit:cover;border-radius:8px;margin-top:6px;">
+<label>Projects Heading</label>
+<input id="projectsHeading">
 </div>
 
-  <button
-    type="button"
-    class="upload-image-button"
-    onclick="uploadWebsiteImage(
-      'project1',
-      'project1ImageFile',
-      'project1Image',
-      'project1UploadStatus'
-    )">
-
-    Upload Project 1 Image
-
-  </button>
-
-  <span
-    id="project1UploadStatus"
-    class="upload-status">
-  </span>
-
-  </div>
-  </div>
-
-
-  <!-- PROJECT 2 -->
-
-  <div class="service-box">
-
-    <h3>🏗️ Project 02</h3>
-
-    <div class="field">
-
-      <label>Category</label>
-
-      <input
-        id="project2Category"
-        type="text"
-        placeholder="CONSTRUCTION">
-
-    </div>
-
-
-    <div class="field">
-
-      <label>Project Title</label>
-
-      <input
-        id="project2Title"
-        type="text"
-        placeholder="Infrastructure Development">
-
-    </div>
-
-
-    <div class="field">
-
-      <label>Project Description</label>
-
-      <textarea
-        id="project2Description"
-        placeholder="Describe this project"></textarea>
-
-    </div>
 <div class="field">
-
-  <label>Project Image</label>
-
-  <input
-    id="project2Image"
-    type="text"
-    placeholder="images/construction.jpg">
-
-</div>
-    <div class="field">
-
-  <label>Upload Project 2 Image</label>
-
-  <input
-    id="project2ImageFile"
-    type="file"
-    accept="image/jpeg,image/png,image/webp">
-      <div style="margin-top:12px;">
-  <small>Current Project 2 Image</small>
-  <br>
-  <img
-    id="project2ImagePreview"
-    src="/images/project2.jpg"
-    alt="Current Project 2 Image"
-    style="width:180px;height:100px;object-fit:cover;border-radius:8px;margin-top:6px;">
+<label>Projects Description</label>
+<textarea id="projectsDescription"></textarea>
 </div>
 
-  <button
-    type="button"
-    class="upload-image-button"
-    onclick="uploadWebsiteImage(
-      'project2',
-      'project2ImageFile',
-      'project2Image',
-      'project2UploadStatus'
-    )">
+<div class="service-box">
 
-    Upload Project 2 Image
+<h3>🌱 Project 01</h3>
 
-  </button>
-
-  <span
-    id="project2UploadStatus"
-    class="upload-status">
-  </span>
-
-    </div>
-  </div>
-
-
-  <!-- PROJECT 3 -->
-
-  <div class="service-box">
-
-    <h3>🚚 Project 03</h3>
-
-    <div class="field">
-
-      <label>Category</label>
-
-      <input
-        id="project3Category"
-        type="text"
-        placeholder="TRANSPORT">
-
-    </div>
-
-
-    <div class="field">
-
-      <label>Project Title</label>
-
-      <input
-        id="project3Title"
-        type="text"
-        placeholder="Transport & Logistics">
-
-    </div>
-
-
-    <div class="field">
-
-      <label>Project Description</label>
-
-      <textarea
-        id="project3Description"
-        placeholder="Describe this project"></textarea>
-
-    </div>
 <div class="field">
-
-  <label>Project Image</label>
-
-  <input
-    id="project3Image"
-    type="text"
-    placeholder="images/transport.jpg">
-
-</div>
-    <div class="field">
-
-  <label>Upload Project 3 Image</label>
-
-  <input
-    id="project3ImageFile"
-    type="file"
-    accept="image/jpeg,image/png,image/webp">
-      <div style="margin-top:12px;">
-  <small>Current Project 3 Image</small>
-  <br>
-  <img
-    id="project3ImagePreview"
-    src="/images/project3.jpg"
-    alt="Current Project 3 Image"
-    style="width:180px;height:100px;object-fit:cover;border-radius:8px;margin-top:6px;">
+<label>Category</label>
+<input id="project1Category">
 </div>
 
-  <button
-    type="button"
-    class="upload-image-button"
-    onclick="uploadWebsiteImage(
-      'project3',
-      'project3ImageFile',
-      'project3Image',
-      'project3UploadStatus'
-    )">
+<div class="field">
+<label>Project Title</label>
+<input id="project1Title">
+</div>
 
-    Upload Project 3 Image
+<div class="field">
+<label>Project Description</label>
+<textarea id="project1Description"></textarea>
+</div>
 
-  </button>
+<div class="field">
+<label>Project Image</label>
+<input id="project1Image">
+</div>
 
-  <span
-    id="project3UploadStatus"
-    class="upload-status">
-  </span>
+</div>
 
-    </div>
-  </div>
+<div class="service-box">
+
+<h3>🏗️ Project 02</h3>
+
+<div class="field">
+<label>Category</label>
+<input id="project2Category">
+</div>
+
+<div class="field">
+<label>Project Title</label>
+<input id="project2Title">
+</div>
+
+<div class="field">
+<label>Project Description</label>
+<textarea id="project2Description"></textarea>
+</div>
+
+<div class="field">
+<label>Project Image</label>
+<input id="project2Image">
+</div>
+
+</div>
+
+<div class="service-box">
+
+<h3>🚚 Project 03</h3>
+
+<div class="field">
+<label>Category</label>
+<input id="project3Category">
+</div>
+
+<div class="field">
+<label>Project Title</label>
+<input id="project3Title">
+</div>
+
+<div class="field">
+<label>Project Description</label>
+<textarea id="project3Description"></textarea>
+</div>
+
+<div class="field">
+<label>Project Image</label>
+<input id="project3Image">
+</div>
+
+</div>
 
 </section>
 
-      <div class="field">
+<!-- CONTACT -->
 
-        <label>Projects Description</label>
+<section class="editor-section" id="contactEditor">
 
-        <textarea id="projectsDescription"></textarea>
+<h2>📞 Contact Information</h2>
 
-      </div>
+<div class="field">
+<label>Business Name</label>
+<input id="businessName">
+</div>
 
-    </section>
+<div class="field">
+<label>Phone Number</label>
+<input id="phone">
+</div>
 
+<div class="field">
+<label>Email Address</label>
+<input id="email">
+</div>
 
-    <!-- CONTACT -->
+<div class="field">
+<label>WhatsApp Number</label>
+<input id="whatsapp">
+</div>
 
-    <section class="editor-section" id="contactEditor">
+<div class="field">
+<label>Address / Location</label>
+<textarea id="address"></textarea>
+</div>
 
-      <h2>📞 Contact Information</h2>
+</section>
 
-      <p class="editor-description">
-        These are already connected to your public website.
-      </p>
+<!-- SAVE -->
 
+<section class="save-panel" id="saveEditor">
 
-      <div class="info-box">
-        Your phone, email and address system is already working.
-        We are keeping it connected to the same database.
-      </div>
+<h2>💾 Save All Website Changes</h2>
 
+<p>
+Save everything you've changed above to the secure database.
+</p>
 
-      <div class="field">
+<button
+  class="save-button"
+  onclick="saveAllContent()">
+💾 Save All Changes
+</button>
 
-        <label>Business Name</label>
+<div id="editorMessage" class="message"></div>
 
-        <input id="businessName" type="text">
-
-      </div>
-
-
-      <div class="field">
-
-        <label>Phone Number</label>
-
-        <input id="phone" type="text">
-
-      </div>
-
-
-      <div class="field">
-
-        <label>Email Address</label>
-
-        <input id="email" type="email">
-
-      </div>
-
-
-      <div class="field">
-
-        <label>WhatsApp Number</label>
-
-        <input id="whatsapp" type="text">
-
-      </div>
-
-
-      <div class="field">
-
-        <label>Address / Location</label>
-
-        <textarea id="address"></textarea>
-
-      </div>
-
-    </section>
-
-
-    <!-- SAVE -->
-
-  <section class="save-panel" id="saveEditor">
-
-      <h2>💾 Save All Website Changes</h2>
-
-      <p>
-        Save everything you've changed above to your secure database.
-      </p>
-
-      <button
-        class="save-button"
-        onclick="saveAllContent()">
-
-        Save All Changes
-
-      </button>
-
-
-      <div id="editorMessage"></div>
-
-    </section>
-
-
-  </div>
+</section>
 
 </main>
 
-
 <footer>
-  LichaTwist Website • Owner Administration Panel
+LichaTwist Website • Owner Administration Panel
 </footer>
 
-
 <script>
-  async function createClientAccount() {
 
-  const nameInput =
-    document.getElementById("clientName");
+/* =========================================
+   GENERAL HELPERS
+========================================= */
 
-  const emailInput =
-    document.getElementById("clientEmail");
+function goTo(id){
+  const element=document.getElementById(id);
 
-  const message =
-    document.getElementById("clientMessage");
-
-  const passwordBox =
-    document.getElementById(
-      "temporaryPasswordBox"
-    );
-
-  const passwordInput =
-    document.getElementById(
-      "temporaryClientPassword"
-    );
-
-
-  const name =
-    nameInput.value.trim();
-
-  const email =
-    emailInput.value.trim();
-
-
-  passwordBox.style.display = "none";
-
-  message.style.display = "block";
-
-  message.style.background = "#eff6ff";
-
-  message.style.color = "#1e40af";
-
-  message.textContent =
-    "Creating client account...";
-
-
-  if (!name) {
-
-    message.style.background =
-      "#fef2f2";
-
-    message.style.color =
-      "#991b1b";
-
-    message.textContent =
-      "Please enter the client name.";
-
-    return;
-
+  if(element){
+    element.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
   }
-
-
-  if (!email) {
-
-    message.style.background =
-      "#fef2f2";
-
-    message.style.color =
-      "#991b1b";
-
-    message.textContent =
-      "Please enter the client email.";
-
-    return;
-
-  }
-
-
-  try {
-
-    const response =
-      await fetch(
-        "/api/create-client",
-        {
-          method: "POST",
-
-          credentials: "include",
-
-          headers: {
-            "Content-Type":
-              "application/json"
-          },
-
-          body:
-            JSON.stringify({
-              name: name,
-              email: email
-            })
-        }
-      );
-
-
-    const data =
-      await response.json();
-
-
-    if (
-      !response.ok ||
-      !data.success
-    ) {
-
-      throw new Error(
-        data.message ||
-        "Unable to create client account."
-      );
-
-    }
-
-
-    message.style.background =
-      "#ecfdf5";
-
-    message.style.color =
-      "#065f46";
-
-    message.textContent =
-      "✓ Client account created successfully.";
-
-
-    /*
-     * Show the temporary password.
-     *
-     * This password is returned only once
-     * by the server and is not stored in
-     * plain text in D1.
-     */
-
-    passwordInput.value =
-      data.temporaryPassword || "";
-
-
-    passwordBox.style.display =
-      "block";
-
-
-    /*
-     * Clear the form fields.
-     */
-
-    nameInput.value = "";
-
-    emailInput.value = "";
-
-
-  } catch (error) {
-
-    message.style.background =
-      "#fef2f2";
-
-    message.style.color =
-      "#991b1b";
-
-    message.textContent =
-      error.message ||
-      "Unable to create client account.";
-
-  }
-
 }
-async function logoutAdmin() {
 
-  try {
+function openWebsite(){
+  window.open(
+    "https://lichatwist-website.pages.dev",
+    "_blank"
+  );
+}
 
-    const response = await fetch(
+function setValue(id,value){
+  const element=document.getElementById(id);
+
+  if(element){
+    element.value=value ?? "";
+  }
+}
+
+function getValue(id){
+  const element=document.getElementById(id);
+
+  return element
+    ? element.value
+    : "";
+}
+
+function showMessage(id,text,type){
+  const element=document.getElementById(id);
+
+  if(!element){
+    return;
+  }
+
+  element.className="message "+type;
+  element.textContent=text;
+}
+
+function escapeHtml(value){
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+async function logoutAdmin(){
+
+  try{
+
+    const response=await fetch(
       "/api/logout",
       {
-        method: "GET",
-        credentials: "include"
+        method:"GET",
+        credentials:"include"
       }
     );
 
-    if (!response.ok) {
-      throw new Error("Logout failed.");
+    if(!response.ok){
+      throw new Error();
     }
 
-    window.location.href = "/admin-login.html";
+    window.location.href="/admin-login.html";
 
-  } catch (error) {
+  }catch(error){
 
     alert(
       "Unable to log out. Please try again."
     );
 
   }
-
-}
-function showMessage(message) {
-
-  document.getElementById("status").textContent =
-    message;
-
 }
 
 
-function openWebsite() {
+/* =========================================
+   CREATE CLIENT
+========================================= */
 
-  window.open(
-    "https://lichatwist-website.pages.dev",
-    "_blank"
+async function createClientAccount(){
+
+  const nameInput=
+    document.getElementById("clientName");
+
+  const emailInput=
+    document.getElementById("clientEmail");
+
+  const name=nameInput.value.trim();
+  const email=emailInput.value.trim();
+
+  document.getElementById(
+    "temporaryPasswordBox"
+  ).style.display="none";
+
+  if(!name){
+    showMessage(
+      "clientMessage",
+      "Please enter the client name.",
+      "error"
+    );
+    return;
+  }
+
+  if(!email){
+    showMessage(
+      "clientMessage",
+      "Please enter the client email.",
+      "error"
+    );
+    return;
+  }
+
+  showMessage(
+    "clientMessage",
+    "Creating client account...",
+    "info"
   );
 
+  try{
+
+    const response=await fetch(
+      "/api/create-client",
+      {
+        method:"POST",
+        credentials:"include",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          name:name,
+          email:email
+        })
+      }
+    );
+
+    const data=await response.json();
+
+    if(!response.ok || !data.success){
+      throw new Error(
+        data.message ||
+        "Unable to create client account."
+      );
+    }
+
+    showMessage(
+      "clientMessage",
+      "✓ Client account created successfully.",
+      "success"
+    );
+
+    document.getElementById(
+      "temporaryClientPassword"
+    ).value=
+      data.temporaryPassword || "";
+
+    document.getElementById(
+      "temporaryPasswordBox"
+    ).style.display="block";
+
+    nameInput.value="";
+    emailInput.value="";
+
+    await loadClientManagement();
+
+  }catch(error){
+
+    showMessage(
+      "clientMessage",
+      error.message ||
+      "Unable to create client account.",
+      "error"
+    );
+
+  }
 }
 
 
-function scrollToEditor() {
+/* =========================================
+   ADMIN PASSWORD
+========================================= */
 
-  document
-    .getElementById("websiteEditor")
-    .scrollIntoView({
-      behavior: "smooth"
-    });
+async function changeAdminPassword(){
 
-}
-function goToAdminSection(sectionId) {
+  const currentPassword=
+    getValue("currentAdminPassword");
 
-  const section =
-    document.getElementById(sectionId);
+  const newPassword=
+    getValue("newAdminPassword");
 
-  if (!section) {
+  const confirmPassword=
+    getValue("confirmAdminPassword");
+
+  if(!currentPassword){
+    showMessage(
+      "passwordMessage",
+      "Please enter your current password.",
+      "error"
+    );
     return;
   }
 
-  section.scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
-
-}
-
-function setValue(id, value) {
-
-  const element =
-    document.getElementById(id);
-
-  if (element) {
-
-    element.value =
-      value || "";
-
+  if(!newPassword){
+    showMessage(
+      "passwordMessage",
+      "Please enter a new password.",
+      "error"
+    );
+    return;
   }
 
+  if(newPassword.length<8){
+    showMessage(
+      "passwordMessage",
+      "New password must be at least 8 characters.",
+      "error"
+    );
+    return;
+  }
+
+  if(newPassword!==confirmPassword){
+    showMessage(
+      "passwordMessage",
+      "New passwords do not match.",
+      "error"
+    );
+    return;
+  }
+
+  showMessage(
+    "passwordMessage",
+    "Changing password...",
+    "info"
+  );
+
+  try{
+
+    const response=await fetch(
+      "/api/change-password",
+      {
+        method:"POST",
+        credentials:"include",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          currentPassword:currentPassword,
+          newPassword:newPassword
+        })
+      }
+    );
+
+    const data=await response.json();
+
+    if(!response.ok || !data.success){
+      throw new Error(
+        data.message ||
+        "Unable to change password."
+      );
+    }
+
+    showMessage(
+      "passwordMessage",
+      "✓ Password changed successfully. Please log in again.",
+      "success"
+    );
+
+    setValue("currentAdminPassword","");
+    setValue("newAdminPassword","");
+    setValue("confirmAdminPassword","");
+
+    setTimeout(function(){
+      window.location.href="/admin-login.html";
+    },1500);
+
+  }catch(error){
+
+    showMessage(
+      "passwordMessage",
+      error.message ||
+      "Unable to connect to password service.",
+      "error"
+    );
+
+  }
 }
 
 
-function getValue(id) {
+/* =========================================
+   LOAD WEBSITE CONTENT
+========================================= */
 
-  const element =
-    document.getElementById(id);
+async function loadContent(){
 
-  return element
-    ? element.value
-    : "";
-
-}
-
-
-async function loadContent() {
-
-  const message =
+  const message=
     document.getElementById("editorMessage");
 
-  try {
+  try{
 
-    const response =
-      await fetch("/api/content");
+    const response=await fetch(
+      "/api/content",
+      {
+        method:"GET",
+        credentials:"include",
+        cache:"no-store"
+      }
+    );
 
-    const data =
-      await response.json();
+    const data=await response.json();
 
-    if (!response.ok || !data.success) {
-
+    if(!response.ok || !data.success){
       throw new Error(
+        data.message ||
         "Unable to load content."
       );
-
     }
 
+    const c=data.content || {};
 
-    const c =
-      data.content || {};
+    const fields={
+      businessName:c.business_name,
+      phone:c.phone,
+      email:c.email,
+      whatsapp:c.whatsapp,
+      address:c.address,
+      about:c.about,
 
+      heroTitle:c.hero_title,
+      heroSubtitle:c.hero_subtitle,
+      heroDescription:c.hero_description,
+      approachTitle:c.approach_title,
+      approachDescription:c.approach_description,
 
-    setValue(
-      "businessName",
-      c.business_name
+      aboutHeading:c.about_heading,
+      aboutDescription:c.about_description,
+
+      mission:c.mission,
+      vision:c.vision,
+      valuesText:c.values_text,
+
+      agricultureTitle:c.agriculture_title,
+      agricultureDescription:c.agriculture_description,
+      agricultureImage:c.agriculture_image,
+
+      constructionTitle:c.construction_title,
+      constructionDescription:c.construction_description,
+      constructionImage:c.construction_image,
+
+      transportTitle:c.transport_title,
+      transportDescription:c.transport_description,
+      transportImage:c.transport_image,
+
+      agroCompanyName:c.agro_company_name,
+      agroCompanyDescription:c.agro_company_description,
+      agroCompanyImage:c.agro_company_image,
+
+      constructionCompanyName:c.construction_company_name,
+      constructionCompanyDescription:c.construction_company_description,
+      constructionCompanyImage:c.construction_company_image,
+
+      transportCompanyName:c.transport_company_name,
+      transportCompanyDescription:c.transport_company_description,
+      transportCompanyImage:c.transport_company_image,
+
+      projectsHeading:c.projects_heading,
+      projectsDescription:c.projects_description,
+
+      project1Category:c.project1_category,
+      project1Title:c.project1_title,
+      project1Description:c.project1_description,
+      project1Image:c.project1_image,
+
+      project2Category:c.project2_category,
+      project2Title:c.project2_title,
+      project2Description:c.project2_description,
+      project2Image:c.project2_image,
+
+      project3Category:c.project3_category,
+      project3Title:c.project3_title,
+      project3Description:c.project3_description,
+      project3Image:c.project3_image
+    };
+
+    Object.entries(fields).forEach(
+      ([id,value])=>{
+        setValue(id,value);
+      }
     );
 
-    setValue(
-      "phone",
-      c.phone
+  }catch(error){
+
+    showMessage(
+      "editorMessage",
+      "Unable to load saved website information.",
+      "error"
     );
-
-    setValue(
-      "email",
-      c.email
-    );
-
-    setValue(
-      "whatsapp",
-      c.whatsapp
-    );
-
-    setValue(
-      "address",
-      c.address
-    );
-
-    setValue(
-      "about",
-      c.about
-    );
-
-
-    setValue(
-      "heroTitle",
-      c.hero_title
-    );
-
-    setValue(
-      "heroSubtitle",
-      c.hero_subtitle
-    );
-
-    setValue(
-      "heroDescription",
-      c.hero_description
-    );
-
-    setValue(
-      "approachTitle",
-      c.approach_title
-    );
-
-    setValue(
-      "approachDescription",
-      c.approach_description
-    );
-
-
-    setValue(
-      "aboutHeading",
-      c.about_heading
-    );
-
-    setValue(
-      "aboutDescription",
-      c.about_description
-    );
-
-
-    setValue(
-      "mission",
-      c.mission
-    );
-
-    setValue(
-      "vision",
-      c.vision
-    );
-
-    setValue(
-      "valuesText",
-      c.values_text
-    );
-
-
-    setValue(
-      "agricultureTitle",
-      c.agriculture_title
-    );
-
-    setValue(
-      "agricultureDescription",
-      c.agriculture_description
-    );
-
-    setValue(
-      "agricultureImage",
-      c.agriculture_image
-    );
-
-
-    setValue(
-      "constructionTitle",
-      c.construction_title
-    );
-
-    setValue(
-      "constructionDescription",
-      c.construction_description
-    );
-
-    setValue(
-      "constructionImage",
-      c.construction_image
-    );
-
-
-    setValue(
-      "transportTitle",
-      c.transport_title
-    );
-
-    setValue(
-      "transportDescription",
-      c.transport_description
-    );
-
-    setValue(
-      "transportImage",
-      c.transport_image
-    );
-
-
-    setValue(
-      "agroCompanyName",
-      c.agro_company_name
-    );
-
-    setValue(
-      "agroCompanyDescription",
-      c.agro_company_description
-    );
-
-
-    setValue(
-      "constructionCompanyName",
-      c.construction_company_name
-    );
-
-    setValue(
-      "constructionCompanyDescription",
-      c.construction_company_description
-    );
-
-
-    setValue(
-      "transportCompanyName",
-      c.transport_company_name
-    );
-
-    setValue(
-      "transportCompanyDescription",
-      c.transport_company_description
-    );
-setValue(
-  "agroCompanyImage",
-  c.agro_company_image
-);
-
-setValue(
-  "constructionCompanyImage",
-  c.construction_company_image
-);
-
-setValue(
-  "transportCompanyImage",
-  c.transport_company_image
-);
-
-    setValue(
-      "projectsHeading",
-      c.projects_heading
-    );
-setValue(
-  "project1Image",
-  c.project1_image
-);
-
-setValue(
-  "project2Image",
-  c.project2_image
-);
-
-setValue(
-  "project3Image",
-  c.project3_image
-);
-    setValue(
-      "projectsDescription",
-      c.projects_description
-    );
-    setValue(
-  "project1Category",
-  c.project1_category
-);
-
-setValue(
-  "project1Title",
-  c.project1_title
-);
-
-setValue(
-  "project1Description",
-  c.project1_description
-);
-
-
-setValue(
-  "project2Category",
-  c.project2_category
-);
-
-setValue(
-  "project2Title",
-  c.project2_title
-);
-
-setValue(
-  "project2Description",
-  c.project2_description
-);
-
-
-setValue(
-  "project3Category",
-  c.project3_category
-);
-
-setValue(
-  "project3Title",
-  c.project3_title
-);
-
-setValue(
-  "project3Description",
-  c.project3_description
-);
-    setValue(
-  "project1Image",
-  c.project1_image
-);
-
-setValue(
-  "project2Image",
-  c.project2_image
-);
-
-setValue(
-  "project3Image",
-  c.project3_image
-);
-
-
-  } catch (error) {
-
-    message.className =
-      "error-message";
-
-    message.textContent =
-      "Unable to load saved website information.";
 
   }
-
 }
 
 
-async function saveAllContent() {
+/* =========================================
+   SAVE WEBSITE CONTENT
+========================================= */
 
-  const message =
-    document.getElementById("editorMessage");
+async function saveAllContent(){
 
-  message.className = "";
-  message.style.display = "block";
-  message.textContent = "Saving...";
+  showMessage(
+    "editorMessage",
+    "Saving website changes...",
+    "info"
+  );
 
+  const data={
 
-  const data = {
+    businessName:getValue("businessName"),
+    phone:getValue("phone"),
+    email:getValue("email"),
+    whatsapp:getValue("whatsapp"),
+    address:getValue("address"),
+    about:getValue("about"),
 
-    businessName:
-      getValue("businessName"),
+    heroTitle:getValue("heroTitle"),
+    heroSubtitle:getValue("heroSubtitle"),
+    heroDescription:getValue("heroDescription"),
 
-    phone:
-      getValue("phone"),
+    approachTitle:getValue("approachTitle"),
+    approachDescription:getValue("approachDescription"),
 
-    email:
-      getValue("email"),
+    aboutHeading:getValue("aboutHeading"),
+    aboutDescription:getValue("aboutDescription"),
 
-    whatsapp:
-      getValue("whatsapp"),
+    mission:getValue("mission"),
+    vision:getValue("vision"),
+    valuesText:getValue("valuesText"),
 
-    address:
-      getValue("address"),
+    agricultureTitle:getValue("agricultureTitle"),
+    agricultureDescription:getValue("agricultureDescription"),
+    agricultureImage:getValue("agricultureImage"),
 
-    about:
-      getValue("about"),
+    constructionTitle:getValue("constructionTitle"),
+    constructionDescription:getValue("constructionDescription"),
+    constructionImage:getValue("constructionImage"),
 
+    transportTitle:getValue("transportTitle"),
+    transportDescription:getValue("transportDescription"),
+    transportImage:getValue("transportImage"),
 
-    heroTitle:
-      getValue("heroTitle"),
+    agroCompanyName:getValue("agroCompanyName"),
+    agroCompanyDescription:getValue("agroCompanyDescription"),
+    agroCompanyImage:getValue("agroCompanyImage"),
 
-    heroSubtitle:
-      getValue("heroSubtitle"),
+    constructionCompanyName:getValue("constructionCompanyName"),
+    constructionCompanyDescription:getValue("constructionCompanyDescription"),
+    constructionCompanyImage:getValue("constructionCompanyImage"),
 
-    heroDescription:
-      getValue("heroDescription"),
+    transportCompanyName:getValue("transportCompanyName"),
+    transportCompanyDescription:getValue("transportCompanyDescription"),
+    transportCompanyImage:getValue("transportCompanyImage"),
 
-    approachTitle:
-      getValue("approachTitle"),
+    projectsHeading:getValue("projectsHeading"),
+    projectsDescription:getValue("projectsDescription"),
 
-    approachDescription:
-      getValue("approachDescription"),
+    project1Category:getValue("project1Category"),
+    project1Title:getValue("project1Title"),
+    project1Description:getValue("project1Description"),
+    project1Image:getValue("project1Image"),
 
+    project2Category:getValue("project2Category"),
+    project2Title:getValue("project2Title"),
+    project2Description:getValue("project2Description"),
+    project2Image:getValue("project2Image"),
 
-    aboutHeading:
-      getValue("aboutHeading"),
-
-    aboutDescription:
-      getValue("aboutDescription"),
-
-
-    mission:
-      getValue("mission"),
-
-    vision:
-      getValue("vision"),
-
-    valuesText:
-      getValue("valuesText"),
-
-
-    agricultureTitle:
-      getValue("agricultureTitle"),
-
-    agricultureDescription:
-      getValue("agricultureDescription"),
-
-    agricultureImage:
-      getValue("agricultureImage"),
-
-
-    constructionTitle:
-      getValue("constructionTitle"),
-
-    constructionDescription:
-      getValue("constructionDescription"),
-
-    constructionImage:
-      getValue("constructionImage"),
-
-
-    transportTitle:
-      getValue("transportTitle"),
-
-    transportDescription:
-      getValue("transportDescription"),
-
-    transportImage:
-      getValue("transportImage"),
-
-
-    agroCompanyName:
-  getValue("agroCompanyName"),
-
-agroCompanyDescription:
-  getValue("agroCompanyDescription"),
-
-agroCompanyImage:
-  getValue("agroCompanyImage"),
-
-
-constructionCompanyName:
-  getValue("constructionCompanyName"),
-
-constructionCompanyDescription:
-  getValue("constructionCompanyDescription"),
-
-constructionCompanyImage:
-  getValue("constructionCompanyImage"),
-
-
-transportCompanyName:
-  getValue("transportCompanyName"),
-
-transportCompanyDescription:
-  getValue("transportCompanyDescription"),
-
-transportCompanyImage:
-  getValue("transportCompanyImage"),
-
-      projectsHeading:
-      getValue("projectsHeading"),
-
-    projectsDescription:
-      getValue("projectsDescription"),
-
-    project1Category:
-      getValue("project1Category"),
-
-    project1Title:
-      getValue("project1Title"),
-
-    project1Description:
-      getValue("project1Description"),
-
-    project1Image:
-      getValue("project1Image"),
-
-    project2Category:
-      getValue("project2Category"),
-
-    project2Title:
-      getValue("project2Title"),
-
-    project2Description:
-      getValue("project2Description"),
-
-    project2Image:
-      getValue("project2Image"),
-
-    project3Category:
-      getValue("project3Category"),
-
-    project3Title:
-      getValue("project3Title"),
-
-    project3Description:
-      getValue("project3Description"),
-
-    project3Image:
-      getValue("project3Image")
+    project3Category:getValue("project3Category"),
+    project3Title:getValue("project3Title"),
+    project3Description:getValue("project3Description"),
+    project3Image:getValue("project3Image")
   };
-  
-  try {
 
-    const response =
-      await fetch(
-        "/api/content",
-        {
-          method: "POST",
+  try{
 
-          headers: {
-            "Content-Type":
-              "application/json"
-          },
+    const response=await fetch(
+      "/api/content",
+      {
+        method:"POST",
+        credentials:"include",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify(data)
+      }
+    );
 
-          body:
-            JSON.stringify(data)
-        }
-      );
+    const result=await response.json();
 
-
-    const result =
-      await response.json();
-
-
-    if (
-      !response.ok ||
-      !result.success
-    ) {
-
+    if(!response.ok || !result.success){
       throw new Error(
         result.message ||
-        "Unable to save."
+        "Unable to save changes."
       );
-
     }
 
+    showMessage(
+      "editorMessage",
+      "✓ All website changes saved successfully.",
+      "success"
+    );
 
-    message.className =
-      "success-message";
+  }catch(error){
 
-    message.textContent =
-      "✓ All website changes saved successfully.";
-
-
-  } catch (error) {
-
-    message.className =
-      "error-message";
-
-    message.textContent =
-      "Unable to save changes. Please try again.";
+    showMessage(
+      "editorMessage",
+      error.message ||
+      "Unable to save changes. Please try again.",
+      "error"
+    );
 
   }
-
 }
 
 
-loadContent();
-async function changeAdminPassword() {
+/* =========================================
+   IMAGE MANAGEMENT UI
+========================================= */
 
-  const currentPassword =
-    document.getElementById(
-      "currentAdminPassword"
-    ).value;
+const imageDefinitions=[
 
-  const newPassword =
-    document.getElementById(
-      "newAdminPassword"
-    ).value;
+  ["hero","Hero Image","heroImageFile","heroImage","/images/hero.jpg"],
 
-  const confirmPassword =
-    document.getElementById(
-      "confirmAdminPassword"
-    ).value;
+  ["about","About Image","aboutImageFile","aboutImage","/images/office.jpg"],
 
-  const message =
+  ["agriculture","Agriculture Image","agricultureImageFile","agricultureImage","/images/agriculture.jpg"],
+
+  ["construction","Construction Image","constructionImageFile","constructionImage","/images/construction.jpg"],
+
+  ["transport","Transport Image","transportImageFile","transportImage","/images/transport.jpg"],
+
+  ["agroCompany","Agro Company Image","agroCompanyImageFile","agroCompanyImage","/images/agro-company.jpg"],
+
+  ["constructionCompany","Construction Company Image","constructionCompanyImageFile","constructionCompanyImage","/images/construction-company.jpg"],
+
+  ["transportCompany","Transport Company Image","transportCompanyImageFile","transportCompanyImage","/images/transport-company.jpg"],
+
+  ["project1","Project 1 Image","project1ImageFile","project1Image","/images/project1.jpg"],
+
+  ["project2","Project 2 Image","project2ImageFile","project2Image","/images/project2.jpg"],
+
+  ["project3","Project 3 Image","project3ImageFile","project3Image","/images/project3.jpg"]
+
+];
+
+function buildImageManagement(){
+
+  const container=
     document.getElementById(
-      "passwordMessage"
+      "imageManagementContainer"
     );
 
+  container.innerHTML="";
 
-  message.style.display = "block";
+  imageDefinitions.forEach(
+    function(item){
 
-  message.style.background = "#eff6ff";
-  message.style.color = "#1e40af";
+      const type=item[0];
+      const title=item[1];
+      const fileId=item[2];
+      const fieldId=item[3];
+      const image=item[4];
 
-  message.textContent =
-    "Changing password...";
+      container.insertAdjacentHTML(
+        "beforeend",
+        `
+        <div class="service-box">
 
+          <h3>🖼️ ${escapeHtml(title)}</h3>
 
-  if (!currentPassword) {
+          <div class="field">
 
-    message.style.background = "#fef2f2";
-    message.style.color = "#991b1b";
+            <label>Select Image</label>
 
-    message.textContent =
-      "Please enter your current password.";
+            <input
+              type="file"
+              id="${fileId}"
+              accept="image/jpeg,image/png,image/webp">
 
-    return;
-  }
+            <div style="margin-top:10px">
 
+              <small>Current Image</small><br>
 
-  if (!newPassword) {
+              <img
+                id="${fileId}Preview"
+                class="preview"
+                src="${image}"
+                alt="${escapeHtml(title)}">
 
-    message.style.background = "#fef2f2";
-    message.style.color = "#991b1b";
+            </div>
 
-    message.textContent =
-      "Please enter a new password.";
+          </div>
 
-    return;
-  }
+          <div class="field">
 
+            <label>Image Path</label>
 
-  if (newPassword.length < 8) {
+            <input
+              id="${fieldId}"
+              type="text">
 
-    message.style.background = "#fef2f2";
-    message.style.color = "#991b1b";
+          </div>
 
-    message.textContent =
-      "New password must be at least 8 characters.";
+          <button
+            type="button"
+            onclick="uploadWebsiteImage(
+              '${type}',
+              '${fileId}',
+              '${fieldId}',
+              '${fileId}Message'
+            )">
+            Upload ${escapeHtml(title)}
+          </button>
 
-    return;
-  }
+          <div
+            id="${fileId}Message"
+            class="message">
+          </div>
 
+        </div>
+        `
+      );
 
-  if (newPassword !== confirmPassword) {
+    }
+  );
 
-    message.style.background = "#fef2f2";
-    message.style.color = "#991b1b";
+  imageDefinitions.forEach(
+    function(item){
 
-    message.textContent =
-      "New passwords do not match.";
+      const fileId=item[2];
 
-    return;
-  }
+      const input=
+        document.getElementById(fileId);
 
+      const preview=
+        document.getElementById(
+          fileId+"Preview"
+        );
 
-  try {
+      if(!input || !preview){
+        return;
+      }
 
-    const response =
-      await fetch(
-        "/api/change-password",
-        {
-          method: "POST",
+      input.addEventListener(
+        "change",
+        function(){
 
-          credentials: "include",
+          const file=this.files[0];
 
-          headers: {
-            "Content-Type":
-              "application/json"
-          },
+          if(!file){
+            return;
+          }
 
-          body: JSON.stringify({
-            currentPassword:
-              currentPassword,
+          if(!file.type.startsWith("image/")){
+            return;
+          }
 
-            newPassword:
-              newPassword
-          })
+          const reader=new FileReader();
+
+          reader.onload=function(event){
+            preview.src=event.target.result;
+          };
+
+          reader.readAsDataURL(file);
+
         }
       );
 
-
-    const data =
-      await response.json();
-
-
-    if (!response.ok || !data.success) {
-
-      message.style.background =
-        "#fef2f2";
-
-      message.style.color =
-        "#991b1b";
-
-      message.textContent =
-        data.message ||
-        "Unable to change password.";
-
-      return;
     }
+  );
+}
 
 
-    message.style.background =
-      "#ecfdf5";
+/* =========================================
+   UPLOAD WEBSITE IMAGE
+========================================= */
 
-    message.style.color =
-      "#065f46";
-
-    message.textContent =
-      "Password changed successfully. " +
-      "Please log in again.";
-
-
-    document.getElementById(
-      "currentAdminPassword"
-    ).value = "";
-
-    document.getElementById(
-      "newAdminPassword"
-    ).value = "";
-
-    document.getElementById(
-      "confirmAdminPassword"
-    ).value = "";
-
-
-    setTimeout(function() {
-
-      window.location.href =
-        "/admin-login.html";
-
-    }, 1500);
-
-
-  } catch (error) {
-
-    message.style.background =
-      "#fef2f2";
-
-    message.style.color =
-      "#991b1b";
-
-    message.textContent =
-      "Unable to connect to password service.";
-
-  }
-
-  }
 async function uploadWebsiteImage(
   imageType,
   fileInputId,
-  thirdArgument,
-  fourthArgument
-) {
+  targetFieldId,
+  messageId
+){
 
-  const targetFieldId =
-    fourthArgument
-      ? thirdArgument
-      : null;
-
-  const messageId =
-    fourthArgument
-      ? fourthArgument
-      : thirdArgument;
-  const fileInput =
+  const fileInput=
     document.getElementById(fileInputId);
 
-  const message =
-    document.getElementById(messageId);
+  if(!fileInput || !fileInput.files.length){
 
-  if (!fileInput || !fileInput.files.length) {
-
-    message.textContent =
-      "Please select an image first.";
-
-    message.style.color =
-      "#dc2626";
+    showMessage(
+      messageId,
+      "Please select an image first.",
+      "error"
+    );
 
     return;
   }
 
-  const file =
-    fileInput.files[0];
+  const file=fileInput.files[0];
 
+  if(file.size>5*1024*1024){
 
-  if (file.size > 5 * 1024 * 1024) {
-
-    message.textContent =
-      "Image must be smaller than 5 MB.";
-
-    message.style.color =
-      "#dc2626";
+    showMessage(
+      messageId,
+      "Image must be smaller than 5 MB.",
+      "error"
+    );
 
     return;
   }
 
-
-  const allowedTypes = [
+  const allowed=[
     "image/jpeg",
     "image/png",
     "image/webp"
   ];
 
-  if (!allowedTypes.includes(file.type)) {
+  if(!allowed.includes(file.type)){
 
-    message.textContent =
-      "Only JPG, PNG and WebP images are allowed.";
-
-    message.style.color =
-      "#dc2626";
+    showMessage(
+      messageId,
+      "Only JPG, PNG and WebP images are allowed.",
+      "error"
+    );
 
     return;
   }
 
-
-  const formData =
-    new FormData();
-
-  formData.append(
-    "image",
-    file
+  showMessage(
+    messageId,
+    "Uploading image...",
+    "info"
   );
 
-  formData.append(
-    "imageType",
-    imageType
-  );
+  const formData=new FormData();
 
+  formData.append("image",file);
+  formData.append("imageType",imageType);
 
-  message.textContent =
-    "Uploading...";
+  try{
 
-  message.style.color =
-    "#2563eb";
+    const response=await fetch(
+      "/api/upload-image",
+      {
+        method:"POST",
+        credentials:"include",
+        body:formData
+      }
+    );
 
+    const data=await response.json();
 
-  try {
-
-    const response =
-      await fetch(
-        "/api/upload-image",
-        {
-          method: "POST",
-          credentials: "include",
-          body: formData
-        }
-      );
-
-
-    const data =
-      await response.json();
-
-
-    if (!response.ok || !data.success) {
+    if(!response.ok || !data.success){
 
       throw new Error(
         data.message ||
@@ -2855,540 +1816,531 @@ async function uploadWebsiteImage(
 
     }
 
+    if(data.path){
 
-message.textContent =
-  "✓ Image uploaded successfully.";
+      setValue(
+        targetFieldId,
+        data.path
+      );
 
-message.style.color =
-  "#059669";
+      const preview=
+        document.getElementById(
+          fileInputId+"Preview"
+        );
 
+      if(preview){
 
-/*
- * Save the returned image path
- * into the matching Admin field.
- */
+        preview.src=
+          data.path+
+          (data.path.includes("?")
+            ? "&"
+            : "?")+
+          "v="+Date.now();
 
-if (data.path) {
-
-  const imageFieldMap = {
-
-    agroCompanyImageFile:
-      "agroCompanyImage",
-
-    constructionCompanyImageFile:
-      "constructionCompanyImage",
-
-    transportCompanyImageFile:
-      "transportCompanyImage",
-
-    project1ImageFile:
-      "project1Image",
-
-    project2ImageFile:
-      "project2Image",
-
-    project3ImageFile:
-      "project3Image"
-
-  };
-
-
- const mappedTargetFieldId =
-  imageFieldMap[fileInputId];
-
-const finalTargetFieldId =
-  targetFieldId ||
-  mappedTargetFieldId;
-
-  if (finalTargetFieldId) {
-
-    const targetField =
-    document.getElementById(
-  finalTargetFieldId
-);
-    if (targetField) {
-
-      targetField.value =
-        data.path;
+      }
 
     }
 
-  }
+    fileInput.value="";
 
-}
+    showMessage(
+      messageId,
+      "✓ Image uploaded successfully.",
+      "success"
+    );
 
+  }catch(error){
 
-fileInput.value = "";
-
-  } catch (error) {
-
-    message.textContent =
+    showMessage(
+      messageId,
       error.message ||
-      "Unable to upload image.";
-
-    message.style.color =
-      "#dc2626";
+      "Unable to upload image.",
+      "error"
+    );
 
   }
-
 }
-  /*
- * =====================================
- * SELECTED IMAGE PREVIEW
- * =====================================
- */
 
-const imagePreviewMap = {
 
-  heroImageFile:
-    "heroImagePreview",
+/* =========================================
+   CLIENT MANAGEMENT
+========================================= */
 
-  aboutImageFile:
-    "aboutImagePreview",
+async function loadClientManagement(){
 
-  agricultureImageFile:
-    "agricultureImagePreview",
+  const list=
+    document.getElementById("clientList");
 
-  constructionImageFile:
-    "constructionImagePreview",
+  const count=
+    document.getElementById(
+      "clientCountLabel"
+    );
 
-  transportImageFile:
-    "transportImagePreview",
+  list.innerHTML=
+    '<div class="info-box">Loading client accounts...</div>';
 
-  agroCompanyImageFile:
-    "agroCompanyImagePreview",
+  try{
 
-  constructionCompanyImageFile:
-    "constructionCompanyImagePreview",
-
-  transportCompanyImageFile:
-    "transportCompanyImagePreview",
-
-  project1ImageFile:
-    "project1ImagePreview",
-
-  project2ImageFile:
-    "project2ImagePreview",
-
-  project3ImageFile:
-    "project3ImagePreview"
-
-};
-
-Object.entries(imagePreviewMap)
-  .forEach(
-    ([fileInputId, previewId]) => {
-
-      const fileInput =
-        document.getElementById(
-          fileInputId
-        );
-
-      const preview =
-        document.getElementById(
-          previewId
-        );
-
-      if (
-        !fileInput ||
-        !preview
-      ) {
-        return;
+    const response=await fetch(
+      "/api/client-management",
+      {
+        method:"GET",
+        credentials:"include",
+        cache:"no-store"
       }
+    );
 
-      fileInput.addEventListener(
-        "change",
-        function () {
+    const data=await response.json();
 
-          const file =
-            this.files &&
-            this.files[0];
+    if(!response.ok || !data.success){
 
-          if (!file) {
-            return;
-          }
-
-          if (
-            !file.type.startsWith(
-              "image/"
-            )
-          ) {
-            return;
-          }
-
-          const reader =
-            new FileReader();
-
-          reader.onload =
-            function (event) {
-
-              preview.src =
-                event.target.result;
-
-            };
-
-          reader.readAsDataURL(
-            file
-          );
-
-        }
+      throw new Error(
+        data.message ||
+        "Unable to load client accounts."
       );
 
     }
+
+    const clients=
+      Array.isArray(data.clients)
+        ? data.clients
+        : [];
+
+    count.textContent=
+      clients.length===1
+        ? "1 client account"
+        : `${clients.length} client accounts`;
+
+    if(!clients.length){
+
+      list.innerHTML=
+        '<div class="info-box">No client accounts found yet.</div>';
+
+      return;
+    }
+
+    list.innerHTML=
+      clients.map(
+        function(client){
+
+          const id=Number(client.id);
+
+          const active=
+            client.status==="active";
+
+          const mustChange=
+            Number(
+              client.must_change_password
+            )===1;
+
+          return `
+
+          <article class="client-card">
+
+            <div class="client-header">
+
+              <div class="client-title">
+                Client #${id}
+              </div>
+
+              <div>
+
+                <span class="badge ${
+                  active
+                    ? "badge-active"
+                    : "badge-inactive"
+                }">
+                  ${active?"Active":"Inactive"}
+                </span>
+
+                ${
+                  mustChange
+                    ? `
+                      <span class="badge badge-temp">
+                        Temporary password required
+                      </span>
+                    `
+                    : ""
+                }
+
+              </div>
+
+            </div>
+
+            <div class="two-column">
+
+              <div class="field">
+
+                <label>
+                  Client Name
+                </label>
+
+                <input
+                  id="client-name-${id}"
+                  type="text"
+                  maxlength="100"
+                  value="${escapeHtml(client.name)}">
+
+              </div>
+
+              <div class="field">
+
+                <label>
+                  Client Email
+                </label>
+
+                <input
+                  id="client-email-${id}"
+                  type="email"
+                  value="${escapeHtml(client.email)}">
+
+              </div>
+
+            </div>
+
+            <div class="client-actions">
+
+              <button
+                class="green"
+                onclick="updateClientAccount(${id})">
+                💾 Save Client
+              </button>
+
+              ${
+                active
+                  ? `
+                    <button
+                      class="danger"
+                      onclick="changeClientStatus(${id},'inactive')">
+                      ⛔ Deactivate
+                    </button>
+                  `
+                  : `
+                    <button
+                      class="green"
+                      onclick="changeClientStatus(${id},'active')">
+                      ✅ Activate
+                    </button>
+                  `
+              }
+
+              <button
+                class="secondary"
+                onclick="resetClientPassword(${id})"
+                ${active?"":"disabled"}>
+                🔑 Reset Password
+              </button>
+
+            </div>
+
+            <div
+              id="clientResetBox-${id}"
+              class="temp-box">
+
+              <strong>
+                ⚠️ New Temporary Password
+              </strong>
+
+              <p style="margin-top:6px">
+                Give this password securely to the client.
+              </p>
+
+              <input
+                id="clientResetPassword-${id}"
+                class="temp-password"
+                type="text"
+                readonly>
+
+            </div>
+
+          </article>
+
+          `;
+
+        }
+      ).join("");
+
+  }catch(error){
+
+    list.innerHTML="";
+
+    showMessage(
+      "clientManagementMessage",
+      error.message ||
+      "Unable to load client accounts.",
+      "error"
+    );
+
+  }
+}
+
+
+async function updateClientAccount(clientId){
+
+  const nameInput=
+    document.getElementById(
+      "client-name-"+clientId
+    );
+
+  const emailInput=
+    document.getElementById(
+      "client-email-"+clientId
+    );
+
+  const name=nameInput.value.trim();
+  const email=emailInput.value.trim();
+
+  if(!name){
+
+    showMessage(
+      "clientManagementMessage",
+      "Client name is required.",
+      "error"
+    );
+
+    return;
+  }
+
+  if(!email){
+
+    showMessage(
+      "clientManagementMessage",
+      "Client email is required.",
+      "error"
+    );
+
+    return;
+  }
+
+  showMessage(
+    "clientManagementMessage",
+    "Saving client information...",
+    "info"
   );
+
+  try{
+
+    const response=await fetch(
+      "/api/client-management",
+      {
+        method:"POST",
+        credentials:"include",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          action:"update",
+          id:clientId,
+          name:name,
+          email:email
+        })
+      }
+    );
+
+    const data=await response.json();
+
+    if(!response.ok || !data.success){
+
+      throw new Error(
+        data.message ||
+        "Unable to update client."
+      );
+
+    }
+
+    showMessage(
+      "clientManagementMessage",
+      "✓ Client information updated successfully.",
+      "success"
+    );
+
+    await loadClientManagement();
+
+  }catch(error){
+
+    showMessage(
+      "clientManagementMessage",
+      error.message ||
+      "Unable to update client.",
+      "error"
+    );
+
+  }
+}
+
+
+async function changeClientStatus(
+  clientId,
+  status
+){
+
+  const actionText=
+    status==="active"
+      ? "activate"
+      : "deactivate";
+
+  if(!confirm(
+    `Are you sure you want to ${actionText} this client account?`
+  )){
+    return;
+  }
+
+  showMessage(
+    "clientManagementMessage",
+    `${status==="active"?"Activating":"Deactivating"} client account...`,
+    "info"
+  );
+
+  try{
+
+    const response=await fetch(
+      "/api/client-management",
+      {
+        method:"POST",
+        credentials:"include",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          action:"status",
+          id:clientId,
+          status:status
+        })
+      }
+    );
+
+    const data=await response.json();
+
+    if(!response.ok || !data.success){
+
+      throw new Error(
+        data.message ||
+        "Unable to change client status."
+      );
+
+    }
+
+    showMessage(
+      "clientManagementMessage",
+      "✓ "+
+      (
+        data.message ||
+        "Client status updated successfully."
+      ),
+      "success"
+    );
+
+    await loadClientManagement();
+
+  }catch(error){
+
+    showMessage(
+      "clientManagementMessage",
+      error.message ||
+      "Unable to change client status.",
+      "error"
+    );
+
+  }
+}
+
+
+async function resetClientPassword(clientId){
+
+  if(!confirm(
+    "Reset this client's password? Their existing client sessions will be invalidated and they will need to choose a new password."
+  )){
+    return;
+  }
+
+  showMessage(
+    "clientManagementMessage",
+    "Generating a new temporary password...",
+    "info"
+  );
+
+  try{
+
+    const response=await fetch(
+      "/api/client-management",
+      {
+        method:"POST",
+        credentials:"include",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+          action:"reset-password",
+          id:clientId
+        })
+      }
+    );
+
+    const data=await response.json();
+
+    if(!response.ok || !data.success){
+
+      throw new Error(
+        data.message ||
+        "Unable to reset client password."
+      );
+
+    }
+
+    await loadClientManagement();
+
+    const box=
+      document.getElementById(
+        "clientResetBox-"+clientId
+      );
+
+    const password=
+      document.getElementById(
+        "clientResetPassword-"+clientId
+      );
+
+    if(box && password){
+
+      password.value=
+        data.temporaryPassword || "";
+
+      box.style.display="block";
+
+      box.scrollIntoView({
+        behavior:"smooth",
+        block:"nearest"
+      });
+
+    }
+
+    showMessage(
+      "clientManagementMessage",
+      "✓ Client password reset successfully. Give the temporary password to the client securely.",
+      "success"
+    );
+
+  }catch(error){
+
+    showMessage(
+      "clientManagementMessage",
+      error.message ||
+      "Unable to reset client password.",
+      "error"
+    );
+
+  }
+}
+
+
+/* =========================================
+   INITIALIZE
+========================================= */
+
+buildImageManagement();
+loadContent();
+loadClientManagement();
+
 </script>
 
 </body>
-  <style>
-    /* =========================================
-   LICHATWIST PREMIUM ADMIN THEME
-   PERMANENT LIGHT MODE
-========================================= */
-
-:root {
-    --lt-navy: #10243e;
-    --lt-navy-dark: #071a33;
-    --lt-blue: #1769e0;
-    --lt-gold: #c9a227;
-
-    --lt-page: #e9eef3;
-    --lt-card: #f8fafc;
-    --lt-input: #eef3f7;
-
-    --lt-text: #16263a;
-    --lt-muted: #667589;
-
-    --lt-border: #d7e0e8;
-}
-
-/* =========================================
-   PAGE
-========================================= */
-
-html,
-body {
-    background: #e9eef3 !important;
-    color: var(--lt-text) !important;
-}
-
-/* Soft premium background */
-
-body {
-    background:
-        radial-gradient(
-            circle at 0% 0%,
-            rgba(201,162,39,.10),
-            transparent 28%
-        ),
-        radial-gradient(
-            circle at 100% 10%,
-            rgba(23,105,224,.08),
-            transparent 30%
-        ),
-        linear-gradient(
-            135deg,
-            #edf2f6 0%,
-            #e4eaf0 100%
-        ) !important;
-}
-
-/* =========================================
-   HEADER
-========================================= */
-
-header {
-    background:
-        linear-gradient(
-            135deg,
-            #071a33,
-            #12365b
-        ) !important;
-
-    color: #ffffff !important;
-
-    border-bottom:
-        3px solid var(--lt-gold) !important;
-
-    box-shadow:
-        0 10px 30px rgba(7,26,51,.18) !important;
-}
-
-/* Header text */
-
-header h1,
-header h2,
-header h3,
-header p,
-header span {
-    color: #ffffff !important;
-}
-
-/* =========================================
-   MAIN CARDS
-========================================= */
-
-.box,
-.card,
-.panel,
-.section,
-[class*="card"],
-[class*="panel"],
-[class*="section"] {
-    background: var(--lt-card) !important;
-
-    color: var(--lt-text) !important;
-
-    border:
-        1px solid var(--lt-border) !important;
-
-    border-radius:
-        22px !important;
-
-    box-shadow:
-        0 12px 32px rgba(16,36,62,.08),
-        0 2px 8px rgba(16,36,62,.04) !important;
-}
-
-/* =========================================
-   CARD HEADINGS
-========================================= */
-
-.box h2,
-.card h2,
-.panel h2,
-.section h2,
-.box h3,
-.card h3,
-.panel h3,
-.section h3 {
-    color: var(--lt-navy-dark) !important;
-}
-
-/* Elegant gold line */
-
-.box h2::after,
-.card h2::after,
-.panel h2::after {
-    content: "";
-
-    display: block;
-
-    width: 44px;
-
-    height: 3px;
-
-    margin-top: 10px;
-
-    border-radius: 10px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #c9a227,
-            #e4c95e
-        );
-}
-
-/* =========================================
-   NORMAL TEXT
-========================================= */
-
-.box p,
-.card p,
-.panel p,
-.section p,
-small {
-    color: var(--lt-muted) !important;
-}
-
-/* =========================================
-   LABELS
-========================================= */
-
-label {
-    color: var(--lt-navy-dark) !important;
-
-    font-weight: 700 !important;
-}
-
-/* =========================================
-   INPUTS
-========================================= */
-
-input,
-textarea,
-select {
-    background:
-        var(--lt-input) !important;
-
-    color:
-        var(--lt-text) !important;
-
-    border:
-        1.5px solid #cfd9e3 !important;
-
-    border-radius:
-        14px !important;
-
-    box-shadow:
-        inset 0 1px 2px rgba(16,36,62,.03) !important;
-}
-
-/* Placeholder */
-
-input::placeholder,
-textarea::placeholder {
-    color: #8a98a8 !important;
-}
-
-/* Focus */
-
-input:focus,
-textarea:focus,
-select:focus {
-    outline: none !important;
-
-    background: #ffffff !important;
-
-    border-color:
-        var(--lt-blue) !important;
-
-    box-shadow:
-        0 0 0 4px rgba(23,105,224,.10),
-        0 6px 18px rgba(23,105,224,.07) !important;
-}
-
-/* =========================================
-   BUTTONS
-========================================= */
-
-button {
-    background:
-        linear-gradient(
-            135deg,
-            #1769e0,
-            #0d4fae
-        ) !important;
-
-    color: #ffffff !important;
-
-    border: none !important;
-
-    border-radius:
-        13px !important;
-
-    min-height:
-        50px !important;
-
-    font-weight:
-        700 !important;
-
-    box-shadow:
-        0 8px 20px rgba(23,105,224,.20) !important;
-
-    transition:
-        transform .2s ease,
-        box-shadow .2s ease !important;
-}
-
-button:hover {
-    transform:
-        translateY(-1px);
-
-    box-shadow:
-        0 12px 26px rgba(23,105,224,.25) !important;
-}
-
-/* Save button */
-
-button[type="submit"],
-.save,
-.save-button {
-    background:
-        linear-gradient(
-            135deg,
-            #07966e,
-            #087b5c
-        ) !important;
-}
-
-/* =========================================
-   LINKS
-========================================= */
-
-a {
-    color:
-        var(--lt-blue) !important;
-}
-
-a:hover {
-    color:
-        var(--lt-gold) !important;
-}
-
-/* =========================================
-   SUCCESS / STATUS MESSAGE
-========================================= */
-
-.status,
-.success,
-.success-message {
-    background:
-        #e5f6ef !important;
-
-    color:
-        #087b5c !important;
-
-    border:
-        1px solid #a9dfcc !important;
-
-    border-radius:
-        14px !important;
-}
-
-/* =========================================
-   MOBILE
-========================================= */
-
-@media (max-width: 600px) {
-
-    body {
-        background:
-            linear-gradient(
-                145deg,
-                #edf2f6,
-                #e4eaf0
-            ) !important;
-    }
-
-    .box,
-    .card,
-    .panel,
-    .section,
-    [class*="card"],
-    [class*="panel"],
-    [class*="section"] {
-        border-radius:
-            18px !important;
-
-        margin-bottom:
-            18px !important;
-    }
-
-    input,
-    textarea,
-    select {
-        font-size:
-            16px !important;
-    }
-
-    button {
-        width:
-            100%;
-
-        min-height:
-            52px !important;
-    }
-  }
-    </style>
-  </html>
+</html>
