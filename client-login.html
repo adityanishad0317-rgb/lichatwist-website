@@ -293,6 +293,10 @@
     </div>
 
 
+    <!-- =========================
+         CLIENT LOGIN
+    ========================== -->
+
     <h2>
       Client Login
     </h2>
@@ -350,81 +354,101 @@
         Sign In
       </button>
 
-  <h2>
-    Create Your Password
-  </h2>
-
-  <p class="description">
-    Your temporary password can only be used for
-    initial access. Please create your own private
-    password to continue.
-  </p>
-
-  <div class="field">
-
-    <label for="currentClientPassword">
-      Temporary Password
-    </label>
-
-    <input
-      id="currentClientPassword"
-      type="password"
-      autocomplete="current-password"
-      placeholder="Enter your temporary password"
-    >
-
-  </div>
-
-
-  <div class="field">
-
-    <label for="newClientPassword">
-      New Password
-    </label>
-
-    <input
-      id="newClientPassword"
-      type="password"
-      autocomplete="new-password"
-      placeholder="Minimum 8 characters"
-    >
-
-  </div>
-
-
-  <div class="field">
-
-    <label for="confirmClientPassword">
-      Confirm New Password
-    </label>
-
-    <input
-      id="confirmClientPassword"
-      type="password"
-      autocomplete="new-password"
-      placeholder="Enter the new password again"
-    >
-
-  </div>
-
-
-  <button
-    id="changePasswordButton"
-    type="button"
-  >
-    Set New Password
-  </button>
-
-</div>
-
 
     </form>
-       <div id="message"></div>
-      <div
-  id="changePasswordBox"
-  style="display:none; margin-top:20px;"
->
 
+
+    <!-- =========================
+         LOGIN MESSAGE
+    ========================== -->
+
+    <div id="message"></div>
+
+
+    <!-- =========================
+         CREATE PASSWORD
+    ========================== -->
+
+    <div
+      id="changePasswordBox"
+      style="display:none; margin-top:20px;"
+    >
+
+      <h2>
+        Create Your Password
+      </h2>
+
+
+      <p class="description">
+
+        Your temporary password can only be used for
+        initial access. Please create your own private
+        password to continue.
+
+      </p>
+
+
+      <div class="field">
+
+        <label for="currentClientPassword">
+          Temporary Password
+        </label>
+
+        <input
+          id="currentClientPassword"
+          type="password"
+          autocomplete="current-password"
+          placeholder="Enter your temporary password"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="newClientPassword">
+          New Password
+        </label>
+
+        <input
+          id="newClientPassword"
+          type="password"
+          autocomplete="new-password"
+          placeholder="Minimum 8 characters"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="confirmClientPassword">
+          Confirm New Password
+        </label>
+
+        <input
+          id="confirmClientPassword"
+          type="password"
+          autocomplete="new-password"
+          placeholder="Enter the new password again"
+        >
+
+      </div>
+
+
+      <button
+        id="changePasswordButton"
+        type="button"
+      >
+        Set New Password
+      </button>
+
+    </div>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
 
     <div class="footer">
 
@@ -466,25 +490,31 @@ const message =
   document.getElementById(
     "message"
   );
-  const changePasswordBox =
+
+
+const changePasswordBox =
   document.getElementById(
     "changePasswordBox"
   );
+
 
 const currentClientPassword =
   document.getElementById(
     "currentClientPassword"
   );
 
+
 const newClientPassword =
   document.getElementById(
     "newClientPassword"
   );
 
+
 const confirmClientPassword =
   document.getElementById(
     "confirmClientPassword"
   );
+
 
 const changePasswordButton =
   document.getElementById(
@@ -507,6 +537,7 @@ function showMessage(
     text;
 
 }
+
 
 async function changeClientPassword() {
 
@@ -642,10 +673,6 @@ async function changeClientPassword() {
       "none";
 
 
-    /*
-     * Clear password fields.
-     */
-
     currentClientPassword.value =
       "";
 
@@ -680,6 +707,8 @@ changePasswordButton.addEventListener(
   "click",
   changeClientPassword
 );
+
+
 form.addEventListener(
   "submit",
   async function(event) {
@@ -783,57 +812,52 @@ form.addEventListener(
 
 
       /*
-       * STEP 1G-E TEST ONLY
+       * TEMPORARY TEST BEHAVIOUR
        *
-       * We are not redirecting yet.
-       *
-       * This lets us verify that the
-       * new client session is created
-       * successfully before we build
-       * the client dashboard.
+       * If this is the first login,
+       * show the password creation screen.
        */
 
       if (
-  data.mustChangePassword
-) {
+        data.mustChangePassword
+      ) {
 
-  showMessage(
-    "✓ Client login successful. Please create your private password.",
-    "success"
-  );
-
-
-  changePasswordBox.style.display =
-    "block";
+        showMessage(
+          "✓ Client login successful. Please create your private password.",
+          "success"
+        );
 
 
-  /*
-   * Keep the temporary password
-   * available for the password-change
-   * request.
-   */
-
-  currentClientPassword.value =
-    password;
+        changePasswordBox.style.display =
+          "block";
 
 
-  /*
-   * Hide the login form after
-   * successful temporary-password login.
-   */
+        /*
+         * Keep the temporary password
+         * available for password change.
+         */
 
-  form.style.display =
-    "none";
+        currentClientPassword.value =
+          password;
 
 
-} else {
+        /*
+         * Hide login form after
+         * successful temporary login.
+         */
 
-  showMessage(
-    "✓ Client login successful.",
-    "success"
-  );
+        form.style.display =
+          "none";
 
-}
+
+      } else {
+
+        showMessage(
+          "✓ Client login successful.",
+          "success"
+        );
+
+      }
 
 
     } catch (error) {
