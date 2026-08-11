@@ -727,47 +727,22 @@ export async function onRequestPost(
 
 
     await context.env.DB.prepare(`
-      INSERT INTO admin_auth (
-        id,
-        recovery_key_hash,
-        recovery_key_salt,
-        recovery_key_iterations,
-        recovery_key_hint,
-        updated_at
-      )
-      VALUES (
-        1,
-        ?,
-        ?,
-        ?,
-        ?,
-        CURRENT_TIMESTAMP
-      )
-      ON CONFLICT(id)
-      DO UPDATE SET
-        recovery_key_hash =
-          excluded.recovery_key_hash,
-
-        recovery_key_salt =
-          excluded.recovery_key_salt,
-
-        recovery_key_iterations =
-          excluded.recovery_key_iterations,
-
-        recovery_key_hint =
-          excluded.recovery_key_hint,
-
-        updated_at =
-          CURRENT_TIMESTAMP
-    `)
-    .bind(
-      hashBase64,
-      saltBase64,
-      PBKDF2_ITERATIONS,
-      recoveryKeyHint
-    )
-    .run();
-
+  UPDATE admin_auth
+  SET
+    recovery_key_hash = ?,
+    recovery_key_salt = ?,
+    recovery_key_iterations = ?,
+    recovery_key_hint = ?,
+    updated_at = CURRENT_TIMESTAMP
+  WHERE id = 1
+`)
+.bind(
+  hashBase64,
+  saltBase64,
+  PBKDF2_ITERATIONS,
+  recoveryKeyHint
+)
+.run();
 
     return json({
       success:
