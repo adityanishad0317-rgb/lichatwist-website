@@ -42,21 +42,17 @@
 
     .topbar {
 
-      background:
-        #071a33;
+      background: #071a33;
 
       color: white;
 
-      padding:
-        18px 22px;
+      padding: 18px 22px;
 
       display: flex;
 
-      justify-content:
-        space-between;
+      justify-content: space-between;
 
-      align-items:
-        center;
+      align-items: center;
 
       gap: 15px;
 
@@ -88,51 +84,42 @@
 
       border-radius: 10px;
 
-      padding:
-        10px 16px;
+      padding: 10px 16px;
 
-      background:
-        #ffffff;
+      background: white;
 
-      color:
-        #071a33;
+      color: #071a33;
 
-      font-weight:
-        700;
+      font-weight: 700;
 
       cursor: pointer;
     }
 
 
-    .logout:hover {
+    .logout:active {
 
-      opacity: .9;
+      transform: scale(.98);
     }
 
 
     .container {
 
       width:
-        min(1100px, 92%);
+        min(1100px, 94%);
 
-      margin:
-        35px auto;
+      margin: 28px auto 45px;
     }
 
 
     .welcome {
 
-      background:
-        #f8fafc;
+      background: #f8fafc;
 
-      border:
-        1px solid #d7e0e8;
+      border: 1px solid #d7e0e8;
 
-      border-radius:
-        18px;
+      border-radius: 18px;
 
-      padding:
-        25px;
+      padding: 24px;
 
       box-shadow:
         0 8px 24px
@@ -142,211 +129,388 @@
 
     .welcome h1 {
 
-      margin:
-        0 0 8px;
+      margin: 0 0 8px;
 
-      color:
-        #071a33;
+      color: #071a33;
+
+      font-size: 27px;
     }
 
 
     .welcome p {
 
-      margin:
-        0;
+      margin: 0;
 
-      color:
-        #667589;
+      color: #667589;
 
-      line-height:
-        1.5;
+      line-height: 1.5;
     }
 
 
     .status {
 
-      display:
-        inline-block;
+      display: inline-block;
 
-      margin-top:
-        18px;
+      margin-top: 16px;
 
-      padding:
-        8px 12px;
+      padding: 8px 12px;
 
-      border-radius:
-        20px;
+      border-radius: 20px;
 
-      background:
-        #ecfdf5;
+      background: #ecfdf5;
 
-      color:
-        #065f46;
+      color: #065f46;
 
-      border:
-        1px solid #a9dfcc;
+      border: 1px solid #a9dfcc;
 
-      font-size:
-        13px;
+      font-size: 13px;
 
-      font-weight:
-        700;
+      font-weight: 700;
     }
 
 
-    .grid {
+    .message {
 
-      display:
-        grid;
+      display: none;
 
-      grid-template-columns:
-        repeat(
-          auto-fit,
-          minmax(240px, 1fr)
-        );
+      margin-top: 20px;
 
-      gap:
-        20px;
+      padding: 14px 16px;
 
-      margin-top:
-        22px;
+      border-radius: 12px;
+
+      line-height: 1.5;
+
+      font-size: 14px;
+
+      word-break: break-word;
     }
 
 
-    .card {
+    .message.success {
 
-      background:
-        #f8fafc;
+      display: block;
 
-      border:
-        1px solid #d7e0e8;
+      background: #ecfdf5;
 
-      border-radius:
-        18px;
+      color: #065f46;
 
-      padding:
-        23px;
+      border: 1px solid #a9dfcc;
+    }
+
+
+    .message.error {
+
+      display: block;
+
+      background: #fef2f2;
+
+      color: #991b1b;
+
+      border: 1px solid #fecaca;
+    }
+
+
+    .message.info {
+
+      display: block;
+
+      background: #eff6ff;
+
+      color: #1e40af;
+
+      border: 1px solid #bfdbfe;
+    }
+
+
+    .editor {
+
+      margin-top: 22px;
+    }
+
+
+    .section {
+
+      background: #f8fafc;
+
+      border: 1px solid #d7e0e8;
+
+      border-radius: 18px;
+
+      padding: 22px;
+
+      margin-bottom: 20px;
 
       box-shadow:
         0 8px 24px
         rgba(16,36,62,.06);
-
-      transition:
-        transform .15s ease,
-        box-shadow .15s ease;
     }
 
 
-    .card:hover {
+    .section-header {
 
-      transform:
-        translateY(-2px);
+      margin-bottom: 20px;
+
+      padding-bottom: 14px;
+
+      border-bottom:
+        1px solid #e1e7ed;
+    }
+
+
+    .section-header h2 {
+
+      margin: 0 0 6px;
+
+      color: #10243e;
+
+      font-size: 20px;
+    }
+
+
+    .section-header p {
+
+      margin: 0;
+
+      color: #667589;
+
+      font-size: 13px;
+
+      line-height: 1.5;
+    }
+
+
+    .field-grid {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          2,
+          minmax(0, 1fr)
+        );
+
+      gap: 18px;
+    }
+
+
+    .field {
+
+      min-width: 0;
+    }
+
+
+    .field.full {
+
+      grid-column:
+        1 / -1;
+    }
+
+
+    label {
+
+      display: block;
+
+      margin-bottom: 7px;
+
+      color: #071a33;
+
+      font-size: 14px;
+
+      font-weight: 700;
+    }
+
+
+    input,
+    textarea {
+
+      width: 100%;
+
+      border:
+        1.5px solid #cfd9e3;
+
+      border-radius: 11px;
+
+      background: #eef3f7;
+
+      color: #16263a;
+
+      font-family: Arial, sans-serif;
+
+      font-size: 15px;
+
+      padding: 12px 13px;
+    }
+
+
+    input {
+
+      min-height: 46px;
+    }
+
+
+    textarea {
+
+      min-height: 110px;
+
+      resize: vertical;
+
+      line-height: 1.5;
+    }
+
+
+    input:focus,
+    textarea:focus {
+
+      outline: none;
+
+      background: white;
+
+      border-color: #1769e0;
 
       box-shadow:
-        0 12px 28px
-        rgba(16,36,62,.09);
+        0 0 0 4px
+        rgba(23,105,224,.10);
     }
 
 
-    .card h2 {
+    .hint {
 
-      margin-top:
-        0;
+      margin-top: 6px;
 
-      color:
-        #10243e;
+      color: #7a8999;
 
-      font-size:
-        19px;
+      font-size: 12px;
+
+      line-height: 1.4;
     }
 
 
-    .card p {
+    .save-area {
 
-      color:
-        #667589;
+      position: sticky;
 
-      line-height:
-        1.5;
-    }
+      bottom: 12px;
 
+      z-index: 10;
 
-    .coming {
+      margin-top: 25px;
 
-      display:
-        inline-block;
-
-      margin-top:
-        8px;
-
-      padding:
-        7px 10px;
-
-      border-radius:
-        8px;
+      padding: 12px;
 
       background:
-        #eef3f7;
+        rgba(237,242,246,.94);
 
-      color:
-        #536477;
+      backdrop-filter:
+        blur(8px);
 
-      font-size:
-        12px;
+      border-radius: 16px;
 
-      font-weight:
-        700;
+      border:
+        1px solid #d7e0e8;
+    }
+
+
+    #saveButton {
+
+      width: 100%;
+
+      min-height: 54px;
+
+      border: 0;
+
+      border-radius: 13px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #1769e0,
+          #0d4fae
+        );
+
+      color: white;
+
+      font-size: 16px;
+
+      font-weight: 700;
+
+      cursor: pointer;
+    }
+
+
+    #saveButton:disabled {
+
+      opacity: .65;
+
+      cursor: wait;
     }
 
 
     .footer {
 
-      text-align:
-        center;
+      text-align: center;
 
-      color:
-        #667589;
+      color: #667589;
 
-      font-size:
-        13px;
+      font-size: 13px;
 
-      margin:
-        30px 0;
+      margin: 30px 0;
     }
 
 
     @media (
-      max-width: 600px
+      max-width: 700px
     ) {
 
       .container {
 
-        width:
-          min(94%, 1100px);
+        width: 94%;
 
         margin:
-          22px auto;
-      }
-
-
-      .welcome {
-
-        padding:
-          20px;
+          20px auto 35px;
       }
 
 
       .topbar {
 
-        padding:
-          15px;
+        padding: 15px;
       }
 
 
-      .card {
+      .welcome {
 
-        padding:
-          20px;
+        padding: 20px;
+      }
+
+
+      .welcome h1 {
+
+        font-size: 23px;
+      }
+
+
+      .section {
+
+        padding: 18px;
+      }
+
+
+      .field-grid {
+
+        grid-template-columns: 1fr;
+      }
+
+
+      .field.full {
+
+        grid-column: auto;
+      }
+
+
+      input,
+      textarea {
+
+        font-size: 16px;
       }
 
     }
@@ -372,7 +536,7 @@
       </div>
 
       <div class="subtitle">
-        Client Dashboard
+        Client Website Management
       </div>
 
     </div>
@@ -390,23 +554,24 @@
 
 
   <!-- =====================================
-       MAIN CONTENT
+       MAIN
   ====================================== -->
 
   <main class="container">
 
 
-    <!-- Welcome -->
+    <!-- WELCOME -->
 
     <section class="welcome">
 
       <h1>
-        Client Dashboard
+        Website Management
       </h1>
 
       <p>
-        Welcome to your LichaTwist website
-        management area.
+        Manage the website information
+        assigned to your LichaTwist client
+        account.
       </p>
 
       <span class="status">
@@ -416,95 +581,804 @@
     </section>
 
 
-    <!-- Dashboard Cards -->
+    <!-- MESSAGE -->
 
-    <section class="grid">
-
-
-      <!-- Website Content -->
-
-      <div class="card">
-
-        <h2>
-          Website Content
-        </h2>
-
-        <p>
-          Manage the website information
-          assigned to your client account.
-        </p>
-
-        <span class="coming">
-          Coming next
-        </span>
-
-      </div>
+    <div
+      id="message"
+      class="message"
+    ></div>
 
 
-      <!-- Images -->
+    <!-- =====================================
+         EDITOR
+    ====================================== -->
 
-      <div class="card">
-
-        <h2>
-          Images
-        </h2>
-
-        <p>
-          Manage permitted website images
-          and previews.
-        </p>
-
-        <span class="coming">
-          Coming next
-        </span>
-
-      </div>
+    <div
+      id="editor"
+      class="editor"
+    >
 
 
-      <!-- Company Information -->
+      <!-- ===================================
+           COMPANY INFORMATION
+      ==================================== -->
 
-      <div class="card">
+      <section class="section">
 
-        <h2>
-          Company Information
-        </h2>
+        <div class="section-header">
 
-        <p>
-          Update the company information
-          available to your account.
-        </p>
+          <h2>
+            Company Information
+          </h2>
 
-        <span class="coming">
-          Coming next
-        </span>
+          <p>
+            Basic company information shown
+            throughout the website.
+          </p>
 
-      </div>
-
-
-      <!-- Account Security -->
-
-      <div class="card">
-
-        <h2>
-          Account Security
-        </h2>
-
-        <p>
-          Change your password and manage
-          your client account security.
-        </p>
-
-        <span class="coming">
-          Coming next
-        </span>
-
-      </div>
+        </div>
 
 
-    </section>
+        <div class="field-grid">
 
 
-    <!-- Footer -->
+          <div class="field">
+
+            <label for="business_name">
+              Business Name
+            </label>
+
+            <input
+              id="business_name"
+              type="text"
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="phone">
+              Phone
+            </label>
+
+            <input
+              id="phone"
+              type="text"
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="email">
+              Email
+            </label>
+
+            <input
+              id="email"
+              type="email"
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="whatsapp">
+              WhatsApp
+            </label>
+
+            <input
+              id="whatsapp"
+              type="text"
+            >
+
+          </div>
+
+
+          <div class="field full">
+
+            <label for="address">
+              Address
+            </label>
+
+            <textarea
+              id="address"
+            ></textarea>
+
+          </div>
+
+
+          <div class="field full">
+
+            <label for="about">
+              About
+            </label>
+
+            <textarea
+              id="about"
+            ></textarea>
+
+          </div>
+
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================
+           HERO / HOME
+      ==================================== -->
+
+      <section class="section">
+
+        <div class="section-header">
+
+          <h2>
+            Home / Hero Section
+          </h2>
+
+          <p>
+            Control the main message visitors
+            see when they open the website.
+          </p>
+
+        </div>
+
+
+        <div class="field-grid">
+
+
+          <div class="field full">
+
+            <label for="hero_title">
+              Hero Title
+            </label>
+
+            <input
+              id="hero_title"
+              type="text"
+            >
+
+          </div>
+
+
+          <div class="field full">
+
+            <label for="hero_subtitle">
+              Hero Subtitle
+            </label>
+
+            <input
+              id="hero_subtitle"
+              type="text"
+            >
+
+          </div>
+
+
+          <div class="field full">
+
+            <label for="hero_description">
+              Hero Description
+            </label>
+
+            <textarea
+              id="hero_description"
+            ></textarea>
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="approach_title">
+              Approach Title
+            </label>
+
+            <input
+              id="approach_title"
+              type="text"
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="approach_description">
+              Approach Description
+            </label>
+
+            <textarea
+              id="approach_description"
+            ></textarea>
+
+          </div>
+
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================
+           ABOUT
+      ==================================== -->
+
+      <section class="section">
+
+        <div class="section-header">
+
+          <h2>
+            About Us
+          </h2>
+
+          <p>
+            Manage the About, Mission, Vision
+            and Values information.
+          </p>
+
+        </div>
+
+
+        <div class="field-grid">
+
+
+          <div class="field full">
+
+            <label for="about_heading">
+              About Heading
+            </label>
+
+            <input
+              id="about_heading"
+              type="text"
+            >
+
+          </div>
+
+
+          <div class="field full">
+
+            <label for="about_description">
+              About Description
+            </label>
+
+            <textarea
+              id="about_description"
+            ></textarea>
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="mission">
+              Mission
+            </label>
+
+            <textarea
+              id="mission"
+            ></textarea>
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="vision">
+              Vision
+            </label>
+
+            <textarea
+              id="vision"
+            ></textarea>
+
+          </div>
+
+
+          <div class="field full">
+
+            <label for="values_text">
+              Values
+            </label>
+
+            <textarea
+              id="values_text"
+            ></textarea>
+
+          </div>
+
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================
+           AGRICULTURE
+      ==================================== -->
+
+      <section class="section">
+
+        <div class="section-header">
+
+          <h2>
+            Agriculture
+          </h2>
+
+          <p>
+            Manage Agriculture service information.
+          </p>
+
+        </div>
+
+
+        <div class="field-grid">
+
+
+          <div class="field full">
+
+            <label for="agriculture_title">
+              Agriculture Title
+            </label>
+
+            <input
+              id="agriculture_title"
+              type="text"
+            >
+
+          </div>
+
+
+          <div class="field full">
+
+            <label for="agriculture_description">
+              Agriculture Description
+            </label>
+
+            <textarea
+              id="agriculture_description"
+            ></textarea>
+
+          </div>
+
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================
+           CONSTRUCTION
+      ==================================== -->
+
+      <section class="section">
+
+        <div class="section-header">
+
+          <h2>
+            Construction
+          </h2>
+
+          <p>
+            Manage Construction service information.
+          </p>
+
+        </div>
+
+
+        <div class="field-grid">
+
+
+          <div class="field full">
+
+            <label for="construction_title">
+              Construction Title
+            </label>
+
+            <input
+              id="construction_title"
+              type="text"
+            >
+
+          </div>
+
+
+          <div class="field full">
+
+            <label for="construction_description">
+              Construction Description
+            </label>
+
+            <textarea
+              id="construction_description"
+            ></textarea>
+
+          </div>
+
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================
+           TRANSPORT
+      ==================================== -->
+
+      <section class="section">
+
+        <div class="section-header">
+
+          <h2>
+            Transport
+          </h2>
+
+          <p>
+            Manage Transport service information.
+          </p>
+
+        </div>
+
+
+        <div class="field-grid">
+
+
+          <div class="field full">
+
+            <label for="transport_title">
+              Transport Title
+            </label>
+
+            <input
+              id="transport_title"
+              type="text"
+            >
+
+          </div>
+
+
+          <div class="field full">
+
+            <label for="transport_description">
+              Transport Description
+            </label>
+
+            <textarea
+              id="transport_description"
+            ></textarea>
+
+          </div>
+
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================
+           SUBSIDIARY COMPANIES
+      ==================================== -->
+
+      <section class="section">
+
+        <div class="section-header">
+
+          <h2>
+            Subsidiary Companies
+          </h2>
+
+          <p>
+            Manage the information displayed
+            for LichaTwist subsidiary companies.
+          </p>
+
+        </div>
+
+
+        <!-- AGRO -->
+
+        <div class="field-grid">
+
+          <div class="field">
+
+            <label for="agro_company_name">
+              LichaTwist Agro Name
+            </label>
+
+            <input
+              id="agro_company_name"
+              type="text"
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="agro_company_description">
+              LichaTwist Agro Description
+            </label>
+
+            <textarea
+              id="agro_company_description"
+            ></textarea>
+
+          </div>
+
+
+          <!-- CONSTRUCTION -->
+
+          <div class="field">
+
+            <label for="construction_company_name">
+              LichaTwist Construction Name
+            </label>
+
+            <input
+              id="construction_company_name"
+              type="text"
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="construction_company_description">
+              LichaTwist Construction Description
+            </label>
+
+            <textarea
+              id="construction_company_description"
+            ></textarea>
+
+          </div>
+
+
+          <!-- TRANSPORT -->
+
+          <div class="field">
+
+            <label for="transport_company_name">
+              LichaTwist Transport Name
+            </label>
+
+            <input
+              id="transport_company_name"
+              type="text"
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="transport_company_description">
+              LichaTwist Transport Description
+            </label>
+
+            <textarea
+              id="transport_company_description"
+            ></textarea>
+
+          </div>
+
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================
+           PROJECTS
+      ==================================== -->
+
+      <section class="section">
+
+        <div class="section-header">
+
+          <h2>
+            Projects
+          </h2>
+
+          <p>
+            Manage the project information
+            displayed on the website.
+          </p>
+
+        </div>
+
+
+        <div class="field-grid">
+
+
+          <div class="field full">
+
+            <label for="projects_heading">
+              Projects Heading
+            </label>
+
+            <input
+              id="projects_heading"
+              type="text"
+            >
+
+          </div>
+
+
+          <div class="field full">
+
+            <label for="projects_description">
+              Projects Description
+            </label>
+
+            <textarea
+              id="projects_description"
+            ></textarea>
+
+          </div>
+
+
+          <!-- PROJECT 1 -->
+
+          <div class="field">
+
+            <label for="project1_category">
+              Project 1 Category
+            </label>
+
+            <input
+              id="project1_category"
+              type="text"
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="project1_title">
+              Project 1 Title
+            </label>
+
+            <input
+              id="project1_title"
+              type="text"
+            >
+
+          </div>
+
+
+          <div class="field full">
+
+            <label for="project1_description">
+              Project 1 Description
+            </label>
+
+            <textarea
+              id="project1_description"
+            ></textarea>
+
+          </div>
+
+
+          <!-- PROJECT 2 -->
+
+          <div class="field">
+
+            <label for="project2_category">
+              Project 2 Category
+            </label>
+
+            <input
+              id="project2_category"
+              type="text"
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="project2_title">
+              Project 2 Title
+            </label>
+
+            <input
+              id="project2_title"
+              type="text"
+            >
+
+          </div>
+
+
+          <div class="field full">
+
+            <label for="project2_description">
+              Project 2 Description
+            </label>
+
+            <textarea
+              id="project2_description"
+            ></textarea>
+
+          </div>
+
+
+          <!-- PROJECT 3 -->
+
+          <div class="field">
+
+            <label for="project3_category">
+              Project 3 Category
+            </label>
+
+            <input
+              id="project3_category"
+              type="text"
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="project3_title">
+              Project 3 Title
+            </label>
+
+            <input
+              id="project3_title"
+              type="text"
+            >
+
+          </div>
+
+
+          <div class="field full">
+
+            <label for="project3_description">
+              Project 3 Description
+            </label>
+
+            <textarea
+              id="project3_description"
+            ></textarea>
+
+          </div>
+
+
+        </div>
+
+      </section>
+
+
+    </div>
+
+
+    <!-- =====================================
+         SAVE
+    ====================================== -->
+
+    <div class="save-area">
+
+      <button
+        id="saveButton"
+        type="button"
+      >
+        Save All Changes
+      </button>
+
+    </div>
+
+
+    <!-- FOOTER -->
 
     <div class="footer">
 
@@ -517,16 +1391,458 @@
 
 
   <!-- =====================================
-       CLIENT DASHBOARD JAVASCRIPT
+       JAVASCRIPT
   ====================================== -->
 
   <script>
 
+
+    const message =
+      document.getElementById(
+        "message"
+      );
+
+
+    const saveButton =
+      document.getElementById(
+        "saveButton"
+      );
+
+
     /*
-     * TEMPORARY LOGOUT REDIRECT
+     * All website fields that are
+     * displayed in this dashboard.
+     */
+
+    const CLIENT_FIELDS = [
+
+      "business_name",
+      "phone",
+      "email",
+      "address",
+      "about",
+      "whatsapp",
+
+      "hero_title",
+      "hero_subtitle",
+      "hero_description",
+
+      "approach_title",
+      "approach_description",
+
+      "about_heading",
+      "about_description",
+
+      "mission",
+      "vision",
+      "values_text",
+
+      "agriculture_title",
+      "agriculture_description",
+
+      "construction_title",
+      "construction_description",
+
+      "transport_title",
+      "transport_description",
+
+      "agro_company_name",
+      "agro_company_description",
+
+      "construction_company_name",
+      "construction_company_description",
+
+      "transport_company_name",
+      "transport_company_description",
+
+      "projects_heading",
+      "projects_description",
+
+      "project1_category",
+      "project1_title",
+      "project1_description",
+
+      "project2_category",
+      "project2_title",
+      "project2_description",
+
+      "project3_category",
+      "project3_title",
+      "project3_description"
+
+    ];
+
+
+    /*
+     * Show a message.
+     */
+
+    function showMessage(
+      text,
+      type
+    ) {
+
+      message.className =
+        "message " + type;
+
+      message.textContent =
+        text;
+
+      message.style.display =
+        "block";
+
+    }
+
+
+    /*
+     * Hide message.
+     */
+
+    function hideMessage() {
+
+      message.style.display =
+        "none";
+
+      message.textContent =
+        "";
+
+    }
+
+
+    /*
+     * Set a field value.
+     */
+
+    function setFieldValue(
+      field,
+      value
+    ) {
+
+      const element =
+        document.getElementById(
+          field
+        );
+
+
+      if (!element) {
+
+        return;
+
+      }
+
+
+      if (
+        value === null ||
+        value === undefined
+      ) {
+
+        element.value =
+          "";
+
+      } else {
+
+        element.value =
+          String(value);
+
+      }
+
+    }
+
+
+    /*
+     * Get a field value.
+     */
+
+    function getFieldValue(
+      field
+    ) {
+
+      const element =
+        document.getElementById(
+          field
+        );
+
+
+      if (!element) {
+
+        return "";
+
+      }
+
+
+      return element.value;
+
+    }
+
+
+    /*
+     * Load existing website content.
+     */
+
+    async function loadContent() {
+
+      try {
+
+        showMessage(
+          "Loading your website information...",
+          "info"
+        );
+
+
+        const response =
+          await fetch(
+            "/api/client-content",
+            {
+              method: "GET",
+
+              credentials:
+                "include",
+
+              cache: "no-store"
+            }
+          );
+
+
+        const data =
+          await response.json();
+
+
+        if (
+          !response.ok ||
+          !data.success
+        ) {
+
+          if (
+            response.status ===
+            401
+          ) {
+
+            window.location.href =
+              "/client-login.html";
+
+            return;
+
+          }
+
+
+          throw new Error(
+            data.message ||
+            "Unable to load website content."
+          );
+
+        }
+
+
+        const content =
+          data.content || {};
+
+
+        /*
+         * Fill every permitted field.
+         */
+
+        CLIENT_FIELDS.forEach(
+          function(field) {
+
+            setFieldValue(
+              field,
+              content[field]
+            );
+
+          }
+        );
+
+
+        showMessage(
+          "✓ Website information loaded successfully.",
+          "success"
+        );
+
+
+        /*
+         * Automatically hide the
+         * success message after a
+         * short time.
+         */
+
+        setTimeout(
+          function() {
+
+            hideMessage();
+
+          },
+          3000
+        );
+
+
+      } catch (error) {
+
+        showMessage(
+          error.message ||
+          "Unable to load website information.",
+          "error"
+        );
+
+      }
+
+    }
+
+
+    /*
+     * Collect current form values.
+     */
+
+    function collectContent() {
+
+      const content = {};
+
+
+      CLIENT_FIELDS.forEach(
+        function(field) {
+
+          content[field] =
+            getFieldValue(
+              field
+            );
+
+        }
+      );
+
+
+      return content;
+
+    }
+
+
+    /*
+     * Save website content.
+     */
+
+    async function saveContent() {
+
+      const content =
+        collectContent();
+
+
+      saveButton.disabled =
+        true;
+
+
+      saveButton.textContent =
+        "Saving Changes...";
+
+
+      showMessage(
+        "Saving your website information...",
+        "info"
+      );
+
+
+      try {
+
+        const response =
+          await fetch(
+            "/api/client-content",
+            {
+              method: "POST",
+
+              credentials:
+                "include",
+
+              headers: {
+                "Content-Type":
+                  "application/json"
+              },
+
+              body:
+                JSON.stringify({
+                  content:
+                    content
+                })
+            }
+          );
+
+
+        const data =
+          await response.json();
+
+
+        if (
+          response.status ===
+          401
+        ) {
+
+          window.location.href =
+            "/client-login.html";
+
+          return;
+
+        }
+
+
+        if (
+          !response.ok ||
+          !data.success
+        ) {
+
+          throw new Error(
+            data.message ||
+            "Unable to save website information."
+          );
+
+        }
+
+
+        showMessage(
+          "✓ All website changes have been saved successfully.",
+          "success"
+        );
+
+
+        /*
+         * Reload the latest data from
+         * the server after saving.
+         */
+
+        await loadContent();
+
+
+      } catch (error) {
+
+        showMessage(
+          error.message ||
+          "Unable to save website information.",
+          "error"
+        );
+
+      } finally {
+
+        saveButton.disabled =
+          false;
+
+        saveButton.textContent =
+          "Save All Changes";
+
+      }
+
+    }
+
+
+    /*
+     * Save button.
+     */
+
+    saveButton.addEventListener(
+      "click",
+      saveContent
+    );
+
+
+    /*
+     * Temporary logout redirect.
      *
-     * A proper server-side logout endpoint
-     * will be added later.
+     * Proper server-side logout will
+     * be added later.
      */
 
     document
@@ -542,6 +1858,15 @@
 
         }
       );
+
+
+    /*
+     * Load website information when
+     * the dashboard opens.
+     */
+
+    loadContent();
+
 
   </script>
 
