@@ -362,6 +362,7 @@ function loginPage() {
   return new Response(`
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
   <meta charset="UTF-8">
@@ -371,190 +372,909 @@ function loginPage() {
     content="width=device-width, initial-scale=1"
   >
 
-  <title>LichaTwist Admin Login</title>
+  <title>LichaTwist Login</title>
 
   <style>
 
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      background: #f4f6f8;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+
       margin: 0;
+
+      min-height: 100vh;
+
+      font-family:
+        Arial,
+        sans-serif;
+
+      background:
+        linear-gradient(
+          135deg,
+          #edf2f6,
+          #e4eaf0
+        );
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      padding: 20px;
+
+      color: #16263a;
     }
 
-    .box {
-      background: white;
-      padding: 30px;
-      border-radius: 14px;
-      width: min(90%, 380px);
+
+    .login-box {
+
+      width:
+        min(100%, 420px);
+
+      background:
+        #ffffff;
+
+      border:
+        1px solid #d7e0e8;
+
+      border-radius:
+        18px;
+
+      padding:
+        28px;
+
       box-shadow:
-        0 4px 20px
-        rgba(0,0,0,.12);
+        0 12px 35px
+        rgba(16,36,62,.12);
     }
 
-    h1 {
-      margin-top: 0;
+
+    .brand {
+
+      text-align:
+        center;
+
+      color:
+        #071a33;
+
+      font-size:
+        24px;
+
+      font-weight:
+        700;
+
+      margin-bottom:
+        6px;
     }
+
+
+    .subtitle {
+
+      text-align:
+        center;
+
+      color:
+        #667589;
+
+      font-size:
+        14px;
+
+      margin-bottom:
+        24px;
+    }
+
+
+    .role-title {
+
+      font-size:
+        14px;
+
+      font-weight:
+        700;
+
+      margin-bottom:
+        10px;
+
+      color:
+        #10243e;
+    }
+
+
+    .role-buttons {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap:
+        10px;
+
+      margin-bottom:
+        22px;
+    }
+
+
+    .role-button {
+
+      border:
+        1px solid #cbd5e1;
+
+      background:
+        #f8fafc;
+
+      color:
+        #10243e;
+
+      border-radius:
+        10px;
+
+      padding:
+        12px;
+
+      font-weight:
+        700;
+
+      cursor:
+        pointer;
+    }
+
+
+    .role-button.active {
+
+      background:
+        #071a33;
+
+      color:
+        #ffffff;
+
+      border-color:
+        #071a33;
+    }
+
+
+    .field {
+
+      margin-bottom:
+        16px;
+    }
+
+
+    label {
+
+      display:
+        block;
+
+      font-size:
+        13px;
+
+      font-weight:
+        700;
+
+      margin-bottom:
+        7px;
+    }
+
 
     input {
-      width: 100%;
-      padding: 13px;
-      margin: 15px 0;
-      box-sizing: border-box;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 16px;
+
+      width:
+        100%;
+
+      padding:
+        12px 13px;
+
+      border:
+        1px solid #cbd5e1;
+
+      border-radius:
+        9px;
+
+      font-size:
+        15px;
+
+      outline:
+        none;
     }
 
-    button {
-      width: 100%;
-      padding: 13px;
-      border: 0;
-      border-radius: 8px;
-      background: #2563eb;
-      color: white;
-      font-size: 16px;
+
+    input:focus {
+
+      border-color:
+        #1769e0;
+
+      box-shadow:
+        0 0 0 3px
+        rgba(23,105,224,.10);
     }
+
+
+    .login-button {
+
+      width:
+        100%;
+
+      border:
+        0;
+
+      border-radius:
+        10px;
+
+      padding:
+        13px;
+
+      background:
+        #1769e0;
+
+      color:
+        #ffffff;
+
+      font-size:
+        15px;
+
+      font-weight:
+        700;
+
+      cursor:
+        pointer;
+    }
+
+
+    .login-button:disabled {
+
+      opacity:
+        .65;
+
+      cursor:
+        wait;
+    }
+
+
+    .helper {
+
+      margin-top:
+        16px;
+
+      padding:
+        12px;
+
+      border-radius:
+        9px;
+
+      background:
+        #f1f5f9;
+
+      color:
+        #536477;
+
+      font-size:
+        12px;
+
+      line-height:
+        1.5;
+
+      text-align:
+        center;
+    }
+
 
     #message {
-      margin-top: 15px;
-      color: #dc2626;
+
+      margin-top:
+        15px;
+
+      padding:
+        11px;
+
+      border-radius:
+        9px;
+
+      font-size:
+        13px;
+
+      line-height:
+        1.45;
+
+      display:
+        none;
+    }
+
+
+    .message-error {
+
+      display:
+        block !important;
+
+      background:
+        #fef2f2;
+
+      color:
+        #991b1b;
+    }
+
+
+    .message-info {
+
+      display:
+        block !important;
+
+      background:
+        #eff6ff;
+
+      color:
+        #1e40af;
+    }
+
+
+    @media (
+      max-width: 480px
+    ) {
+
+      .login-box {
+
+        padding:
+          22px;
+      }
+
+      .role-buttons {
+
+        grid-template-columns:
+          1fr;
+      }
+
     }
 
   </style>
 
 </head>
 
+
 <body>
 
-  <div class="box">
 
-    <h1>
-      LichaTwist Admin
-    </h1>
+  <div class="login-box">
 
-    <p>
-      Owner login
-    </p>
+
+    <div class="brand">
+      LichaTwist
+    </div>
+
+
+    <div class="subtitle">
+      Secure Administration & Client Login
+    </div>
+
+
+    <div class="role-title">
+      Select how you want to sign in
+    </div>
+
+
+    <div class="role-buttons">
+
+
+      <button
+        type="button"
+        id="ownerRoleButton"
+        class="role-button active"
+      >
+        👑 Owner / Admin
+      </button>
+
+
+      <button
+        type="button"
+        id="clientRoleButton"
+        class="role-button"
+      >
+        👤 Client
+      </button>
+
+
+    </div>
+
 
     <form id="loginForm">
 
-      <input
-        id="password"
-        type="password"
-        placeholder="Admin password"
-        required
+
+      <div
+        class="field"
+        id="ownerPasswordField"
       >
 
-   <button type="submit">
-  Sign in
-</button>
+        <label for="ownerPassword">
+          Owner / Admin Password
+        </label>
 
-<a
-  href="/admin-recovery.html"
-  style="
-    display:block;
-    margin-top:14px;
-    text-align:center;
-    color:#2563eb;
-    text-decoration:none;
-    font-size:14px;
-    font-weight:700;
-  "
->
-  Forgot Admin Password?
-</a>
+        <input
+          id="ownerPassword"
+          type="password"
+          autocomplete="current-password"
+          placeholder="Enter owner password"
+        >
 
-<div id="message"></div>
+      </div>
+
+
+      <div
+        id="clientFields"
+        style="display:none;"
+      >
+
+
+        <div class="field">
+
+          <label for="clientEmail">
+            Client Email
+          </label>
+
+          <input
+            id="clientEmail"
+            type="email"
+            autocomplete="username"
+            placeholder="Enter client email"
+          >
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="clientPassword">
+            Client Password
+          </label>
+
+          <input
+            id="clientPassword"
+            type="password"
+            autocomplete="current-password"
+            placeholder="Enter client password"
+          >
+
+        </div>
+
+
+      </div>
+
+
+      <button
+        type="submit"
+        class="login-button"
+        id="loginButton"
+      >
+        Sign in as Owner / Admin
+      </button>
+
+
+      <div
+        id="message"
+      ></div>
+
+
     </form>
+
+
+    <div
+      class="helper"
+      id="helperText"
+    >
+      Owner access opens the LichaTwist Admin Panel.
+    </div>
+
+
+    <div
+      id="ownerRecovery"
+      style="
+        text-align:center;
+        margin-top:14px;
+      "
+    >
+
+      <a
+        href="/admin-recovery.html"
+        style="
+          color:#1769e0;
+          font-size:13px;
+          text-decoration:none;
+          font-weight:700;
+        "
+      >
+        Forgot Owner Password?
+      </a>
+
+    </div>
+
 
   </div>
 
-  <script>
 
-    document
-      .getElementById("loginForm")
-      .addEventListener(
-        "submit",
-        async function(e) {
+<script>
 
-          e.preventDefault();
+const ownerRoleButton =
+  document.getElementById(
+    "ownerRoleButton"
+  );
 
-          const password =
-            document
-              .getElementById("password")
-              .value;
 
-          const message =
-            document
-              .getElementById("message");
+const clientRoleButton =
+  document.getElementById(
+    "clientRoleButton"
+  );
 
-          try {
 
-            const response =
-              await fetch(
-                "/api/login",
-                {
-                  method: "POST",
+const ownerPasswordField =
+  document.getElementById(
+    "ownerPasswordField"
+  );
 
-                  headers: {
-                    "Content-Type":
-                      "application/json"
-                  },
 
-                  body:
-                    JSON.stringify({
-                      password:
-                        password
-                    })
-                }
-              );
+const clientFields =
+  document.getElementById(
+    "clientFields"
+  );
 
-            const data =
-              await response.json();
 
-            if (data.success) {
+const ownerPassword =
+  document.getElementById(
+    "ownerPassword"
+  );
 
-              window.location.href =
-                "/admin.html";
 
-            } else {
+const clientEmail =
+  document.getElementById(
+    "clientEmail"
+  );
 
-              message.textContent =
-                "Invalid password.";
 
-            }
+const clientPassword =
+  document.getElementById(
+    "clientPassword"
+  );
 
-          } catch {
 
-            message.textContent =
-              "Unable to connect to login service.";
+const loginButton =
+  document.getElementById(
+    "loginButton"
+  );
+
+
+const message =
+  document.getElementById(
+    "message"
+  );
+
+
+const helperText =
+  document.getElementById(
+    "helperText"
+  );
+
+
+const ownerRecovery =
+  document.getElementById(
+    "ownerRecovery"
+  );
+
+
+let selectedRole =
+  "owner";
+
+
+function showMessage(
+  text,
+  type
+) {
+
+  message.className =
+    type === "error"
+      ? "message-error"
+      : "message-info";
+
+  message.textContent =
+    text;
+
+}
+
+
+function selectOwner() {
+
+  selectedRole =
+    "owner";
+
+
+  ownerRoleButton.classList.add(
+    "active"
+  );
+
+
+  clientRoleButton.classList.remove(
+    "active"
+  );
+
+
+  ownerPasswordField.style.display =
+    "block";
+
+
+  clientFields.style.display =
+    "none";
+
+
+  ownerPassword.required =
+    true;
+
+
+  clientEmail.required =
+    false;
+
+
+  clientPassword.required =
+    false;
+
+
+  loginButton.textContent =
+    "Sign in as Owner / Admin";
+
+
+  helperText.textContent =
+    "Owner access opens the LichaTwist Admin Panel.";
+
+
+  ownerRecovery.style.display =
+    "block";
+
+
+  message.className = "";
+
+  message.textContent = "";
+
+}
+
+
+function selectClient() {
+
+  selectedRole =
+    "client";
+
+
+  clientRoleButton.classList.add(
+    "active"
+  );
+
+
+  ownerRoleButton.classList.remove(
+    "active"
+  );
+
+
+  ownerPasswordField.style.display =
+    "none";
+
+
+  clientFields.style.display =
+    "block";
+
+
+  ownerPassword.required =
+    false;
+
+
+  clientEmail.required =
+    true;
+
+
+  clientPassword.required =
+    true;
+
+
+  loginButton.textContent =
+    "Sign in as Client";
+
+
+  helperText.textContent =
+    "Client access opens your secure Client Dashboard.";
+
+
+  ownerRecovery.style.display =
+    "none";
+
+
+  message.className = "";
+
+  message.textContent = "";
+
+}
+
+
+ownerRoleButton.addEventListener(
+  "click",
+  selectOwner
+);
+
+
+clientRoleButton.addEventListener(
+  "click",
+  selectClient
+);
+
+
+document
+  .getElementById("loginForm")
+  .addEventListener(
+    "submit",
+    async function(event) {
+
+      event.preventDefault();
+
+
+      message.className = "";
+
+      message.textContent = "";
+
+
+      loginButton.disabled =
+        true;
+
+
+      loginButton.textContent =
+        "Signing in...";
+
+
+      try {
+
+
+        if (
+          selectedRole ===
+          "owner"
+        ) {
+
+
+          const response =
+            await fetch(
+              "/api/login",
+              {
+                method:
+                  "POST",
+
+                headers: {
+                  "Content-Type":
+                    "application/json"
+                },
+
+                body:
+                  JSON.stringify({
+                    password:
+                      ownerPassword.value
+                  })
+              }
+            );
+
+
+          const data =
+            await response.json();
+
+
+          if (
+            !response.ok ||
+            !data.success
+          ) {
+
+            throw new Error(
+              data.message ||
+              "Invalid owner password."
+            );
 
           }
 
-        }
-      );
 
-  </script>
+          window.location.href =
+            "/admin.html";
+
+
+          return;
+
+        }
+
+
+        const response =
+          await fetch(
+            "/api/client-login",
+            {
+              method:
+                "POST",
+
+              credentials:
+                "include",
+
+              headers: {
+                "Content-Type":
+                  "application/json"
+              },
+
+              body:
+                JSON.stringify({
+                  email:
+                    clientEmail.value,
+
+                  password:
+                    clientPassword.value
+                })
+            }
+          );
+
+
+        const data =
+          await response.json();
+
+
+        if (
+          !response.ok ||
+          !data.success
+        ) {
+
+          throw new Error(
+            data.message ||
+            "Invalid client email or password."
+          );
+
+        }
+
+
+        window.location.href =
+          "/client-dashboard.html";
+
+
+      } catch (error) {
+
+
+        showMessage(
+          error.message ||
+          "Unable to connect to login service.",
+          "error"
+        );
+
+
+        loginButton.disabled =
+          false;
+
+
+        loginButton.textContent =
+          selectedRole === "owner"
+            ? "Sign in as Owner / Admin"
+            : "Sign in as Client";
+
+      }
+
+    }
+  );
+
+</script>
+
 
 </body>
+
 </html>
   `, {
 
     status: 401,
 
     headers: {
+
       "Content-Type":
-        "text/html; charset=UTF-8"
+        "text/html; charset=UTF-8",
+
+      "Cache-Control":
+        "no-store"
+
     }
 
   });
 
 }
-
 
 /* =========================================
    MIDDLEWARE
