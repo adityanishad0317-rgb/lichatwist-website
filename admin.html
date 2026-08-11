@@ -544,8 +544,110 @@ Keep it secure.
 
 </section>
 
-<!-- CREATE CLIENT -->
 
+<!-- OWNER RECOVERY KEY -->
+
+<section class="editor-section" id="adminRecovery">
+
+  <h2>🛡️ Owner Password Recovery</h2>
+
+  <p class="editor-description">
+    Set or change the private recovery key that can be used
+    to recover the owner Admin Panel password.
+  </p>
+
+  <div class="info-box">
+    The recovery key is stored securely and is never displayed
+    after it has been saved. Use the hint as a private memory clue.
+    Do not put the actual recovery key inside the hint.
+  </div>
+
+
+  <div class="field">
+
+    <label for="recoveryCurrentPassword">
+      Current Admin Password
+    </label>
+
+    <input
+      id="recoveryCurrentPassword"
+      type="password"
+      autocomplete="current-password"
+      placeholder="Enter your current admin password"
+    >
+
+  </div>
+
+
+  <div class="field">
+
+    <label for="recoveryKey">
+      New Recovery Key
+    </label>
+
+    <input
+      id="recoveryKey"
+      type="password"
+      autocomplete="new-password"
+      minlength="8"
+      maxlength="200"
+      placeholder="Enter a recovery key"
+    >
+
+  </div>
+
+
+  <div class="field">
+
+    <label for="confirmRecoveryKey">
+      Confirm Recovery Key
+    </label>
+
+    <input
+      id="confirmRecoveryKey"
+      type="password"
+      autocomplete="new-password"
+      minlength="8"
+      maxlength="200"
+      placeholder="Confirm the recovery key"
+    >
+
+  </div>
+
+
+  <div class="field">
+
+    <label for="recoveryKeyHint">
+      Recovery Key Hint
+    </label>
+
+    <input
+      id="recoveryKeyHint"
+      type="text"
+      maxlength="200"
+      placeholder="Example: My first business idea"
+    >
+
+  </div>
+
+
+  <button
+    type="button"
+    onclick="saveRecoveryKey()"
+  >
+    🔑 Save Recovery Key & Hint
+  </button>
+
+
+  <div
+    id="recoveryKeyMessage"
+    class="message"
+  ></div>
+
+</section>
+
+
+<!-- CREATE CLIENT -->
 <section class="editor-section" id="clientManagement">
 
 <h2>👤 Create Client Account</h2>
@@ -1349,7 +1451,211 @@ async function changeAdminPassword(){
   }
 }
 
+/* =========================================
+   OWNER RECOVERY KEY
+========================================= */
 
+async function saveRecoveryKey(){
+
+  const currentPassword =
+    getValue("recoveryCurrentPassword");
+
+  const recoveryKey =
+    getValue("recoveryKey").trim();
+
+  const confirmRecoveryKey =
+    getValue("confirmRecoveryKey").trim();
+
+  const recoveryKeyHint =
+    getValue("recoveryKeyHint").trim();
+
+
+  if(!currentPassword){
+
+    showMessage(
+      "recoveryKeyMessage",
+      "Please enter your current admin password.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!recoveryKey){
+
+    showMessage(
+      "recoveryKeyMessage",
+      "Please enter a recovery key.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(recoveryKey.length < 8){
+
+    showMessage(
+      "recoveryKeyMessage",
+      "Recovery key must be at least 8 characters.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(recoveryKey !== confirmRecoveryKey){
+
+    showMessage(
+      "recoveryKeyMessage",
+      "Recovery keys do not match.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(!recoveryKeyHint){
+
+    showMessage(
+      "recoveryKeyMessage",
+      "Please enter a recovery key hint.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(
+    recoveryKeyHint.length < 3
+  ){
+
+    showMessage(
+      "recoveryKeyMessage",
+      "Recovery key hint is too short.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(
+    recoveryKeyHint.length > 200
+  ){
+
+    showMessage(
+      "recoveryKeyMessage",
+      "Recovery key hint is too long.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  showMessage(
+    "recoveryKeyMessage",
+    "Saving recovery key...",
+    "info"
+  );
+
+
+  try{
+
+    const response =
+      await fetch(
+        "/api/admin-recovery-key",
+        {
+          method:
+            "POST",
+
+          credentials:
+            "include",
+
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+
+          body:
+            JSON.stringify({
+              currentPassword:
+                currentPassword,
+
+              recoveryKey:
+                recoveryKey,
+
+              recoveryKeyHint:
+                recoveryKeyHint
+            })
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if(
+      !response.ok ||
+      !data.success
+    ){
+
+      throw new Error(
+        data.message ||
+        "Unable to save recovery key."
+      );
+
+    }
+
+
+    showMessage(
+      "recoveryKeyMessage",
+      "✓ Recovery key and hint saved successfully.",
+      "success"
+    );
+
+
+    setValue(
+      "recoveryCurrentPassword",
+      ""
+    );
+
+    setValue(
+      "recoveryKey",
+      ""
+    );
+
+    setValue(
+      "confirmRecoveryKey",
+      ""
+    );
+
+
+  }catch(error){
+
+    showMessage(
+      "recoveryKeyMessage",
+      error.message ||
+      "Unable to connect to recovery service.",
+      "error"
+    );
+
+  }
+
+}
 /* =========================================
    LOAD WEBSITE CONTENT
 ========================================= */
