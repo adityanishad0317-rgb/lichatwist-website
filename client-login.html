@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>LichaTwist Client Login</title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      padding: 20px;
+
+      font-family:
+        Arial,
+        sans-serif;
+
+      background:
+        radial-gradient(
+          circle at 0% 0%,
+          rgba(201,162,39,.10),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 100% 10%,
+          rgba(23,105,224,.08),
+          transparent 30%
+        ),
+        linear-gradient(
+          135deg,
+          #edf2f6 0%,
+          #e4eaf0 100%
+        );
+
+      color: #16263a;
+    }
+
+
+    .login-box {
+
+      width: min(
+        100%,
+        420px
+      );
+
+      background: #f8fafc;
+
+      padding: 32px;
+
+      border-radius: 22px;
+
+      border:
+        1px solid #d7e0e8;
+
+      box-shadow:
+        0 12px 32px
+        rgba(16,36,62,.08),
+        0 2px 8px
+        rgba(16,36,62,.04);
+    }
+
+
+    .logo-area {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+
+    .logo-area h1 {
+
+      margin: 0;
+
+      color: #071a33;
+
+      font-size: 28px;
+    }
+
+
+    .logo-area p {
+
+      margin-top: 8px;
+
+      color: #667589;
+
+      font-size: 14px;
+    }
+
+
+    h2 {
+
+      margin-top: 0;
+
+      color: #10243e;
+
+      font-size: 22px;
+    }
+
+
+    .description {
+
+      color: #667589;
+
+      line-height: 1.5;
+
+      font-size: 14px;
+
+      margin-bottom: 22px;
+    }
+
+
+    .field {
+
+      margin-bottom: 18px;
+    }
+
+
+    label {
+
+      display: block;
+
+      margin-bottom: 7px;
+
+      color: #071a33;
+
+      font-weight: 700;
+    }
+
+
+    input {
+
+      width: 100%;
+
+      padding: 14px;
+
+      font-size: 16px;
+
+      border:
+        1.5px solid #cfd9e3;
+
+      border-radius: 14px;
+
+      background: #eef3f7;
+
+      color: #16263a;
+    }
+
+
+    input:focus {
+
+      outline: none;
+
+      background: #ffffff;
+
+      border-color: #1769e0;
+
+      box-shadow:
+        0 0 0 4px
+        rgba(23,105,224,.10);
+    }
+
+
+    button {
+
+      width: 100%;
+
+      min-height: 52px;
+
+      border: none;
+
+      border-radius: 13px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #1769e0,
+          #0d4fae
+        );
+
+      color: white;
+
+      font-size: 16px;
+
+      font-weight: 700;
+
+      cursor: pointer;
+    }
+
+
+    button:disabled {
+
+      opacity: .65;
+
+      cursor: wait;
+    }
+
+
+    #message {
+
+      display: none;
+
+      margin-top: 18px;
+
+      padding: 13px;
+
+      border-radius: 12px;
+
+      line-height: 1.5;
+
+      word-break: break-word;
+    }
+
+
+    .success {
+
+      background: #ecfdf5;
+
+      color: #065f46;
+
+      border:
+        1px solid #a9dfcc;
+    }
+
+
+    .error {
+
+      background: #fef2f2;
+
+      color: #991b1b;
+
+      border:
+        1px solid #fecaca;
+    }
+
+
+    .info {
+
+      background: #eff6ff;
+
+      color: #1e40af;
+
+      border:
+        1px solid #bfdbfe;
+    }
+
+
+    .footer {
+
+      margin-top: 22px;
+
+      text-align: center;
+
+      font-size: 13px;
+
+      color: #667589;
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <div class="login-box">
+
+
+    <div class="logo-area">
+
+      <h1>LichaTwist</h1>
+
+      <p>
+        Website Management
+      </p>
+
+    </div>
+
+
+    <h2>
+      Client Login
+    </h2>
+
+
+    <p class="description">
+
+      Sign in to manage your
+      LichaTwist website.
+
+    </p>
+
+
+    <form id="clientLoginForm">
+
+
+      <div class="field">
+
+        <label for="clientEmail">
+          Email
+        </label>
+
+        <input
+          id="clientEmail"
+          type="email"
+          autocomplete="username"
+          placeholder="Enter your email"
+          required
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label for="clientPassword">
+          Password
+        </label>
+
+        <input
+          id="clientPassword"
+          type="password"
+          autocomplete="current-password"
+          placeholder="Enter your password"
+          required
+        >
+
+      </div>
+
+
+      <button
+        id="loginButton"
+        type="submit"
+      >
+        Sign In
+      </button>
+
+
+      <div id="message"></div>
+
+
+    </form>
+
+
+    <div class="footer">
+
+      LichaTwist Client Administration
+
+    </div>
+
+
+  </div>
+
+
+<script>
+
+const form =
+  document.getElementById(
+    "clientLoginForm"
+  );
+
+
+const emailInput =
+  document.getElementById(
+    "clientEmail"
+  );
+
+
+const passwordInput =
+  document.getElementById(
+    "clientPassword"
+  );
+
+
+const button =
+  document.getElementById(
+    "loginButton"
+  );
+
+
+const message =
+  document.getElementById(
+    "message"
+  );
+
+
+function showMessage(
+  text,
+  type
+) {
+
+  message.style.display =
+    "block";
+
+  message.className =
+    type;
+
+  message.textContent =
+    text;
+
+}
+
+
+form.addEventListener(
+  "submit",
+  async function(event) {
+
+    event.preventDefault();
+
+
+    const email =
+      emailInput.value
+        .trim()
+        .toLowerCase();
+
+
+    const password =
+      passwordInput.value;
+
+
+    if (!email) {
+
+      showMessage(
+        "Please enter your email.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if (!password) {
+
+      showMessage(
+        "Please enter your password.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    button.disabled =
+      true;
+
+    button.textContent =
+      "Signing in...";
+
+
+    showMessage(
+      "Checking your login...",
+      "info"
+    );
+
+
+    try {
+
+      const response =
+        await fetch(
+          "/api/client-login",
+          {
+            method: "POST",
+
+            credentials:
+              "include",
+
+            headers: {
+              "Content-Type":
+                "application/json"
+            },
+
+            body:
+              JSON.stringify({
+                email:
+                  email,
+
+                password:
+                  password
+              })
+          }
+        );
+
+
+      const data =
+        await response.json();
+
+
+      if (
+        !response.ok ||
+        !data.success
+      ) {
+
+        showMessage(
+          data.message ||
+          "Invalid email or password.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      /*
+       * STEP 1G-E TEST ONLY
+       *
+       * We are not redirecting yet.
+       *
+       * This lets us verify that the
+       * new client session is created
+       * successfully before we build
+       * the client dashboard.
+       */
+
+      if (
+        data.mustChangePassword
+      ) {
+
+        showMessage(
+          "✓ Client login successful. " +
+          "Temporary-password login is working. " +
+          "Password-change screen will be added next.",
+          "success"
+        );
+
+      } else {
+
+        showMessage(
+          "✓ Client login successful.",
+          "success"
+        );
+
+      }
+
+
+    } catch (error) {
+
+      showMessage(
+        "Unable to connect to the client login service.",
+        "error"
+      );
+
+    } finally {
+
+      button.disabled =
+        false;
+
+      button.textContent =
+        "Sign In";
+
+    }
+
+  }
+);
+
+</script>
+
+
+</body>
+
+</html>
