@@ -2349,7 +2349,11 @@ async function loadClientManagement(){
                 ${active?"":"disabled"}>
                 🔑 Reset Password
               </button>
-
+<button
+  class="danger"
+  onclick="deleteClientAccount(${id})">
+  🗑️ Delete Client
+</button>
             </div>
 
             <div
@@ -2650,6 +2654,116 @@ async function resetClientPassword(clientId){
   }
 }
 
+  /* =========================================
+   DELETE CLIENT
+========================================= */
+
+async function deleteClientAccount(
+  clientId
+){
+
+  const firstConfirm =
+    confirm(
+      "WARNING: This will permanently delete this client account. Continue?"
+    );
+
+
+  if(!firstConfirm){
+
+    return;
+
+  }
+
+
+  const secondConfirm =
+    confirm(
+      "This action cannot be undone. Delete this client permanently?"
+    );
+
+
+  if(!secondConfirm){
+
+    return;
+
+  }
+
+
+  showMessage(
+    "clientManagementMessage",
+    "Deleting client account...",
+    "info"
+  );
+
+
+  try{
+
+    const response =
+      await fetch(
+        "/api/delete-client",
+        {
+          method:
+            "POST",
+
+          credentials:
+            "include",
+
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+
+          body:
+            JSON.stringify({
+              id:
+                clientId
+            })
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if(
+      !response.ok ||
+      !data.success
+    ){
+
+      throw new Error(
+        data.message ||
+        "Unable to delete client account."
+      );
+
+    }
+
+
+    showMessage(
+      "clientManagementMessage",
+      "✓ "+
+      (
+        data.message ||
+        "Client account deleted successfully."
+      ),
+      "success"
+    );
+
+
+    await loadClientManagement();
+
+
+  }catch(error){
+
+    showMessage(
+      "clientManagementMessage",
+      error.message ||
+      "Unable to delete client account.",
+      "error"
+    );
+
+  }
+
+}
 
 /* =========================================
    INITIALIZE
