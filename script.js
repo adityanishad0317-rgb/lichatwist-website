@@ -479,5 +479,94 @@ if (emailContactCard) {
      */
 
     loadPublicTheme();
+    /* =========================================================
+   PREMIUM SCROLL REVEAL ANIMATION
+========================================================= */
+
+const revealElements =
+  document.querySelectorAll(
+    ".section-heading, " +
+    ".about-grid, " +
+    ".mission-card, " +
+    ".service-card, " +
+    ".company-card, " +
+    ".project-card, " +
+    ".testimonial-card, " +
+    ".faq-item, " +
+    ".contact-grid, " +
+    ".stats-grid, " +
+    ".footer-grid"
+  );
+
+
+revealElements.forEach(
+  (element, index) => {
+
+    element.classList.add(
+      "reveal"
+    );
+
+
+    const delay =
+      Math.min(
+        (index % 4) + 1,
+        4
+      );
+
+
+    element.classList.add(
+      "reveal-delay-" +
+      delay
+    );
+
+  }
+);
+
+
+const revealObserver =
+  new IntersectionObserver(
+    (entries) => {
+
+      entries.forEach(
+        (entry) => {
+
+          if (
+            entry.isIntersecting
+          ) {
+
+            entry.target.classList.add(
+              "visible"
+            );
+
+
+            revealObserver.unobserve(
+              entry.target
+            );
+
+          }
+
+        }
+      );
+
+    },
+    {
+      threshold:
+        0.12,
+
+      rootMargin:
+        "0px 0px -60px 0px"
+    }
+  );
+
+
+revealElements.forEach(
+  (element) => {
+
+    revealObserver.observe(
+      element
+    );
+
+  }
+);
 
 })();
