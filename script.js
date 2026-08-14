@@ -290,3 +290,194 @@ if (emailContactCard) {
     });
 
 }
+/* =========================================================
+   LICHATWIST — PUBLIC WEBSITE THEME LOADER
+   Reads the owner's selected theme from /api/public-theme
+   and applies it to the entire public website.
+========================================================= */
+
+(function () {
+
+    const allowedThemes = [
+        "classic",
+        "ocean",
+        "emerald",
+        "purple",
+        "sunset",
+        "slate",
+        "earth"
+    ];
+
+
+    function applyPublicTheme(theme) {
+
+        if (!allowedThemes.includes(theme)) {
+
+            theme = "classic";
+
+        }
+
+
+        document.documentElement
+            .setAttribute(
+                "data-theme",
+                theme
+            );
+
+
+        /*
+         * Keep theme available to
+         * other front-end scripts.
+         */
+
+        window.LichaTwistTheme =
+            theme;
+
+
+        /*
+         * Update browser theme color.
+         */
+
+        const themeColors = {
+
+            classic: "#071a33",
+
+            ocean: "#063b66",
+
+            emerald: "#063b2b",
+
+            purple: "#241044",
+
+            sunset: "#4b1d0f",
+
+            slate: "#202b38",
+
+            earth: "#3e291d"
+
+        };
+
+
+        const metaTheme =
+            document.querySelector(
+                'meta[name="theme-color"]'
+            );
+
+
+        if (metaTheme) {
+
+            metaTheme.setAttribute(
+                "content",
+                themeColors[theme]
+            );
+
+        }
+
+
+        /*
+         * Keep the existing scroll-to-top
+         * button synchronized with the theme.
+         */
+
+        const topButton =
+            document.getElementById(
+                "scrollTopButton"
+            );
+
+
+        if (topButton) {
+
+            topButton.style.background =
+                themeColors[theme];
+
+        }
+
+    }
+
+
+    async function loadPublicTheme() {
+
+        /*
+         * Start with Classic immediately.
+         * This prevents a blank/un-themed page.
+         */
+
+        applyPublicTheme(
+            "classic"
+        );
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "/api/public-theme",
+                    {
+                        method:
+                            "GET",
+
+                        cache:
+                            "no-store"
+                    }
+                );
+
+
+            if (
+                !response.ok
+            ) {
+
+                return;
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            if (
+                data &&
+                data.success &&
+                allowedThemes.includes(
+                    data.theme
+                )
+            ) {
+
+                applyPublicTheme(
+                    data.theme
+                );
+
+            }
+
+        } catch (error) {
+
+            /*
+             * Keep Classic if the
+             * theme API is unavailable.
+             */
+
+            console.log(
+                "Public theme could not be loaded.",
+                error
+            );
+
+        }
+
+    }
+
+
+    /*
+     * Make theme loading available
+     * to the rest of the website.
+     */
+
+    window.loadPublicTheme =
+        loadPublicTheme;
+
+
+    /*
+     * Load immediately.
+     */
+
+    loadPublicTheme();
+
+})();
