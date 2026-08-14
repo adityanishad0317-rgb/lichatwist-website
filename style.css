@@ -3336,3 +3336,1029 @@ footer h4 {
   }
 
 }
+/* =========================================================
+   LICHATWIST — GLOBAL 7-THEME VISUAL ENGINE
+   Applies the selected admin theme to the entire public site.
+   Content, images, clients and authentication are untouched.
+========================================================= */
+
+
+/* =========================================================
+   DEFAULT THEME VARIABLES
+========================================================= */
+
+:root {
+
+    --theme-primary: #071a33;
+    --theme-secondary: #12365b;
+    --theme-accent: #d7ad4a;
+    --theme-accent-soft: #f3e4b5;
+
+    --theme-page: #f5f7fa;
+    --theme-section: #ffffff;
+    --theme-card: #ffffff;
+
+    --theme-text: #16263a;
+    --theme-muted: #667589;
+
+    --theme-border: rgba(7,26,51,.10);
+
+    --theme-dark-text: #ffffff;
+    --theme-shadow: rgba(7,26,51,.12);
+
+    --theme-gradient:
+        linear-gradient(
+            135deg,
+            #071a33,
+            #12365b
+        );
+}
+
+
+/* =========================================================
+   CLASSIC — NAVY & GOLD
+========================================================= */
+
+html[data-theme="classic"] {
+
+    --theme-primary: #071a33;
+    --theme-secondary: #12365b;
+    --theme-accent: #d7ad4a;
+    --theme-accent-soft: #f3e4b5;
+
+    --theme-page: #f5f7fa;
+    --theme-section: #ffffff;
+    --theme-card: #ffffff;
+
+    --theme-text: #16263a;
+    --theme-muted: #667589;
+
+    --theme-border: rgba(7,26,51,.10);
+
+    --theme-shadow: rgba(7,26,51,.12);
+
+    --theme-gradient:
+        linear-gradient(
+            135deg,
+            #071a33,
+            #12365b
+        );
+}
+
+
+/* =========================================================
+   OCEAN — BLUE
+========================================================= */
+
+html[data-theme="ocean"] {
+
+    --theme-primary: #063b66;
+    --theme-secondary: #087ea4;
+    --theme-accent: #31c4d9;
+    --theme-accent-soft: #c9f5fa;
+
+    --theme-page: #eef9fc;
+    --theme-section: #ffffff;
+    --theme-card: #ffffff;
+
+    --theme-text: #123047;
+    --theme-muted: #5d7385;
+
+    --theme-border: rgba(6,59,102,.12);
+
+    --theme-shadow: rgba(6,59,102,.13);
+
+    --theme-gradient:
+        linear-gradient(
+            135deg,
+            #063b66,
+            #087ea4
+        );
+}
+
+
+/* =========================================================
+   EMERALD — GREEN
+========================================================= */
+
+html[data-theme="emerald"] {
+
+    --theme-primary: #063b2b;
+    --theme-secondary: #087f5b;
+    --theme-accent: #35c98a;
+    --theme-accent-soft: #c8f4df;
+
+    --theme-page: #eefaf5;
+    --theme-section: #ffffff;
+    --theme-card: #ffffff;
+
+    --theme-text: #15372d;
+    --theme-muted: #5d776d;
+
+    --theme-border: rgba(6,59,43,.12);
+
+    --theme-shadow: rgba(6,59,43,.13);
+
+    --theme-gradient:
+        linear-gradient(
+            135deg,
+            #063b2b,
+            #087f5b
+        );
+}
+
+
+/* =========================================================
+   PURPLE — ROYAL
+========================================================= */
+
+html[data-theme="purple"] {
+
+    --theme-primary: #241044;
+    --theme-secondary: #56329a;
+    --theme-accent: #b985ff;
+    --theme-accent-soft: #eadcff;
+
+    --theme-page: #f7f3fc;
+    --theme-section: #ffffff;
+    --theme-card: #ffffff;
+
+    --theme-text: #302348;
+    --theme-muted: #746786;
+
+    --theme-border: rgba(36,16,68,.11);
+
+    --theme-shadow: rgba(36,16,68,.14);
+
+    --theme-gradient:
+        linear-gradient(
+            135deg,
+            #241044,
+            #56329a
+        );
+}
+
+
+/* =========================================================
+   SUNSET — ORANGE
+========================================================= */
+
+html[data-theme="sunset"] {
+
+    --theme-primary: #4b1d0f;
+    --theme-secondary: #a43d13;
+    --theme-accent: #f39a3f;
+    --theme-accent-soft: #ffe0bd;
+
+    --theme-page: #fff7f0;
+    --theme-section: #ffffff;
+    --theme-card: #ffffff;
+
+    --theme-text: #3d281e;
+    --theme-muted: #806b60;
+
+    --theme-border: rgba(75,29,15,.11);
+
+    --theme-shadow: rgba(75,29,15,.14);
+
+    --theme-gradient:
+        linear-gradient(
+            135deg,
+            #4b1d0f,
+            #a43d13
+        );
+}
+
+
+/* =========================================================
+   SLATE — SILVER
+========================================================= */
+
+html[data-theme="slate"] {
+
+    --theme-primary: #202b38;
+    --theme-secondary: #475569;
+    --theme-accent: #aebdcc;
+    --theme-accent-soft: #e2e8f0;
+
+    --theme-page: #f1f4f7;
+    --theme-section: #ffffff;
+    --theme-card: #ffffff;
+
+    --theme-text: #263442;
+    --theme-muted: #687789;
+
+    --theme-border: rgba(32,43,56,.12);
+
+    --theme-shadow: rgba(32,43,56,.13);
+
+    --theme-gradient:
+        linear-gradient(
+            135deg,
+            #202b38,
+            #475569
+        );
+}
+
+
+/* =========================================================
+   EARTH — BROWN / NATURAL
+========================================================= */
+
+html[data-theme="earth"] {
+
+    --theme-primary: #3e291d;
+    --theme-secondary: #735238;
+    --theme-accent: #c59652;
+    --theme-accent-soft: #f0dfc2;
+
+    --theme-page: #faf6ef;
+    --theme-section: #ffffff;
+    --theme-card: #ffffff;
+
+    --theme-text: #3c3027;
+    --theme-muted: #7a6b5f;
+
+    --theme-border: rgba(62,41,29,.12);
+
+    --theme-shadow: rgba(62,41,29,.14);
+
+    --theme-gradient:
+        linear-gradient(
+            135deg,
+            #3e291d,
+            #735238
+        );
+}
+
+
+/* =========================================================
+   GLOBAL PAGE
+========================================================= */
+
+html[data-theme] body {
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--theme-page),
+            var(--theme-section)
+        );
+
+    color:
+        var(--theme-text);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+html[data-theme] .site-header {
+
+    background:
+        color-mix(
+            in srgb,
+            var(--theme-primary) 88%,
+            transparent
+        );
+
+    border-bottom:
+        1px solid
+        color-mix(
+            in srgb,
+            var(--theme-accent) 45%,
+            transparent
+        );
+
+    box-shadow:
+        0 10px 35px
+        var(--theme-shadow);
+}
+
+
+html[data-theme] .site-header.scrolled {
+
+    background:
+        var(--theme-primary);
+
+    box-shadow:
+        0 12px 40px
+        var(--theme-shadow);
+}
+
+
+/* =========================================================
+   HEADER BRAND
+========================================================= */
+
+html[data-theme] .brand-text strong {
+
+    color:
+        var(--theme-dark-text);
+}
+
+
+html[data-theme] .brand-text strong sup {
+
+    color:
+        var(--theme-accent);
+}
+
+
+html[data-theme] .brand-text span {
+
+    color:
+        color-mix(
+            in srgb,
+            var(--theme-dark-text) 62%,
+            transparent
+        );
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+html[data-theme] .desktop-nav a {
+
+    color:
+        color-mix(
+            in srgb,
+            var(--theme-dark-text) 82%,
+            transparent
+        );
+}
+
+
+html[data-theme] .desktop-nav a:hover,
+html[data-theme] .desktop-nav a.active {
+
+    color:
+        var(--theme-dark-text);
+}
+
+
+html[data-theme] .desktop-nav a::after {
+
+    background:
+        var(--theme-accent);
+}
+
+
+html[data-theme] .nav-contact {
+
+    border-color:
+        color-mix(
+            in srgb,
+            var(--theme-accent) 70%,
+            transparent
+        );
+
+    color:
+        var(--theme-dark-text);
+}
+
+
+html[data-theme] .nav-contact i {
+
+    color:
+        var(--theme-accent);
+}
+
+
+html[data-theme] .nav-contact:hover {
+
+    background:
+        var(--theme-accent);
+
+    color:
+        var(--theme-primary);
+}
+
+
+html[data-theme] .nav-contact:hover i {
+
+    color:
+        var(--theme-primary);
+}
+
+
+/* =========================================================
+   MOBILE NAVIGATION
+========================================================= */
+
+html[data-theme] .mobile-nav {
+
+    background:
+        var(--theme-primary);
+
+    border-top:
+        1px solid
+        color-mix(
+            in srgb,
+            var(--theme-accent) 35%,
+            transparent
+        );
+}
+
+
+html[data-theme] .mobile-nav a {
+
+    color:
+        var(--theme-dark-text);
+}
+
+
+html[data-theme] .mobile-nav a:hover {
+
+    color:
+        var(--theme-accent);
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+html[data-theme] .hero-overlay {
+
+    background:
+        linear-gradient(
+            135deg,
+            color-mix(
+                in srgb,
+                var(--theme-primary) 86%,
+                transparent
+            ),
+            color-mix(
+                in srgb,
+                var(--theme-secondary) 68%,
+                transparent
+            )
+        );
+}
+
+
+html[data-theme] .hero-label span:last-child {
+
+    color:
+        var(--theme-accent);
+}
+
+
+html[data-theme] .hero-line {
+
+    background:
+        var(--theme-accent);
+}
+
+
+html[data-theme] .hero-content h1 {
+
+    color:
+        #ffffff;
+}
+
+
+html[data-theme] .hero-description {
+
+    color:
+        rgba(255,255,255,.76);
+}
+
+
+/* =========================================================
+   PRIMARY BUTTONS
+========================================================= */
+
+html[data-theme] .primary-button {
+
+    background:
+        var(--theme-accent);
+
+    color:
+        var(--theme-primary);
+
+    box-shadow:
+        0 12px 30px
+        var(--theme-shadow);
+}
+
+
+html[data-theme] .primary-button:hover {
+
+    background:
+        var(--theme-accent-soft);
+
+    color:
+        var(--theme-primary);
+}
+
+
+html[data-theme] .secondary-button {
+
+    border-color:
+        rgba(255,255,255,.35);
+
+    color:
+        #ffffff;
+}
+
+
+html[data-theme] .secondary-button:hover {
+
+    background:
+        var(--theme-accent);
+
+    border-color:
+        var(--theme-accent);
+
+    color:
+        var(--theme-primary);
+}
+
+
+/* =========================================================
+   SECTION HEADINGS
+========================================================= */
+
+html[data-theme] .section-label,
+html[data-theme] .mini-heading {
+
+    color:
+        var(--theme-accent);
+}
+
+
+html[data-theme] .section-heading h2,
+html[data-theme] .about-heading h2,
+html[data-theme] .services-heading h2,
+html[data-theme] .projects-heading h2,
+html[data-theme] .contact-heading h2 {
+
+    color:
+        var(--theme-primary);
+}
+
+
+html[data-theme] .section-heading p,
+html[data-theme] .about-heading p,
+html[data-theme] .services-heading p,
+html[data-theme] .projects-heading p,
+html[data-theme] .contact-heading p {
+
+    color:
+        var(--theme-muted);
+}
+
+
+/* =========================================================
+   GENERAL SECTIONS
+========================================================= */
+
+html[data-theme] section {
+
+    color:
+        var(--theme-text);
+}
+
+
+html[data-theme] .about-section,
+html[data-theme] .services-section,
+html[data-theme] .companies-section,
+html[data-theme] .projects-section {
+
+    background:
+        var(--theme-section);
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+html[data-theme] .service-card,
+html[data-theme] .company-card,
+html[data-theme] .project-card,
+html[data-theme] .contact-card,
+html[data-theme] .testimonial-card {
+
+    background:
+        var(--theme-card);
+
+    border-color:
+        var(--theme-border);
+
+    box-shadow:
+        0 12px 35px
+        var(--theme-shadow);
+}
+
+
+html[data-theme] .service-card:hover,
+html[data-theme] .company-card:hover,
+html[data-theme] .project-card:hover,
+html[data-theme] .contact-grid a.contact-card:hover {
+
+    border-color:
+        var(--theme-accent);
+
+    box-shadow:
+        0 18px 45px
+        var(--theme-shadow);
+}
+
+
+/* =========================================================
+   CARD ICONS
+========================================================= */
+
+html[data-theme] .service-icon,
+html[data-theme] .company-icon,
+html[data-theme] .contact-icon {
+
+    background:
+        var(--theme-primary);
+
+    color:
+        var(--theme-accent);
+}
+
+
+/* =========================================================
+   CARD HEADINGS
+========================================================= */
+
+html[data-theme] .service-card h3,
+html[data-theme] .company-card h3,
+html[data-theme] .project-card h3,
+html[data-theme] .contact-card h3 {
+
+    color:
+        var(--theme-primary);
+}
+
+
+html[data-theme] .service-card p,
+html[data-theme] .company-card p,
+html[data-theme] .project-card p,
+html[data-theme] .contact-card p {
+
+    color:
+        var(--theme-muted);
+}
+
+
+/* =========================================================
+   GOLD / ACCENT ELEMENTS
+========================================================= */
+
+html[data-theme] .gold,
+html[data-theme] .accent,
+html[data-theme] .highlight {
+
+    color:
+        var(--theme-accent);
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+html[data-theme] .stats {
+
+    background:
+        var(--theme-primary);
+
+    color:
+        #ffffff;
+
+    box-shadow:
+        0 18px 45px
+        var(--theme-shadow);
+}
+
+
+html[data-theme] .stats strong,
+html[data-theme] .counter {
+
+    color:
+        var(--theme-accent);
+}
+
+
+/* =========================================================
+   ABOUT / FEATURE PANELS
+========================================================= */
+
+html[data-theme] .about-card,
+html[data-theme] .feature-card,
+html[data-theme] .approach-card {
+
+    background:
+        var(--theme-card);
+
+    border-color:
+        var(--theme-border);
+
+    box-shadow:
+        0 12px 35px
+        var(--theme-shadow);
+}
+
+
+/* =========================================================
+   QUOTE / DARK PANELS
+========================================================= */
+
+html[data-theme] .quote-section,
+html[data-theme] .cta-section {
+
+    background:
+        var(--theme-gradient);
+}
+
+
+html[data-theme] .quote-section h2,
+html[data-theme] .cta-section h2 {
+
+    color:
+        #ffffff;
+}
+
+
+html[data-theme] .quote-section p,
+html[data-theme] .cta-section p {
+
+    color:
+        rgba(255,255,255,.74);
+}
+
+
+/* =========================================================
+   PROJECT FILTERS
+========================================================= */
+
+html[data-theme] .project-filter button,
+html[data-theme] .filter-button {
+
+    border-color:
+        var(--theme-border);
+
+    color:
+        var(--theme-primary);
+
+    background:
+        var(--theme-card);
+}
+
+
+html[data-theme] .project-filter button:hover,
+html[data-theme] .project-filter button.active,
+html[data-theme] .filter-button:hover,
+html[data-theme] .filter-button.active {
+
+    background:
+        var(--theme-primary);
+
+    color:
+        #ffffff;
+
+    border-color:
+        var(--theme-primary);
+}
+
+
+/* =========================================================
+   CONTACT SECTION
+========================================================= */
+
+html[data-theme] .contact-section {
+
+    background:
+        var(--theme-page);
+}
+
+
+html[data-theme] .contact-grid .contact-card {
+
+    background:
+        var(--theme-card);
+
+    border-color:
+        var(--theme-border);
+}
+
+
+html[data-theme] .contact-grid .contact-card small {
+
+    color:
+        var(--theme-accent);
+}
+
+
+html[data-theme] .contact-grid .contact-icon {
+
+    background:
+        var(--theme-primary);
+
+    color:
+        var(--theme-accent);
+}
+
+
+/* =========================================================
+   CONTACT MESSAGE FORM
+========================================================= */
+
+html[data-theme] .contact-message-box {
+
+    background:
+        var(--theme-gradient);
+
+    box-shadow:
+        0 20px 55px
+        var(--theme-shadow);
+}
+
+
+html[data-theme] .message-form-heading .mini-heading {
+
+    color:
+        var(--theme-accent);
+}
+
+
+html[data-theme] .message-form-heading h3 span {
+
+    color:
+        var(--theme-accent);
+}
+
+
+html[data-theme] .message-submit-button {
+
+    background:
+        var(--theme-accent);
+
+    color:
+        var(--theme-primary);
+}
+
+
+html[data-theme] .message-submit-button:hover {
+
+    box-shadow:
+        0 10px 25px
+        var(--theme-shadow);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+html[data-theme] .premium-footer {
+
+    background:
+        var(--theme-gradient);
+
+    color:
+        #ffffff;
+
+    border-top:
+        3px solid
+        var(--theme-accent);
+}
+
+
+html[data-theme] .premium-footer h3 {
+
+    color:
+        var(--theme-accent);
+}
+
+
+html[data-theme] .premium-footer p,
+html[data-theme] .premium-footer span {
+
+    color:
+        rgba(255,255,255,.68);
+}
+
+
+html[data-theme] .premium-footer a {
+
+    color:
+        rgba(255,255,255,.78);
+}
+
+
+html[data-theme] .premium-footer a:hover {
+
+    color:
+        var(--theme-accent);
+}
+
+
+html[data-theme] .footer-logo {
+
+    background:
+        #ffffff;
+
+    border-color:
+        color-mix(
+            in srgb,
+            var(--theme-accent) 45%,
+            transparent
+        );
+}
+
+
+html[data-theme] .footer-socials a {
+
+    background:
+        rgba(255,255,255,.08);
+
+    border-color:
+        rgba(255,255,255,.14);
+
+    color:
+        var(--theme-accent);
+}
+
+
+html[data-theme] .footer-socials a:hover {
+
+    background:
+        var(--theme-accent);
+
+    color:
+        var(--theme-primary);
+}
+
+
+html[data-theme] .footer-bottom {
+
+    border-top-color:
+        rgba(255,255,255,.12);
+}
+
+
+html[data-theme] .footer-bottom a {
+
+    color:
+        var(--theme-accent);
+}
+
+
+html[data-theme] .footer-admin-link a {
+
+    color:
+        rgba(255,255,255,.50);
+}
+
+
+html[data-theme] .footer-admin-link a:hover {
+
+    color:
+        var(--theme-accent);
+}
+
+
+/* =========================================================
+   SCROLL-TOP BUTTON
+========================================================= */
+
+html[data-theme] #scrollTopButton {
+
+    background:
+        var(--theme-primary) !important;
+
+    color:
+        var(--theme-accent) !important;
+}
+
+
+/* =========================================================
+   SMOOTH GLOBAL TRANSITION
+========================================================= */
+
+html[data-theme] body,
+html[data-theme] .site-header,
+html[data-theme] .service-card,
+html[data-theme] .company-card,
+html[data-theme] .project-card,
+html[data-theme] .contact-card,
+html[data-theme] .premium-footer {
+
+    transition:
+        background-color .35s ease,
+        background .35s ease,
+        border-color .35s ease,
+        color .35s ease,
+        box-shadow .35s ease;
+}
