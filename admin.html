@@ -486,6 +486,9 @@ footer{
     <h3>🔐 Security</h3>
     <p>Change the owner administration password.</p>
     <button onclick="goTo('adminPassword')">Security</button>
+    <button onclick="goTo('themeManagement')">
+  🎨 Theme
+</button>
   </div>
 
 </section>
@@ -645,7 +648,85 @@ Keep it secure.
   ></div>
 
 </section>
+<!-- WEBSITE THEME -->
 
+<section
+  class="editor-section"
+  id="themeManagement">
+
+  <h2>🎨 Website Theme</h2>
+
+  <p class="editor-description">
+    Choose one of the fixed LichaTwist themes.
+    The selected theme will be applied to the public website.
+  </p>
+
+
+  <div class="info-box">
+
+    Theme changes affect the visual appearance only.
+    Your website content, images, clients, passwords and
+    existing settings are not changed.
+
+  </div>
+
+
+  <div class="field">
+
+    <label for="websiteTheme">
+      Select Website Theme
+    </label>
+
+    <select id="websiteTheme">
+
+      <option value="classic">
+        Classic Navy & Gold
+      </option>
+
+      <option value="ocean">
+        Ocean Blue
+      </option>
+
+      <option value="emerald">
+        Emerald Green
+      </option>
+
+      <option value="purple">
+        Royal Purple
+      </option>
+
+      <option value="sunset">
+        Sunset Orange
+      </option>
+
+      <option value="slate">
+        Slate Silver
+      </option>
+
+      <option value="earth">
+        Earth Brown
+      </option>
+
+    </select>
+
+  </div>
+
+
+  <button
+    type="button"
+    onclick="saveWebsiteTheme()">
+
+    🎨 Apply Theme
+
+  </button>
+
+
+  <div
+    id="themeMessage"
+    class="message">
+  </div>
+
+</section>
 
 <!-- CREATE CLIENT -->
 <section class="editor-section" id="clientManagement">
@@ -1650,6 +1731,159 @@ async function saveRecoveryKey(){
       "recoveryKeyMessage",
       error.message ||
       "Unable to connect to recovery service.",
+      "error"
+    );
+
+  }
+
+}
+  /* =========================================
+   WEBSITE THEME MANAGEMENT
+========================================= */
+
+async function loadWebsiteTheme(){
+
+  const select =
+    document.getElementById(
+      "websiteTheme"
+    );
+
+
+  if(!select){
+
+    return;
+
+  }
+
+
+  try{
+
+    const response =
+      await fetch(
+        "/api/theme",
+        {
+          method:
+            "GET",
+
+          credentials:
+            "include",
+
+          cache:
+            "no-store"
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if(
+      response.ok &&
+      data.success &&
+      data.theme
+    ){
+
+      select.value =
+        data.theme;
+
+    }
+
+
+  }catch(error){
+
+    console.log(
+      "Unable to load website theme.",
+      error
+    );
+
+  }
+
+}
+
+
+async function saveWebsiteTheme(){
+
+  const select =
+    document.getElementById(
+      "websiteTheme"
+    );
+
+
+  if(!select){
+
+    return;
+
+  }
+
+
+  const theme =
+    select.value;
+
+
+  showMessage(
+    "themeMessage",
+    "Applying website theme...",
+    "info"
+  );
+
+
+  try{
+
+    const response =
+      await fetch(
+        "/api/theme",
+        {
+          method:
+            "POST",
+
+          credentials:
+            "include",
+
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+
+          body:
+            JSON.stringify({
+              theme:
+                theme
+            })
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if(
+      !response.ok ||
+      !data.success
+    ){
+
+      throw new Error(
+        data.message ||
+        "Unable to update website theme."
+      );
+
+    }
+
+
+    showMessage(
+      "themeMessage",
+      "✓ Website theme updated successfully.",
+      "success"
+    );
+
+
+  }catch(error){
+
+    showMessage(
+      "themeMessage",
+      error.message ||
+      "Unable to update website theme.",
       "error"
     );
 
@@ -2772,7 +3006,7 @@ async function deleteClientAccount(
 buildImageManagement();
 loadContent();
 loadClientManagement();
-
+loadWebsiteTheme();
 </script>
 
 </body>
