@@ -4362,3 +4362,667 @@ html[data-theme] .premium-footer {
         color .35s ease,
         box-shadow .35s ease;
 }
+/* =========================================================
+   LICHATWIST PREMIUM THEME UPGRADE
+   VISUAL ONLY - NO CONTENT / API / DATABASE CHANGES
+========================================================= */
+
+:root {
+    --lt-theme-green: #15966d;
+    --lt-theme-green-dark: #08704f;
+
+    --lt-theme-gold: #d6a83a;
+    --lt-theme-gold-dark: #9d741c;
+
+    --lt-theme-blue: #2477e8;
+    --lt-theme-blue-dark: #1554ad;
+
+    --lt-theme-purple: #7957d5;
+    --lt-theme-purple-dark: #5133a5;
+
+    --lt-theme-cyan: #159eb5;
+    --lt-theme-cyan-dark: #087486;
+
+    --lt-theme-rose: #c94c78;
+    --lt-theme-rose-dark: #963454;
+
+    --lt-glass: rgba(255,255,255,.78);
+    --lt-glass-border: rgba(255,255,255,.62);
+
+    --lt-shadow-soft:
+        0 18px 45px rgba(8,28,52,.10);
+
+    --lt-shadow-hover:
+        0 28px 65px rgba(8,28,52,.17);
+}
+
+
+/* =========================================================
+   GLOBAL PREMIUM FINISH
+========================================================= */
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+
+::selection {
+    background: #d6a83a;
+    color: #071a33;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.site-header,
+.header {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+
+.site-header::after,
+.header::after {
+    content: "";
+    display: block;
+    height: 1px;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(214,168,58,.65),
+            transparent
+        );
+}
+
+
+/* =========================================================
+   SECTION HEADINGS
+========================================================= */
+
+.section-tag,
+.projects-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.section-tag span,
+.projects-tag span {
+    width: 34px;
+    height: 2px;
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #d6a83a,
+            #f0ce79
+        );
+}
+
+
+.services-heading h2,
+.companies-heading h2,
+.projects-heading h2,
+.section-intro h2 {
+    letter-spacing: -1.5px;
+}
+
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.about-visual,
+.about-image,
+.image-card {
+    transition:
+        transform .45s ease,
+        box-shadow .45s ease;
+}
+
+
+.about-visual:hover,
+.about-image:hover,
+.image-card:hover {
+    transform: translateY(-7px);
+    box-shadow:
+        0 25px 60px rgba(8,28,52,.16);
+}
+
+
+/* =========================================================
+   PRINCIPLES
+   MISSION / VISION / VALUES
+========================================================= */
+
+.principles-grid {
+    gap: 24px;
+}
+
+
+.principle-card {
+    position: relative;
+    overflow: hidden;
+
+    border-radius: 24px;
+
+    border:
+        1px solid rgba(215,224,232,.95);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.96),
+            rgba(242,247,250,.88)
+        );
+
+    box-shadow:
+        0 16px 42px rgba(8,28,52,.08);
+
+    transition:
+        transform .4s ease,
+        box-shadow .4s ease,
+        border-color .4s ease;
+}
+
+
+.principle-card::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    top: 0;
+
+    height: 5px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #15966d,
+            #43c89b
+        );
+}
+
+
+.principle-card:nth-child(2)::before {
+    background:
+        linear-gradient(
+            90deg,
+            #d6a83a,
+            #f1cf77
+        );
+}
+
+
+.principle-card:nth-child(3)::before {
+    background:
+        linear-gradient(
+            90deg,
+            #7957d5,
+            #a78bea
+        );
+}
+
+
+.principle-card:hover {
+    transform: translateY(-10px);
+
+    box-shadow:
+        0 28px 60px rgba(8,28,52,.15);
+}
+
+
+.principle-card:nth-child(1) .principle-icon {
+    color: #15966d;
+}
+
+
+.principle-card:nth-child(2) .principle-icon {
+    color: #b27d16;
+}
+
+
+.principle-card:nth-child(3) .principle-icon {
+    color: #7957d5;
+}
+
+
+/* =========================================================
+   SERVICES
+   THREE UNIQUE THEMES
+========================================================= */
+
+.service-showcase {
+    align-items: stretch;
+}
+
+
+.premium-service-card {
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 26px;
+
+    border:
+        1px solid rgba(255,255,255,.65);
+
+    box-shadow:
+        0 18px 45px rgba(8,28,52,.11);
+
+    transition:
+        transform .45s ease,
+        box-shadow .45s ease;
+}
+
+
+.premium-service-card::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 5px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #15966d,
+            #5ad6ae
+        );
+
+    z-index: 5;
+}
+
+
+.premium-service-card:nth-child(2)::after {
+    background:
+        linear-gradient(
+            90deg,
+            #d6a83a,
+            #f3d17b
+        );
+}
+
+
+.premium-service-card:nth-child(3)::after {
+    background:
+        linear-gradient(
+            90deg,
+            #2477e8,
+            #65a7ff
+        );
+}
+
+
+.premium-service-card:hover {
+    transform: translateY(-12px);
+
+    box-shadow:
+        var(--lt-shadow-hover);
+}
+
+
+.service-image {
+    overflow: hidden;
+}
+
+
+.service-image img {
+    transition:
+        transform .8s cubic-bezier(.2,.7,.2,1),
+        filter .6s ease;
+}
+
+
+.premium-service-card:hover
+.service-image img {
+    transform: scale(1.08);
+    filter: saturate(1.08);
+}
+
+
+.premium-service-card:nth-child(1)
+.service-icon {
+    background:
+        linear-gradient(
+            135deg,
+            #15966d,
+            #08704f
+        );
+}
+
+
+.premium-service-card:nth-child(2)
+.service-icon {
+    background:
+        linear-gradient(
+            135deg,
+            #d6a83a,
+            #9d741c
+        );
+}
+
+
+.premium-service-card:nth-child(3)
+.service-icon {
+    background:
+        linear-gradient(
+            135deg,
+            #2477e8,
+            #1554ad
+        );
+}
+
+
+.premium-service-card
+.service-icon {
+    box-shadow:
+        0 10px 25px rgba(8,28,52,.20);
+}
+
+
+/* =========================================================
+   COMPANIES
+   THREE UNIQUE THEMES
+========================================================= */
+
+.company-showcase {
+    align-items: stretch;
+}
+
+
+.company-feature-card {
+    border:
+        1px solid rgba(255,255,255,.18);
+
+    box-shadow:
+        0 20px 55px rgba(3,15,30,.20);
+
+    transition:
+        transform .5s ease,
+        box-shadow .5s ease;
+}
+
+
+.company-feature-card::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 5px;
+
+    z-index: 10;
+
+    background:
+        linear-gradient(
+            90deg,
+            #15966d,
+            #5ad6ae
+        );
+}
+
+
+.company-feature-card:nth-child(2)::after {
+    background:
+        linear-gradient(
+            90deg,
+            #d6a83a,
+            #f1cf77
+        );
+}
+
+
+.company-feature-card:nth-child(3)::after {
+    background:
+        linear-gradient(
+            90deg,
+            #2477e8,
+            #65a7ff
+        );
+}
+
+
+.company-feature-card:hover {
+    transform: translateY(-12px);
+
+    box-shadow:
+        0 32px 70px rgba(3,15,30,.30);
+}
+
+
+.company-feature-card img {
+    transition:
+        transform .8s cubic-bezier(.2,.7,.2,1);
+}
+
+
+.company-feature-card:hover img {
+    transform: scale(1.09);
+}
+
+
+.company-feature-card:nth-child(1)
+.company-card-content > span {
+    color: #61d6ac;
+}
+
+
+.company-feature-card:nth-child(2)
+.company-card-content > span {
+    color: #f0c968;
+}
+
+
+.company-feature-card:nth-child(3)
+.company-card-content > span {
+    color: #70adff;
+}
+
+
+/* =========================================================
+   PROJECTS
+   THREE UNIQUE THEMES
+========================================================= */
+
+.projects-grid {
+    gap: 24px;
+}
+
+
+.project-card {
+    overflow: hidden;
+
+    border-radius: 24px;
+
+    border:
+        1px solid rgba(215,224,232,.85);
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #f4f7fa
+        );
+
+    box-shadow:
+        0 16px 42px rgba(8,28,52,.09);
+
+    transition:
+        transform .45s ease,
+        box-shadow .45s ease;
+}
+
+
+.project-card:hover {
+    transform: translateY(-10px);
+
+    box-shadow:
+        0 28px 62px rgba(8,28,52,.16);
+}
+
+
+.project-card:nth-child(1) {
+    border-top:
+        5px solid #15966d;
+}
+
+
+.project-card:nth-child(2) {
+    border-top:
+        5px solid #d6a83a;
+}
+
+
+.project-card:nth-child(3) {
+    border-top:
+        5px solid #2477e8;
+}
+
+
+.project-image {
+    overflow: hidden;
+}
+
+
+.project-image img {
+    transition:
+        transform .8s cubic-bezier(.2,.7,.2,1);
+}
+
+
+.project-card:hover
+.project-image img {
+    transform: scale(1.07);
+}
+
+
+.project-card:nth-child(1)
+.project-content small {
+    color: #15966d;
+}
+
+
+.project-card:nth-child(2)
+.project-content small {
+    color: #a87816;
+}
+
+
+.project-card:nth-child(3)
+.project-content small {
+    color: #2477e8;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.btn,
+button,
+.nav-contact {
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        filter .25s ease;
+}
+
+
+.btn:hover,
+button:hover,
+.nav-contact:hover {
+    transform: translateY(-2px);
+
+    filter: brightness(1.04);
+
+    box-shadow:
+        0 12px 28px rgba(8,28,52,.15);
+}
+
+
+.btn-primary {
+    box-shadow:
+        0 10px 25px rgba(23,105,224,.18);
+}
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contact-card,
+.contact-box,
+.contact-info,
+.contact-form {
+    border-radius: 24px;
+
+    box-shadow:
+        0 18px 48px rgba(8,28,52,.10);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    position: relative;
+}
+
+
+footer::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 3px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #15966d,
+            #d6a83a,
+            #2477e8
+        );
+}
+
+
+/* =========================================================
+   MOBILE SAFETY
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .premium-service-card:hover,
+    .company-feature-card:hover,
+    .project-card:hover,
+    .principle-card:hover {
+        transform: translateY(-6px);
+    }
+
+                     }
