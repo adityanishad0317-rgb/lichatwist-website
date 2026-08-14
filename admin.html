@@ -402,6 +402,643 @@ footer{
   .quick-nav-links button{width:100%}
   .client-actions button{width:100%}
 }
+  /* =========================================================
+   LICHATWIST ADMIN PREMIUM CONTROL PANEL THEME
+   VISUAL ONLY
+   DOES NOT CHANGE ADMIN LOGIC
+========================================================= */
+
+:root {
+
+    --admin-blue: #2477e8;
+    --admin-blue-dark: #1554ad;
+
+    --admin-green: #15966d;
+    --admin-green-dark: #08704f;
+
+    --admin-purple: #7957d5;
+    --admin-purple-dark: #5133a5;
+
+    --admin-gold: #d6a83a;
+    --admin-gold-dark: #9d741c;
+
+    --admin-orange: #e27a27;
+    --admin-orange-dark: #ad4e0b;
+
+    --admin-cyan: #159eb5;
+    --admin-cyan-dark: #087486;
+
+    --admin-rose: #c94c78;
+    --admin-rose-dark: #963454;
+
+    --admin-red: #d64c4c;
+    --admin-red-dark: #9e2929;
+
+    --admin-shadow:
+        0 18px 45px rgba(8,28,52,.10);
+
+    --admin-shadow-hover:
+        0 28px 65px rgba(8,28,52,.17);
+}
+
+
+/* =========================================================
+   ADMIN PAGE
+========================================================= */
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+    -webkit-font-smoothing: antialiased;
+}
+
+
+/* =========================================================
+   QUICK NAV
+========================================================= */
+
+.quick-nav {
+    position: sticky;
+
+    top: 12px;
+
+    z-index: 20;
+
+    border:
+        1px solid rgba(215,224,232,.9);
+
+    background:
+        rgba(248,250,252,.84);
+
+    backdrop-filter:
+        blur(18px);
+
+    -webkit-backdrop-filter:
+        blur(18px);
+
+    box-shadow:
+        0 14px 38px rgba(8,28,52,.09);
+
+    border-radius:
+        20px;
+}
+
+
+.quick-nav-links {
+    gap: 10px;
+}
+
+
+.quick-nav-links button {
+    border:
+        1px solid #d7e0e8;
+
+    border-radius:
+        12px;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
+}
+
+
+.quick-nav-links button:hover {
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 10px 24px rgba(8,28,52,.10);
+}
+
+
+/* =========================================================
+   TOP DASHBOARD CARDS
+   FIVE UNIQUE THEMES
+========================================================= */
+
+.quick-nav + .grid {
+    gap: 22px;
+}
+
+
+.quick-nav + .grid > .card {
+    position: relative;
+
+    overflow: hidden;
+
+    min-height: 185px;
+
+    border:
+        1px solid rgba(215,224,232,.95);
+
+    border-radius:
+        24px;
+
+    box-shadow:
+        var(--admin-shadow);
+
+    transition:
+        transform .4s ease,
+        box-shadow .4s ease;
+}
+
+
+.quick-nav + .grid > .card::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    top: 0;
+
+    height: 5px;
+}
+
+
+.quick-nav + .grid > .card:nth-child(1)::before {
+    background:
+        linear-gradient(
+            90deg,
+            var(--admin-blue),
+            #72afff
+        );
+}
+
+
+.quick-nav + .grid > .card:nth-child(2)::before {
+    background:
+        linear-gradient(
+            90deg,
+            var(--admin-purple),
+            #aa91ed
+        );
+}
+
+
+.quick-nav + .grid > .card:nth-child(3)::before {
+    background:
+        linear-gradient(
+            90deg,
+            var(--admin-green),
+            #59d2ab
+        );
+}
+
+
+.quick-nav + .grid > .card:nth-child(4)::before {
+    background:
+        linear-gradient(
+            90deg,
+            var(--admin-orange),
+            #f1a365
+        );
+}
+
+
+.quick-nav + .grid > .card:nth-child(5)::before {
+    background:
+        linear-gradient(
+            90deg,
+            var(--admin-red),
+            #f08484
+        );
+}
+
+
+.quick-nav + .grid > .card:hover {
+    transform:
+        translateY(-8px);
+
+    box-shadow:
+        var(--admin-shadow-hover);
+}
+
+
+.quick-nav + .grid > .card:nth-child(1) h3 {
+    color:
+        var(--admin-blue-dark) !important;
+}
+
+
+.quick-nav + .grid > .card:nth-child(2) h3 {
+    color:
+        var(--admin-purple-dark) !important;
+}
+
+
+.quick-nav + .grid > .card:nth-child(3) h3 {
+    color:
+        var(--admin-green-dark) !important;
+}
+
+
+.quick-nav + .grid > .card:nth-child(4) h3 {
+    color:
+        var(--admin-orange-dark) !important;
+}
+
+
+.quick-nav + .grid > .card:nth-child(5) h3 {
+    color:
+        var(--admin-red-dark) !important;
+}
+
+
+/* =========================================================
+   EDITOR SECTIONS
+========================================================= */
+
+.editor-section {
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius:
+        24px !important;
+
+    border:
+        1px solid rgba(215,224,232,.92) !important;
+
+    box-shadow:
+        var(--admin-shadow) !important;
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease;
+}
+
+
+.editor-section::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    top: 0;
+
+    height: 5px;
+}
+
+
+.editor-section:hover {
+    box-shadow:
+        var(--admin-shadow-hover) !important;
+}
+
+
+/* OWNER PASSWORD */
+
+#adminPassword::before {
+    background:
+        linear-gradient(
+            90deg,
+            var(--admin-red),
+            #f08a8a
+        );
+}
+
+
+/* CLIENT MANAGEMENT */
+
+#clientManagement::before {
+    background:
+        linear-gradient(
+            90deg,
+            var(--admin-orange),
+            #f3ad68
+        );
+}
+
+
+/* IMAGES */
+
+#imageManagement::before {
+    background:
+        linear-gradient(
+            90deg,
+            var(--admin-green),
+            #62d6b0
+        );
+}
+
+
+/* HOME */
+
+#homeEditor::before {
+    background:
+        linear-gradient(
+            90deg,
+            var(--admin-blue),
+            #6ba9ff
+        );
+}
+
+
+/* ABOUT */
+
+#aboutEditor::before {
+    background:
+        linear-gradient(
+            90deg,
+            var(--admin-purple),
+            #ad95ed
+        );
+}
+
+
+/* MISSION */
+
+#missionEditor::before {
+    background:
+        linear-gradient(
+            90deg,
+            var(--admin-gold),
+            #f2d27c
+        );
+}
+
+
+/* SERVICES */
+
+#servicesEditor::before {
+    background:
+        linear-gradient(
+            90deg,
+            var(--admin-green-dark),
+            #48bf96
+        );
+}
+
+
+/* COMPANIES */
+
+#companiesEditor::before {
+    background:
+        linear-gradient(
+            90deg,
+            #10243e,
+            #41698e
+        );
+}
+
+
+/* PROJECTS */
+
+#projectsEditor::before {
+    background:
+        linear-gradient(
+            90deg,
+            var(--admin-cyan),
+            #64d2e4
+        );
+}
+
+
+/* CONTACT */
+
+#contactEditor::before {
+    background:
+        linear-gradient(
+            90deg,
+            var(--admin-rose),
+            #e58bab
+        );
+}
+
+
+/* SAVE */
+
+#saveEditor::before {
+    background:
+        linear-gradient(
+            90deg,
+            var(--admin-green),
+            #72dcb9
+        );
+}
+
+
+/* =========================================================
+   EDITOR HEADINGS
+========================================================= */
+
+.editor-section h2 {
+    letter-spacing:
+        -.5px;
+}
+
+
+.editor-section h2::after {
+    content: "";
+
+    display: block;
+
+    width: 48px;
+
+    height: 3px;
+
+    margin-top: 10px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--admin-blue),
+            var(--admin-gold)
+        );
+}
+
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+.editor-section input,
+.editor-section textarea,
+.editor-section select {
+    border:
+        1px solid #d7e0e8 !important;
+
+    border-radius:
+        13px !important;
+
+    background:
+        #f7fafc !important;
+
+    transition:
+        border-color .25s ease,
+        box-shadow .25s ease,
+        background .25s ease;
+}
+
+
+.editor-section input:focus,
+.editor-section textarea:focus,
+.editor-section select:focus {
+    outline:
+        none;
+
+    background:
+        #ffffff !important;
+
+    border-color:
+        var(--admin-blue) !important;
+
+    box-shadow:
+        0 0 0 4px rgba(36,119,232,.10) !important;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.editor-section button {
+    border:
+        0;
+
+    border-radius:
+        13px;
+
+    font-weight:
+        700;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        filter .25s ease;
+}
+
+
+.editor-section button:hover {
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 12px 28px rgba(8,28,52,.15);
+
+    filter:
+        brightness(1.04);
+}
+
+
+/* =========================================================
+   STATUS / MESSAGE
+========================================================= */
+
+.message,
+.status {
+    border-radius:
+        14px !important;
+}
+
+
+#status {
+    box-shadow:
+        0 10px 28px rgba(8,28,52,.06);
+}
+
+
+/* =========================================================
+   INFO BOX
+========================================================= */
+
+.info-box {
+    border-radius:
+        14px !important;
+
+    border-left:
+        4px solid var(--admin-blue);
+
+    background:
+        linear-gradient(
+            135deg,
+            #f4f8ff,
+            #eef5ff
+        ) !important;
+}
+
+
+/* =========================================================
+   RECOVERY AREA
+   VISUAL ONLY — NO RECOVERY LOGIC CHANGES
+========================================================= */
+
+#adminRecovery {
+    border-top:
+        0 !important;
+}
+
+
+#adminRecovery::before {
+    background:
+        linear-gradient(
+            90deg,
+            #8b5cf6,
+            #c084fc
+        );
+}
+
+
+#adminRecovery h2::after {
+    background:
+        linear-gradient(
+            90deg,
+            #8b5cf6,
+            #d6a83a
+        );
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .quick-nav {
+        position:
+            relative;
+
+        top:
+            auto;
+    }
+
+
+    .quick-nav-links {
+        display:
+            grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    .quick-nav-links button {
+        width:
+            100%;
+    }
+
+
+    .quick-nav + .grid > .card {
+        min-height:
+            160px;
+    }
+
+
+    .editor-section {
+        border-radius:
+            20px !important;
+    }
+
+}
 </style>
 </head>
 
