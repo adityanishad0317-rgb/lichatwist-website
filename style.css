@@ -5026,3 +5026,634 @@ footer::before {
     }
 
                      }
+
+/* =========================================================
+   LICHATWIST PREMIUM ANIMATION SYSTEM
+   Added without changing existing functionality
+========================================================= */
+
+
+/* =========================================================
+   1. GLOBAL SMOOTH SCROLL
+========================================================= */
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+/* =========================================================
+   2. HERO ENTRANCE ANIMATION
+========================================================= */
+
+.hero-subtitle {
+  animation:
+    heroFadeDown
+    0.9s
+    ease
+    both;
+}
+
+.hero h1 {
+  animation:
+    heroFadeUp
+    1s
+    0.15s
+    ease
+    both;
+}
+
+.hero p {
+  animation:
+    heroFadeUp
+    1s
+    0.3s
+    ease
+    both;
+}
+
+.hero-buttons {
+  animation:
+    heroFadeUp
+    1s
+    0.45s
+    ease
+    both;
+}
+
+
+@keyframes heroFadeDown {
+
+  from {
+    opacity: 0;
+    transform:
+      translateY(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      translateY(0);
+  }
+
+}
+
+
+@keyframes heroFadeUp {
+
+  from {
+    opacity: 0;
+    transform:
+      translateY(35px);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      translateY(0);
+  }
+
+}
+
+
+/* =========================================================
+   3. HERO FLOATING SCROLL INDICATOR
+========================================================= */
+
+.scroll-down {
+  animation:
+    scrollFloat
+    2s
+    ease-in-out
+    infinite;
+}
+
+
+@keyframes scrollFloat {
+
+  0%,
+  100% {
+    transform:
+      translateY(0);
+  }
+
+  50% {
+    transform:
+      translateY(10px);
+  }
+
+}
+
+
+/* =========================================================
+   4. SECTION HEADING
+========================================================= */
+
+.section-heading {
+  transition:
+    transform
+    0.6s
+    ease,
+    opacity
+    0.6s
+    ease;
+}
+
+
+/* =========================================================
+   5. CARD HOVER ENHANCEMENTS
+========================================================= */
+
+.mission-card,
+.service-card,
+.company-card,
+.project-card,
+.testimonial-card,
+.faq-item,
+.image-card {
+  transition:
+    transform
+    0.45s
+    cubic-bezier(.2,.8,.2,1),
+    box-shadow
+    0.45s
+    ease;
+}
+
+
+.mission-card:hover,
+.service-card:hover,
+.company-card:hover,
+.project-card:hover,
+.testimonial-card:hover,
+.faq-item:hover,
+.image-card:hover {
+
+  transform:
+    translateY(-10px);
+
+  box-shadow:
+    0 20px 45px
+    rgba(0,0,0,.14);
+
+}
+
+
+/* =========================================================
+   6. CARD ICON ANIMATION
+========================================================= */
+
+.mission-card i,
+.service-icon,
+.company-card i {
+
+  transition:
+    transform
+    0.45s
+    ease;
+
+}
+
+
+.mission-card:hover i,
+.service-card:hover .service-icon,
+.company-card:hover i {
+
+  transform:
+    translateY(-6px)
+    scale(1.08);
+
+}
+
+
+/* =========================================================
+   7. IMAGE HOVER ZOOM
+========================================================= */
+
+.company-card img {
+
+  transition:
+    transform
+    0.7s
+    cubic-bezier(.2,.8,.2,1);
+
+}
+
+
+.company-card:hover img {
+
+  transform:
+    scale(1.06);
+
+}
+
+
+/* =========================================================
+   8. PROJECT CARD ZOOM
+========================================================= */
+
+.project-card {
+
+  transition:
+    transform
+    0.5s
+    ease,
+    box-shadow
+    0.5s
+    ease;
+
+}
+
+
+.project-card:hover {
+
+  transform:
+    translateY(-8px)
+    scale(1.015);
+
+  box-shadow:
+    0 22px 45px
+    rgba(0,0,0,.18);
+
+}
+
+
+/* =========================================================
+   9. BUTTON ANIMATION
+========================================================= */
+
+.btn {
+
+  position:
+    relative;
+
+  overflow:
+    hidden;
+
+  transition:
+    transform
+    0.3s
+    ease,
+    box-shadow
+    0.3s
+    ease;
+
+}
+
+
+.btn:hover {
+
+  transform:
+    translateY(-4px);
+
+  box-shadow:
+    0 10px 25px
+    rgba(0,0,0,.16);
+
+}
+
+
+.btn:active {
+
+  transform:
+    translateY(-1px);
+
+}
+
+
+/* =========================================================
+   10. BUTTON SHINE EFFECT
+========================================================= */
+
+.btn::after {
+
+  content:
+    "";
+
+  position:
+    absolute;
+
+  top:
+    0;
+
+  left:
+    -120%;
+
+  width:
+    70%;
+
+  height:
+    100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.35),
+      transparent
+    );
+
+  transform:
+    skewX(-20deg);
+
+  transition:
+    left
+    0.7s
+    ease;
+
+}
+
+
+.btn:hover::after {
+
+  left:
+    140%;
+
+}
+
+
+/* =========================================================
+   11. NAVIGATION LINK ANIMATION
+========================================================= */
+
+.nav-menu a {
+
+  position:
+    relative;
+
+  transition:
+    color
+    0.3s
+    ease;
+
+}
+
+
+.nav-menu a::after {
+
+  content:
+    "";
+
+  position:
+    absolute;
+
+  left:
+    50%;
+
+  bottom:
+    -7px;
+
+  width:
+    0;
+
+  height:
+    2px;
+
+  background:
+    currentColor;
+
+  transform:
+    translateX(-50%);
+
+  transition:
+    width
+    0.3s
+    ease;
+
+}
+
+
+.nav-menu a:hover::after {
+
+  width:
+    100%;
+
+}
+
+
+/* =========================================================
+   12. ABOUT IMAGE FLOAT
+========================================================= */
+
+.about-image {
+
+  animation:
+    gentleFloat
+    5s
+    ease-in-out
+    infinite;
+
+}
+
+
+@keyframes gentleFloat {
+
+  0%,
+  100% {
+    transform:
+      translateY(0);
+  }
+
+  50% {
+    transform:
+      translateY(-8px);
+  }
+
+}
+
+
+/* =========================================================
+   13. FEATURE CHECK ANIMATION
+========================================================= */
+
+.feature {
+
+  transition:
+    transform
+    0.3s
+    ease;
+
+}
+
+
+.feature:hover {
+
+  transform:
+    translateX(6px);
+
+}
+
+
+/* =========================================================
+   14. FOOTER LINK ANIMATION
+========================================================= */
+
+footer a {
+
+  transition:
+    transform
+    0.25s
+    ease,
+    opacity
+    0.25s
+    ease;
+
+}
+
+
+footer a:hover {
+
+  transform:
+    translateX(5px);
+
+}
+
+
+/* =========================================================
+   15. MAP ANIMATION
+========================================================= */
+
+.map iframe {
+
+  transition:
+    transform
+    0.5s
+    ease,
+    box-shadow
+    0.5s
+    ease;
+
+}
+
+
+.map iframe:hover {
+
+  transform:
+    scale(1.01);
+
+  box-shadow:
+    0 18px 40px
+    rgba(0,0,0,.14);
+
+}
+
+
+/* =========================================================
+   16. SCROLL REVEAL INITIAL STATE
+========================================================= */
+
+.reveal {
+
+  opacity:
+    0;
+
+  transform:
+    translateY(35px);
+
+  transition:
+    opacity
+    0.8s
+    ease,
+    transform
+    0.8s
+    ease;
+
+}
+
+
+.reveal.visible {
+
+  opacity:
+    1;
+
+  transform:
+    translateY(0);
+
+}
+
+
+/* =========================================================
+   17. STAGGERED REVEAL
+========================================================= */
+
+.reveal-delay-1 {
+  transition-delay:
+    0.1s;
+}
+
+.reveal-delay-2 {
+  transition-delay:
+    0.2s;
+}
+
+.reveal-delay-3 {
+  transition-delay:
+    0.3s;
+}
+
+.reveal-delay-4 {
+  transition-delay:
+    0.4s;
+}
+
+
+/* =========================================================
+   18. MOBILE SAFETY
+========================================================= */
+
+@media (
+  max-width: 768px
+) {
+
+  .about-image {
+
+    animation:
+      none;
+
+  }
+
+  .project-card:hover,
+  .mission-card:hover,
+  .service-card:hover,
+  .company-card:hover {
+
+    transform:
+      translateY(-5px);
+
+  }
+
+}
+
+
+/* =========================================================
+   19. ACCESSIBILITY
+========================================================= */
+
+@media (
+  prefers-reduced-motion: reduce
+) {
+
+  html {
+    scroll-behavior:
+      auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+
+    animation-duration:
+      0.01ms !important;
+
+    animation-iteration-count:
+      1 !important;
+
+    transition-duration:
+      0.01ms !important;
+
+    scroll-behavior:
+      auto !important;
+
+  }
+
+}
