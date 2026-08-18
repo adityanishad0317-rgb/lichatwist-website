@@ -6994,3 +6994,31 @@ footer a:hover {
     }
 
        }
+/* =========================================================
+   LICHATWIST — DESKTOP NAVIGATION OVERRIDE
+   Desktop: show normal navigation
+   Mobile: keep hamburger menu
+========================================================= */
+
+@media (min-width: 801px) {
+
+    .desktop-nav {
+        display: flex !important;
+        align-items: center;
+        gap: 30px;
+        margin-left: auto;
+    }
+
+    .nav-contact {
+        display: flex !important;
+        align-items: center;
+    }
+
+    .mobile-menu-button {
+        display: none !important;
+    }
+
+    .mobile-nav {
+        display: none !important;
+    }
+}
